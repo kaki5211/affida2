@@ -17,7 +17,10 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  base: "/", // カスタムのベースURLを設定
+
+
 })
 
 export default router
