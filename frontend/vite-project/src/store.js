@@ -16,7 +16,9 @@ async function fetchDataAndCommit({ commit, endpoint, mutationType }) {
 // const host = "http://127.0.0.1:8000"
 // const host_api = "http://127.0.0.1:8000/api"
 // const host = "http://172.20.10.5:8000"
-const host_api = "http://localhost:8000/api"
+// const host_api = "https://localhost:8000/api"
+const host_api = "https://153.122.199.147]:8000/api"
+
 // http://localhost:8000/api/your-endpoint/
 
 
