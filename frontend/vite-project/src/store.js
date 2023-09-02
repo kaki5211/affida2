@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
-import createPersistedState from 'vuex-persistedstate'
+// import createPersistedState from 'vuex-persistedstate'
 
 
 
@@ -16,12 +16,12 @@ async function fetchDataAndCommit({ commit, endpoint, mutationType }) {
 // const host = "http://127.0.0.1:8000"
 // const host_api = "http://127.0.0.1:8000/api"
 // const host = "http://172.20.10.5:8000"
-const host_api = "http://172.20.10.5:8000/api"
-
+const host_api = "http://localhost:8000/api"
+// http://localhost:8000/api/your-endpoint/
 
 
 const store = createStore({
-  plugins: [createPersistedState()],
+  // plugins: [createPersistedState()],
   state: {
     videos: null,
     performer_list: null,
