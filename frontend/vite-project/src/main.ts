@@ -1,9 +1,12 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue';
+import store from './store';
+
 import { createRouter, createWebHistory } from 'vue-router';
 
-// ƒy[ƒWƒRƒ“ƒ|[ƒlƒ“ƒg‚ğƒCƒ“ƒ|[ƒg
+
+// ï¿½yï¿½[ï¿½Wï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½|ï¿½[ï¿½g
 import Home from './views/Home.vue';
 import About from './views/About.vue';
 
@@ -16,6 +19,7 @@ const router = createRouter({
 });
 
 const app = createApp(App);
-app.use(router); // VueƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÉVue Router‚ğ’Ç‰Á
+app.use(router) // Vueï¿½Aï¿½vï¿½ï¿½ï¿½Pï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Vue Routerï¿½ï¿½Ç‰ï¿½
+.use(store);
 
 app.mount('#app');
