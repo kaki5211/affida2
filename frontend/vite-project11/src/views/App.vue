@@ -1,7 +1,9 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import { useRoute } from 'vue-router';
-const router = useRoute();
+<script setup lang="ts">
+import HelloWorld from '../components/HelloWorld.vue'
+import { useStore, computed } from 'vuex';
+const store = useStore();
+
+const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 
 </script>
 
@@ -14,16 +16,8 @@ const router = useRoute();
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <div>
-    <a>■■■■■</a>
-    <div>
-    <router-view />
-  </div>
-    <a>■■■■■</a>
-  </div>
+  ■■■■■■■■■{{ VIDEOS }}
   <HelloWorld msg="Vite + Vue" />
-
-
 </template>
 
 <style scoped>
