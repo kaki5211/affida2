@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import HelloWorld from '../components/HelloWorld.vue'
+import { useStore } from 'vuex';
+const store = useStore();
+
+const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
+
 </script>
 
 <template>
@@ -11,6 +16,7 @@ import HelloWorld from '../components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  ■■■■■■■■■{{ VIDEOS }}
   <HelloWorld msg="Vite + Vue" />
 </template>
 
