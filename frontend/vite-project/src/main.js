@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store';
 
-import VueMeta from 'vue-meta'
+import { createMetaManager } from 'vue-meta'
 
 
 // import vuetify from './plugins/vuetify'
@@ -16,6 +16,6 @@ import VueMeta from 'vue-meta'
 createApp(App)
 .use(store)
 .use(router)
-.use(VueMeta)
+.use(createMetaManager())
 // .use(vuetify)
 .mount('#app')
