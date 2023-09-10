@@ -18,7 +18,10 @@ async function fetchDataAndCommit({ commit, endpoint, mutationType }) {
 // const host = "http://172.20.10.5:8000"
 // const host_api = "https://localhost:8000/api"
 // const host_api = "https://153.122.199.147]:8000/api"
-const host_api = "https://153.122.199.147:8000/api"
+// const host_api = "https://153.122.199.147:8080/api"
+const host_api = "https://kyounuki.jp:8080/api"
+
+
 
 // http://localhost:8000/api/your-endpoint/
 
