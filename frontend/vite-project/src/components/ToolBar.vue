@@ -169,6 +169,11 @@ export default {
     
 </header>
 </template>
+
+
+
+
+
 <style>
 
 .v-toolbar-title__placeholder {
