@@ -7,7 +7,7 @@ import store from './store';
 // import metaManager from './meta'; // 外部のmeta.jsをインポート
 // import VueMeta from "vue-meta";
 
-// import vuetify from './plugins/vuetify'
+import vuetify from 'vuetify'
 import { createMetaManager } from 'vue-meta'
 
 
@@ -16,5 +16,5 @@ createApp(App)
 .use(store)
 .use(router)
 .use(createMetaManager())
-// .use(vuetify)
+.use(vuetify)
 .mount('#app')
