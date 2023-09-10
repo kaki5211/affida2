@@ -1,14 +1,31 @@
 <script setup>
 
+
+// ■■■■■■ import > Packages ■■■■■■
 import { computed } from 'vue';
-// import { useRoute } from 'vue-router';
+// import { onMounted } from 'vue';
+// import { ref } from 'vue';
 import { useStore } from 'vuex';
+// import { useRoute } from 'vue-router';
 
 
-// const route = useRoute();
+
+// ■■■■■■ import > Others ■■■■■■
+// import { Icon } from '@iconify/vue';
+
+
+
+
+
+// ■■■■■■ import > Components ■■■■■■
+// import Btn_1 from '../components/_Btn_1_mottomiru.vue';
+// import Text_1 from '../components/_Text_1.vue';
+
+
+
+
+// ■■■■■■ VueStore ■■■■■■
 const store = useStore();
-
-
 const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 // const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
@@ -22,6 +39,14 @@ const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 // const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
+const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
+console.log("DEBUG", DEBUG.value)
+
+
+// ■■■■■■ VueRouter ■■■■■■
+// const route = useRoute();
+
+
 
 
 
@@ -30,16 +55,21 @@ const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 
 <template>
 
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-    <p>ABOUT！</p>
-        ■■■VIDEOS：{{ VIDEOS }}
-  </div>
+<v-app id="#my-scroll-target">
+  <a>{{ DEBUG }}</a>
+  <a>{{ VIDEOS }}</a>
+
+
+
+</v-app>
+
+
+
+
+
+
+
+
 </template>
 
 

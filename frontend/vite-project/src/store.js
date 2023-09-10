@@ -38,10 +38,7 @@ const store = createStore({
     kyounuki_list: null,
     contents_list: null,
 
-
-
     set_videos_loaded: null,
-
 
     url_list: null,
     url_param: null,
@@ -122,7 +119,7 @@ const store = createStore({
     async FETCH_GET_DEBUG({ commit }) {
       const urlhost = window.location.hostname;
       console.log("urlhost.includes('172.')", urlhost.includes("172."))
-      commit('SET_DEBUG', urlhost.includes("172."));
+      commit('SET_DEBUG', urlhost.includes("kyounuki"));
     },
     async FETCH_GET_BREADCRUMBS({ commit }) {
 
