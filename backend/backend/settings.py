@@ -148,7 +148,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'  # 静的ファイルへのURLの接頭辞
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [BASE_DIR, os.path.join(BASE_DIR, 'static')]  # 静的ファイルが配置されているディレクトリのパス
+STATICFILES_DIRS = [BASE_DIR]  # 静的ファイルが配置されているディレクトリのパス
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
