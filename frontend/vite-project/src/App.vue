@@ -75,7 +75,7 @@ console.log("DEBUG", DEBUG.value)
 
 <v-app>
 
-  <Header />
+  <!-- <Header /> -->
   <ToolBar />
   <!-- <Topimage /> -->
 
@@ -96,7 +96,7 @@ console.log("DEBUG", DEBUG.value)
       url_judge_param: {{ url_judge_param }}
   </div>
 
-  <Footer />
+  <!-- <Footer /> -->
 </v-app>
 
 
