@@ -125,7 +125,6 @@ export default {
         <v-list id="drwer-list" density="compact" nav class="pl-8">
 
           <v-list-item class="text-h3 my-text-size-40" title="ホーム" value="home"
-            :to="{ name: 'Home'}"
             >
               <template v-slot:prepend>
                 <v-icon><Icon icon="solar:home-bold-duotone" /></v-icon>
@@ -133,7 +132,6 @@ export default {
             </v-list-item>
 
             <v-list-item class="text-h3 my-text-size-40" title="今日抜き" value="kyounuki"
-            :to="{ name: 'Kyounuki'}"
             >
               <template v-slot:prepend>
                 <v-icon><Icon icon="icon-park:soccer-one" /></v-icon>
@@ -141,7 +139,6 @@ export default {
             </v-list-item>
 
             <v-list-item class="text-h3 my-text-size-40" title="動画" value="video"
-            :to="{ name: 'Videos'}"
             >
               <template v-slot:prepend>
                 <v-icon><Icon icon="icon-park:video-two" /></v-icon>
