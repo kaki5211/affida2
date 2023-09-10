@@ -12,7 +12,7 @@ div {
 // import { computed } from 'vue';
 // import { useStore } from 'vuex';
 // import { ref, onMounted } from 'vue';
-import useMeta from "../meta"
+import { useMeta } from 'vue-meta'
 
 
 // const store = useStore();
