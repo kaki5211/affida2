@@ -12,7 +12,7 @@ div {
 // import { computed } from 'vue';
 // import { useStore } from 'vuex';
 // import { ref, onMounted } from 'vue';
-import { useMeta } from 'vue-meta';
+import useMeta from "../meta"
 
 
 // const store = useStore();
@@ -118,7 +118,6 @@ const { metaInfo } = useMeta({
 //   count.value++;
 // };
 </script>
-
 
 
 
