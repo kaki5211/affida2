@@ -87,11 +87,11 @@ console.log("DEBUG", DEBUG.value)
     </v-col>
   </v-row>
     
-  <v-main v-if="VIDEOS_LOADED" class="my-bg-color-white">    
+  <v-main class="my-bg-color-white">    
     <router-view />
   </v-main>
 
-  <div v-else>
+  <div>
       データを読み込んでいます...
       url_judge_param: {{ url_judge_param }}
   </div>
