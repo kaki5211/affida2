@@ -52,7 +52,7 @@ export default {
       id="#toolbar"
         >
         
-      <v-toolbar-title @click="$router.push({ name: 'Home' })" class="my-text-title my-text-size-50 my-text-color-white">BOOK</v-toolbar-title>
+      <!-- <v-toolbar-title @click="$router.push({ name: 'Home' })" class="my-text-title my-text-size-50 my-text-color-white">BOOK</v-toolbar-title> -->
 
       <v-spacer></v-spacer>
         <v-btn class="mx-11 d-flex" icon color="var(--my-color-white)">
