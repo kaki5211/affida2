@@ -94,7 +94,7 @@ console.log("DEBUG", DEBUG.value)
   <div>
       データを読み込んでいます...
       <!-- url_judge_param: {{ URL_JUDGE_PARAM }} -->
-      <!-- VIDEOS: {{ VIDEOS }} -->
+      VIDEOS: {{ VIDEOS }}
   </div>
 
   <!-- <Footer /> -->
