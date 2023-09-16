@@ -88,7 +88,7 @@ console.log("DEBUG", DEBUG.value)
   </v-row>
     
   <v-main class="my-bg-color-white">    
-    <!-- <router-view /> -->
+    <router-view />
   </v-main>
 
   <div>

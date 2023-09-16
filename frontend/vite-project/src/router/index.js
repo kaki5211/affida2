@@ -63,6 +63,7 @@ const router = createRouter({
 
 });
 
+
 // router.beforeEach((to, from, next) => {
 //   if (to.name === 'Books_Contents') {
 //     // /books/:params にアクセスした場合、リダイレクトして /books/:params/:params2 に遷移する
@@ -73,10 +74,6 @@ const router = createRouter({
 //     next();
 //   }
 // });
-
-
-
-
 
 
 
