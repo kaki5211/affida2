@@ -76,16 +76,16 @@ console.log("DEBUG", DEBUG.value)
 <v-app>
 
   <!-- <Header /> -->
-  <ToolBar />
+  <!-- <ToolBar /> -->
   <!-- <Topimage /> -->
 
 
   <!-- <Judgeurl /> -->
-  <v-row no-gutters>
-    <v-col cols="12">
+  <!-- <v-row no-gutters> -->
+    <!-- <v-col cols="12"> -->
       <!-- <Breadcrumbs /> -->
-    </v-col>
-  </v-row>
+    <!-- </v-col> -->
+  <!-- </v-row> -->
     
   <v-main class="my-bg-color-white">    
     <router-view />
