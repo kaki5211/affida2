@@ -2,10 +2,10 @@
 
 
 // ■■■■■■ import > Packages ■■■■■■
-import { computed } from 'vue';
+// import { computed } from 'vue';
 // import { onMounted } from 'vue';
 // import { ref } from 'vue';
-import { useStore } from 'vuex';
+// import { useStore } from 'vuex';
 // import { useRoute } from 'vue-router';
 
 
@@ -31,7 +31,7 @@ import { useStore } from 'vuex';
 
 
 // ■■■■■■ VueStore ■■■■■■
-const store = useStore();
+// const store = useStore();
 // const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 // const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
