@@ -9,14 +9,14 @@ import { createMetaManager } from 'vue-meta'
 // Vuetify
 // import 'vuetify/styles'
 // import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
-import { createVuetify } from 'vuetify'
+// import { createVuetify } from 'vuetify'
 // import * as components from 'vuetify/components'
 // import * as directives from 'vuetify/directives'
 // const vuetify = createVuetify({
 //   components,
 //   directives,
 // })
-const vuetify = createVuetify()
+// const vuetify = createVuetify()
 
 
 
@@ -24,5 +24,5 @@ createApp(App)
 .use(store)
 .use(router)
 .use(createMetaManager())
-.use(vuetify)
+// .use(vuetify)
 .mount('#app')
