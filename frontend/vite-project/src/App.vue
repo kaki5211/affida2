@@ -20,10 +20,10 @@ import { useStore } from 'vuex';
 // import Btn_1 from '../components/_Btn_1_mottomiru.vue';
 // import Text_1 from '../components/_Text_1.vue';
 // import HelloWorld from './components/HelloWorld.vue'
-import Header from './components/Header.vue';
-import ToolBar from './components/ToolBar.vue';
+// import Header from './components/Header.vue';
+// import ToolBar from './components/ToolBar.vue';
 // import Topimage from './components/Topimage.vue';
-import Footer from './components/Footer.vue';
+// import Footer from './components/Footer.vue';
 // import Breadcrumbs from './components/Breadcrumbs.vue';
 
 
@@ -32,7 +32,7 @@ import Footer from './components/Footer.vue';
 
 // ■■■■■■ VueStore ■■■■■■
 const store = useStore();
-const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
+// const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 // const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
 // const MAKER_LIST = computed(() => { return store.getters.GET_MAKER_LIST; });
@@ -88,12 +88,12 @@ console.log("DEBUG", DEBUG.value)
   <!-- </v-row> -->
     
   <v-main class="my-bg-color-white">    
-    <router-view />
+    <!-- <router-view /> -->
   </v-main>
 
   <div>
       データを読み込んでいます...
-      url_judge_param: {{ URL_JUDGE_PARAM }}
+      <!-- url_judge_param: {{ URL_JUDGE_PARAM }} -->
       <!-- VIDEOS: {{ VIDEOS }} -->
   </div>
 
