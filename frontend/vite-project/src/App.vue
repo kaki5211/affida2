@@ -42,7 +42,7 @@ const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const VIDEOS_LOADED = computed(() => { return store.getters.GET_VIDEOS_LOADED; });
 // const URL_LIST = computed(() => { return store.getters.GET_URL_LIST; });
 // const URL_PARAM = computed(() => { return store.getters.GET_URL_PARAM; });
-// const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
+const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 // const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
 const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
@@ -94,7 +94,7 @@ console.log("DEBUG", DEBUG.value)
   <div>
       データを読み込んでいます...
       url_judge_param: {{ url_judge_param }}
-      VIDEOS: {{ VIDEOS }}
+      <!-- VIDEOS: {{ VIDEOS }} -->
   </div>
 
   <!-- <Footer /> -->
