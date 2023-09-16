@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-// import './style.css'
+import './style.css'
 import App from './App.vue'
 
 // import router from './router'
@@ -21,8 +21,8 @@ import App from './App.vue'
 
 
 createApp(App)
-// .use(store)
-// .use(router)
-// .use(createMetaManager())
+.use(store)
+.use(router)
+.use(createMetaManager())
 // .use(vuetify)
 .mount('#app')
