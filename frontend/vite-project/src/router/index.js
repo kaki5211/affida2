@@ -23,6 +23,7 @@ const routes= []
 
 
 routes.push(
+  
     { path: '/home', name: 'Home', component: Home },
     { path: '/about', name: 'About', component: About },
 
