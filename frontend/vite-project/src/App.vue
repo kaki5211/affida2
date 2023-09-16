@@ -32,7 +32,7 @@ import { useStore } from 'vuex';
 
 // ■■■■■■ VueStore ■■■■■■
 const store = useStore();
-const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
+// const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 // const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
 // const MAKER_LIST = computed(() => { return store.getters.GET_MAKER_LIST; });
@@ -45,8 +45,8 @@ const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 // const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
-const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
-console.log("DEBUG", DEBUG.value)
+// const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
+// console.log("DEBUG", DEBUG.value)
 
 
 // ■■■■■■ VueRouter ■■■■■■
@@ -94,7 +94,7 @@ console.log("DEBUG", DEBUG.value)
   <div>
       データを読み込んでいます...
       <!-- url_judge_param: {{ URL_JUDGE_PARAM }} -->
-      VIDEOS: {{ VIDEOS }}
+      <!-- VIDEOS: {{ VIDEOS }} -->
   </div>
 
   <!-- <Footer /> -->
