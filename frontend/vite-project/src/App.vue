@@ -21,7 +21,7 @@ import { useStore } from 'vuex';
 // import Text_1 from '../components/_Text_1.vue';
 // import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header.vue';
-// import ToolBar from './components/ToolBar.vue';
+import ToolBar from './components/ToolBar.vue';
 // import Topimage from './components/Topimage.vue';
 // import Footer from './components/Footer.vue';
 // import Breadcrumbs from './components/Breadcrumbs.vue';
@@ -76,7 +76,7 @@ console.log("DEBUG", DEBUG.value)
 <v-app>
 
   <Header />
-  <!-- <ToolBar /> -->
+  <ToolBar />
   <!-- <Topimage /> -->
 
 
