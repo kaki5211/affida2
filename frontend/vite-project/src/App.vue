@@ -32,7 +32,7 @@ import { useStore } from 'vuex';
 
 // ■■■■■■ VueStore ■■■■■■
 const store = useStore();
-// const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
+const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 // const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
 // const MAKER_LIST = computed(() => { return store.getters.GET_MAKER_LIST; });
@@ -99,6 +99,7 @@ console.log("DEBUG", DEBUG.value)
 
   <!-- <Footer /> -->
 </v-app>
+
 
 
 
