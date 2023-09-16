@@ -20,8 +20,8 @@ import { useStore } from 'vuex';
 // import Btn_1 from '../components/_Btn_1_mottomiru.vue';
 // import Text_1 from '../components/_Text_1.vue';
 // import HelloWorld from './components/HelloWorld.vue'
-import Header from './components/Header.vue';
-import ToolBar from './components/ToolBar.vue';
+// import Header from './components/Header.vue';
+// import ToolBar from './components/ToolBar.vue';
 // import Topimage from './components/Topimage.vue';
 // import Footer from './components/Footer.vue';
 // import Breadcrumbs from './components/Breadcrumbs.vue';
@@ -42,7 +42,7 @@ const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const VIDEOS_LOADED = computed(() => { return store.getters.GET_VIDEOS_LOADED; });
 // const URL_LIST = computed(() => { return store.getters.GET_URL_LIST; });
 // const URL_PARAM = computed(() => { return store.getters.GET_URL_PARAM; });
-const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
+// const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 // const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
 const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
@@ -75,8 +75,8 @@ console.log("DEBUG", DEBUG.value)
 
 <v-app>
 
-  <Header />
-  <ToolBar />
+  <!-- <Header /> -->
+  <!-- <ToolBar /> -->
   <!-- <Topimage /> -->
 
 
@@ -88,7 +88,7 @@ console.log("DEBUG", DEBUG.value)
   <!-- </v-row> -->
     
   <v-main class="my-bg-color-white">    
-    <router-view />
+    <!-- <router-view /> -->
   </v-main>
 
   <div>
