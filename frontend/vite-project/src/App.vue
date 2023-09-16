@@ -20,7 +20,7 @@ import { useStore } from 'vuex';
 // import Btn_1 from '../components/_Btn_1_mottomiru.vue';
 // import Text_1 from '../components/_Text_1.vue';
 // import HelloWorld from './components/HelloWorld.vue'
-// import Header from './components/Header.vue';
+import Header from './components/Header.vue';
 // import ToolBar from './components/ToolBar.vue';
 // import Topimage from './components/Topimage.vue';
 // import Footer from './components/Footer.vue';
@@ -75,7 +75,7 @@ console.log("DEBUG", DEBUG.value)
 
 <v-app>
 
-  <!-- <Header /> -->
+  <Header />
   <!-- <ToolBar /> -->
   <!-- <Topimage /> -->
 
