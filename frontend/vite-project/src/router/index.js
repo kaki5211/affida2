@@ -1,6 +1,9 @@
 // router/index.js
+import App from '../views/App.vue'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
+import ContantsListVideo from '../views/ContantsListVideo.vue'
+
 // import NotFoundComponent from '../views/NotFoundComponent.vue'
 
 // import { computed } from 'vue';
@@ -23,10 +26,12 @@ const routes= []
 
 
 routes.push(
-  
+
     { path: '/home', name: 'Home', component: Home },
     { path: '/about', name: 'About', component: About },
+    { path: '/video',  name: 'Videos',  meta: { subcontents: 'video'}, component: ContantsListVideo, props: true},
 
+    { path: '/app', name: 'App', component: App },
 
 //   { path: '/:pathMatch(.*)*', name: 'App_none', component: NotFoundComponent },
 );

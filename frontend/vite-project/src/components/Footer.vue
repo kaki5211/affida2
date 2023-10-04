@@ -1,34 +1,56 @@
+<script setup>
+// import { VList, VListItem, VListItemContent } from 'vuetify/lib'; // 正しいインポートパスを指定
 
-<script setup lang="ts">
+
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+// import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
+// import { useMeta } from 'vue-meta';
 
+
+const drawer = ref(false);
+const props = ref(true);
+const isActive = ref(true);
+
+const store = useStore();
+const myData = computed(() => {
+  return store.getters.getMyData;
+});
+
+// myData.book_list[0].id
+
+
+
+// const title = computed(() => myData.value.book_list[0]?.title || '')
+// const icon = "/src/assets/book-ic_icon.svg";
+// const count = ref(0);
+// const increaseCount = () => {
+//   count.value++;
+// };
 </script>
-<script lang="ts">
-export default {
+
+
+<script>
+import { defineComponent } from 'vue'
+
+
+export default defineComponent({
 	components: {
 		Icon,
 	},
-
-  data: () => ({
-    links1: [
-      'ホーム',
-      '今日抜き',
-      '動画',
-      'ランキング',
-    ],
-    links2: [
-      'ブログ記事',
-    ],
-    
-  }),
-};
+});
 </script>
+
 
 
 
 
 
 <template>
+  <div>
+
   <v-row no-gutters class="py-1 my-bg-color-black"></v-row>
   <v-footer class="my-bg-color px-0">
     <v-row justify="center" no-gutters class="mt-10">
@@ -42,7 +64,7 @@ export default {
           <v-list id="drwer-list" density="compact" nav class="pl-8 my-bg-color my-text-color-white">
 
             <v-list-item class="text-h3 my-text-size-40" title="ホーム" value="home"
-            :to="{ name: 'Home'}"
+            :to="{}"
             >
               <template v-slot:prepend>
                 <v-icon><Icon icon="solar:home-bold-duotone" /></v-icon>
@@ -50,7 +72,7 @@ export default {
             </v-list-item>
 
             <v-list-item class="text-h3 my-text-size-40" title="今日抜き" value="kyounuki"
-            :to="{ name: 'Kyounuki'}"
+            :to="{}"
             >
               <template v-slot:prepend>
                 <v-icon><Icon icon="icon-park:soccer-one" /></v-icon>
@@ -58,7 +80,7 @@ export default {
             </v-list-item>
 
             <v-list-item class="text-h3 my-text-size-40" title="動画" value="video"
-            :to="{ name: 'Videos'}"
+            :to="{}"
             >
               <template v-slot:prepend>
                 <v-icon><Icon icon="icon-park:video-two" /></v-icon>
@@ -141,8 +163,8 @@ export default {
     </v-row>
   </v-footer>
   <v-row no-gutters class="py-2 my-bg-color-black"></v-row>
-
-</template>
+</div>
+  </template>
 
 
 

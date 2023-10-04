@@ -1,7 +1,10 @@
 
 
 
-<script setup lang="ts">
+<script setup>
+// import { VList, VListItem, VListItemContent } from 'vuetify/lib'; // 正しいインポートパスを指定
+
+
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 // import { ref, onMounted } from 'vue';
@@ -30,13 +33,22 @@ const myData = computed(() => {
 //   count.value++;
 // };
 </script>
-<script lang="ts">
-export default {
+
+
+<script>
+import { defineComponent } from 'vue'
+
+
+export default defineComponent({
 	components: {
 		Icon,
 	},
-};
+});
 </script>
+
+
+
+
 
 
 
@@ -53,15 +65,15 @@ export default {
       id="#toolbar"
         >
         
-      <!-- <v-toolbar-title @click="$router.push({ name: 'Home' })" class="my-text-title my-text-size-50 my-text-color-white">BOOK</v-toolbar-title> -->
+      <v-toolbar-title @click="$router.push({ name: 'Home' })" class="my-text-title my-text-size-50 my-text-color-white">BOOK</v-toolbar-title>
 
       <v-spacer></v-spacer>
-        <v-btn class="mx-11 d-flex" icon color="var(--my-color-white)">
+        <v-btn class="mx-11 d-flex" icon>
           <v-icon class="align-center" size="80" color="#1DA1F2">mdi-twitter</v-icon>
         </v-btn>
 
 
-        <v-btn class="mx-11 d-flex" icon color="var(--my-color-white)">
+        <v-btn class="mx-11 d-flex" icon>
           <v-icon class="align-center" size="80"><Icon icon="skill-icons:instagram" /></v-icon>
         </v-btn>
         <v-app-bar-nav-icon class="mx-11 d-flex"  @click.stop="drawer = !drawer">

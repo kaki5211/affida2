@@ -5,12 +5,6 @@ import axios from 'axios';
 
 
 
-// fetchDataAndCommit
-async function fetchDataAndCommit({ commit, endpoint, mutationType }) {
-  const response = await axios.get(`${host_api}/${endpoint}/`);
-  commit(mutationType, response.data);
-}
-
 
 // URL選択
 // const host = "http://127.0.0.1:8000"
@@ -24,6 +18,29 @@ const host_api = "https://kyounuki.jp:8080/api"
 
 
 // http://localhost:8000/api/your-endpoint/
+
+
+
+
+
+
+// fetchDataAndCommit
+async function fetchDataAndCommit({ commit, endpoint, mutationType }) {
+  const response = await axios.get(`${host_api}/${endpoint}/`);
+  commit(mutationType, response.data);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const store = createStore({
@@ -122,7 +139,7 @@ const store = createStore({
       commit('SET_DEBUG', urlhost.includes("kyounuki"));
     },
     async FETCH_GET_BREADCRUMBS({ commit }) {
-
+      
       // 事前に定義したパスと表示する文字列の対
       const pathMapping = {
         video: "動画",

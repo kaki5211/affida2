@@ -8,19 +8,10 @@ div {
 
 
 
-<script setup lang="ts">
-// import { computed } from 'vue';
-// import { useStore } from 'vuex';
-// import { ref, onMounted } from 'vue';
-import { useMeta } from 'vue-meta'
+<script setup>
+import { useMeta } from 'vue-meta';
 
 
-// const store = useStore();
-// const myData = computed(() => {
-//   return store.getters.getMyData;
-// });
-
-// myData.book_list[0].id
 const { metaInfo } = useMeta({
   title: "",
   meta: [
@@ -118,6 +109,7 @@ const { metaInfo } = useMeta({
 //   count.value++;
 // };
 </script>
+
 
 
 

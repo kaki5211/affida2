@@ -50,27 +50,27 @@ Bold text.
 
 
 /* #f5f8f5!important */
-.my-text-color { color: var(--my-color);}
-.my-text-color-black { color: var(--my-color-black);}
-.my-text-color-white { color: var(--my-color-white);}
-.my-text-color-gray { color: var(--my-color-gray);}
-.my-text-color-green { color: var(--my-color-green);}
+.my-text-color { color: var(--my-color)!important;}
+.my-text-color-black { color: var(--my-color-black)!important;}
+.my-text-color-white { color: var(--my-color-white)!important;}
+.my-text-color-gray { color: var(--my-color-gray)!important;}
+.my-text-color-green { color: var(--my-color-green)!important;}
 
-.my-bg-color { background-color: var(--my-color);}
-.my-bg-color-black { background-color: var(--my-color-black);}
-.my-bg-color-white { background-color: var(--my-color-white);}
-.my-bg-color-gray { background-color: var(--my-color-gray);}
-.my-bg-color-green { background-color: var(--my-color-green);}
+.my-bg-color { background-color: var(--my-color)!important;}
+.my-bg-color-black { background-color: var(--my-color-black)!important;}
+.my-bg-color-white { background-color: var(--my-color-white)!important;}
+.my-bg-color-gray { background-color: var(--my-color-gray)!important;}
+.my-bg-color-green { background-color: var(--my-color-green)!important;}
 
-.my-border { border:thin solid var(--my-color);}
-.my-border-vue { border: thin solid rgba(0,0,0,.12);}
-.my-border-bottom { border-bottom: thin solid var(--my-color);}
+.my-border { border:thin solid var(--my-color)!important;}
+.my-border-vue { border: thin solid rgba(0,0,0,.12)!important;}
+.my-border-bottom { border-bottom: thin solid var(--my-color)!important;}
 
-.my-border-color { border-color: var(--my-color);}
-.my-border-color-black { border-color: var(--my-color-black);}
-.my-border-color-white { border-color: var(--my-color-white);}
-.my-border-color-gray { border-color: var(--my-color-gray);}
-.my-border-2 { border-width: 2px;}
+.my-border-color { border-color: var(--my-color)!important;}
+.my-border-color-black { border-color: var(--my-color-black)!important;}
+.my-border-color-white { border-color: var(--my-color-white)!important;}
+.my-border-color-gray { border-color: var(--my-color-gray)!important;}
+.my-border-2 { border-width: 2px!important;}
 
 
 
