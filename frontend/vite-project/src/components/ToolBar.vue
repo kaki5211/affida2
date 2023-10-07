@@ -4,6 +4,7 @@
 <script setup>
 // import { VList, VListItem, VListItemContent } from 'vuetify/lib'; // 正しいインポートパスを指定
 
+import '@mdi/font/css/materialdesignicons.css'
 
 import { computed } from 'vue';
 import { useStore } from 'vuex';
