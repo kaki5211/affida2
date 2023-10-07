@@ -96,11 +96,11 @@ export default defineComponent({
 <template>
 
 <v-app id="#my-scroll-target">
-  <Meta />
+  <!-- <Meta /> -->
 
 
-  <ToolBar />
-  <Topimage />
+  <!-- <ToolBar /> -->
+  <!-- <Topimage /> -->
 
 
 
@@ -108,12 +108,13 @@ export default defineComponent({
   <!-- <Judgeurl /> -->
   <v-row no-gutters>
     <v-col cols="12">
-      <Breadcrumbs />
+      <!-- <Breadcrumbs /> -->
     </v-col>
   </v-row>
     
   <v-main class="my-bg-color-white">
-    <router-view />
+    aiueo!
+    <!-- <router-view /> -->
   </v-main>
 
 
@@ -126,7 +127,7 @@ export default defineComponent({
 
 
 
-  <Footer />
+  <!-- <Footer /> -->
 </v-app>
 
 

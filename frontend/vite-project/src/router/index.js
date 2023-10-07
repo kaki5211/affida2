@@ -28,20 +28,20 @@ const routes= []
 
 routes.push(
 
-    { path: '/home', name: 'Home', component: Home },
-    { path: '/about', name: 'About', component: About },
+    // { path: '/home', name: 'Home', component: Home },
+    // { path: '/about', name: 'About', component: About },
 
-    { path: '/app', name: 'App', component: App },
+    // { path: '/app', name: 'App', component: App },
 
 
 
     { path: '/', name: 'Home', component: App },
-    { path: '/video',  name: 'Videos',  meta: { subcontents: 'video'}, component: ContantsListVideo, props: true},
-    { path: '/video/:param',  name: 'Video',  meta: { subcontents: 'video'}, component: About, props: true},
-    { path: '/kyounuki',  name: 'Kyounuki',  meta: { subcontents: 'kyounuki'}, component: ContantsListKyounuki, props: true},
-    { path: '/performer',  name: 'Performers',  meta: { subcontents: 'performer'}, component: About, props: true},
-    { path: '/performer/:param',  name: 'Performer',  meta: { subcontents: 'performer'}, component: About, props: true},
-    { path: '/tag',  name: 'Tags',  meta: { subcontents: 'tag'}, component: About,  props: true},
+    // { path: '/video',  name: 'Videos',  meta: { subcontents: 'video'}, component: ContantsListVideo, props: true},
+    // { path: '/video/:param',  name: 'Video',  meta: { subcontents: 'video'}, component: About, props: true},
+    // { path: '/kyounuki',  name: 'Kyounuki',  meta: { subcontents: 'kyounuki'}, component: ContantsListKyounuki, props: true},
+    // { path: '/performer',  name: 'Performers',  meta: { subcontents: 'performer'}, component: About, props: true},
+    // { path: '/performer/:param',  name: 'Performer',  meta: { subcontents: 'performer'}, component: About, props: true},
+    // { path: '/tag',  name: 'Tags',  meta: { subcontents: 'tag'}, component: About,  props: true},
   //   { path: '/tag/:param',  name: 'Tag',  meta: { subcontents: 'tag'}, component: About, props: true},
     { path: '/maker',  name: 'Makers',  meta: { subcontents: 'maker'}, component: About, props: true},
   //   { path: '/maker/:param',  name: 'Maker',  meta: { subcontents: 'maker'}, component: About, props: true},
