@@ -17,16 +17,12 @@ import 'vuetify/styles'
 import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
 import { createVuetify } from 'vuetify'
 import '@mdi/font/css/materialdesignicons.css'
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
+// import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 const vuetify = createVuetify({
   components,
   directives,
-  iconfont: 'mdi', // ここでmdiアイコンセットを指定
-  icons: {
-    values: mdi, // mdiアイコンセットをvaluesに設定
-  },
 })
 
 // const vuetify = createVuetify({
