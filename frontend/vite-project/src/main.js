@@ -17,17 +17,29 @@ import 'vuetify/styles'
 import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
 import { createVuetify } from 'vuetify'
 import '@mdi/font/css/materialdesignicons.min.css'
-// import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
+// import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 const vuetify = createVuetify({
   components,
   directives,
+  icons: {
+    defaultSet: 'mdi', // This is already the default value - only for display purposes
+  },
+
+
 })
 
 // const vuetify = createVuetify({
 //     components,
 //     directives,
+// icons: {
+//     defaultSet: 'mdi',
+//     aliases,
+//     sets: {
+//       mdi,
+//     },
+//   },
 //  });
 
 // const vuetify = createVuetify()
