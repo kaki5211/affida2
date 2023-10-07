@@ -2,6 +2,22 @@
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
+
+<script>
+import GlobalStyles from './components/_GlobalStyles.vue';
+import { defineComponent } from 'vue'
+
+
+export default defineComponent({
+	components: {
+    GlobalStyles,
+	},
+});
+</script>
+
+
+
+
 <template>
   <div>
     <a href="https://vitejs.dev" target="_blank">
