@@ -8,7 +8,7 @@ import App from '../views/App.vue'
 // import NotFoundComponent from '../views/NotFoundComponent.vue'
 
 // import { computed } from 'vue';
-// import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 // import { useStore } from 'vuex';
 // import store from '../store';
 
