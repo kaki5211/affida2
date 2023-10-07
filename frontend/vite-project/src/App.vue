@@ -99,8 +99,8 @@ export default defineComponent({
   <!-- <Meta /> -->
 
 
-  <!-- <ToolBar /> -->
-  <!-- <Topimage /> -->
+  <ToolBar />
+  <Topimage />
 
 
 
@@ -127,7 +127,7 @@ export default defineComponent({
 
 
 
-  <!-- <Footer /> -->
+  <Footer />
 </v-app>
 
 
