@@ -16,7 +16,7 @@ import { createMetaManager } from 'vue-meta'
 import 'vuetify/styles'
 import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
 import { createVuetify } from 'vuetify'
-import '@mdi/font/css/materialdesignicons.css'
+import '@mdi/font/css/materialdesignicons.min.css'
 // import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
