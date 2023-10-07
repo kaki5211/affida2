@@ -1,11 +1,11 @@
 import { createApp } from 'vue'
-import './style.css'
+// import './style.css'
 import App from './App.vue'
 
 // import router from './router'
 // import store from './store';
 // import { createMetaManager } from 'vue-meta'
-const metaManager = createMetaManager()
+// const metaManager = createMetaManager()
 
 
 
@@ -13,22 +13,22 @@ const metaManager = createMetaManager()
 
 
 // Vuetify
-import 'vuetify/styles'
-import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
-import { createVuetify } from 'vuetify'
-import '@mdi/font/css/materialdesignicons.css'
+// import 'vuetify/styles'
+// import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
+// import { createVuetify } from 'vuetify'
+// import '@mdi/font/css/materialdesignicons.css'
 // import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+// import * as components from 'vuetify/components'
+// import * as directives from 'vuetify/directives'
 // const vuetify = createVuetify({
 //   components,
 //   directives,
 // })
 
-const vuetify = createVuetify({
-    components,
-    directives,
- });
+// const vuetify = createVuetify({
+//     components,
+//     directives,
+//  });
 
 // const vuetify = createVuetify()
 
