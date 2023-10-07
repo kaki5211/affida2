@@ -96,7 +96,7 @@ export default defineComponent({
 <template>
 
 <v-app id="#my-scroll-target">
-  <!-- <Meta /> -->
+  <Meta />
 
 
   <ToolBar />
