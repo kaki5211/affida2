@@ -125,7 +125,7 @@ function filterVideo(data, searchparams) {
 
       // }
     }
-  console.log("filteredData.length", filteredData.length)
+  // console.log("filteredData.length", filteredData.length)
   // console.log("searchparams", searchparams)
   }  return filteredData;
 }
@@ -426,7 +426,9 @@ export default defineComponent({
                     
                     >
                       全 
-                      <a class="text-red">{{ filterVideo(VIDEOS, searchparams).length }}</a>
+                      
+                      <a v-if="VIDEOS" class="text-red">{{ filterVideo(VIDEOS, searchparams).length || "0"}}</a>
+
                       件 表示
                     </div>
                   </div>
@@ -461,7 +463,7 @@ export default defineComponent({
                                       {{ item.name }}
                                     </v-chip>
                                   </v-chip-group>
-                                  {{searchparams.performers}}
+                                  <!-- {{searchparams.performers}} -->
 
                                   <div class="d-flex py-3">
                                     <v-btn
@@ -516,7 +518,7 @@ export default defineComponent({
                                       {{ item.name }}
                                     </v-chip>
                                   </v-chip-group>
-                                  {{searchparams.tags}}
+                                  <!-- {{searchparams.tags}} -->
 
                                   <div class="d-flex py-3">
                                     <v-btn

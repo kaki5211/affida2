@@ -40,12 +40,20 @@ Bold text.
 }
 
 :root {
+  --my-color: #3245c1;
+  --my-color-black: #2b2c30;
+  --my-color-white: #fff5f9;
+  --my-color-gray: #6668cc;
+  --my-color-green: #3d11c1;
+}
+
+/* :root {
   --my-color: #455045;
   --my-color-black: #2b302b;
   --my-color-white: #f5f8f5;
   --my-color-gray: #9A9;
   --my-color-green: #1aa179;
-}
+} */
 
 
 

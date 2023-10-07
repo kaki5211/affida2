@@ -137,46 +137,49 @@ export default defineComponent({
         
         <v-list id="drwer-list" density="compact" nav class="pl-8">
 
-          <v-list-item class="text-h3 my-text-size-40" title="ホーム" value="home"
-            >
-              <template v-slot:prepend>
-                <v-icon><Icon icon="solar:home-bold-duotone" /></v-icon>
-              </template>
-            </v-list-item>
+<v-list-item class="text-h3 my-text-size-40" title="ホーム" value="home"
+  :to="{ name: 'Home'}"
+  >
+    <template v-slot:prepend>
+      <v-icon><Icon icon="solar:home-bold-duotone" /></v-icon>
+    </template>
+  </v-list-item>
 
-            <v-list-item class="text-h3 my-text-size-40" title="今日抜き" value="kyounuki"
-            >
-              <template v-slot:prepend>
-                <v-icon><Icon icon="icon-park:soccer-one" /></v-icon>
-              </template>
-            </v-list-item>
+  <v-list-item class="text-h3 my-text-size-40" title="今日抜き" value="kyounuki"
+  :to="{ name: 'Kyounuki'}"
+  >
+    <template v-slot:prepend>
+      <v-icon><Icon icon="icon-park:soccer-one" /></v-icon>
+    </template>
+  </v-list-item>
 
-            <v-list-item class="text-h3 my-text-size-40" title="動画" value="video"
-            >
-              <template v-slot:prepend>
-                <v-icon><Icon icon="icon-park:video-two" /></v-icon>
-              </template>
-            </v-list-item>          
-
-
-            <v-list-item class="my-text-size-40" disabled title="ランキング(準備中...)" value="ranking">
-              <template v-slot:prepend>
-                <v-icon><Icon icon="icon-park:ranking-list" /></v-icon>
-              </template>
-            </v-list-item>
-
-            <v-list-item class="my-text-size-40" disabled title="ブログ記事(準備中...)" value="ranking">
-            <template v-slot:prepend>
-              <v-icon><Icon icon="fluent:content-view-28-filled" /></v-icon>
-            </template>
-          </v-list-item>
-        
-        </v-list>
+  <v-list-item class="text-h3 my-text-size-40" title="動画" value="video"
+  :to="{ name: 'Videos'}"
+  >
+    <template v-slot:prepend>
+      <v-icon><Icon icon="icon-park:video-two" /></v-icon>
+    </template>
+  </v-list-item>          
 
 
+  <v-list-item class="my-text-size-40" disabled title="ランキング(準備中...)" value="ranking">
+    <template v-slot:prepend>
+      <v-icon><Icon icon="icon-park:ranking-list" /></v-icon>
+    </template>
+  </v-list-item>
 
-      </v-navigation-drawer>
-      <!-- <v-main style="height: 500px"></v-main> -->
+  <v-list-item class="my-text-size-40" disabled title="ブログ記事(準備中...)" value="ranking">
+  <template v-slot:prepend>
+    <v-icon><Icon icon="fluent:content-view-28-filled" /></v-icon>
+  </template>
+</v-list-item>
+
+</v-list>
+
+
+
+</v-navigation-drawer>
+<!-- <v-main style="height: 500px"></v-main> -->
 
 
     

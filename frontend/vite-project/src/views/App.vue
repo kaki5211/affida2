@@ -1,48 +1,74 @@
 
-
-<script setup lang="ts">
-import Btn_1 from '../components/_Btn_1_mottomiru.vue';
+<script setup>
 
 
-import { useRoute } from 'vue-router';
-import { useStore } from 'vuex';
+
+
+// ■Component
+
+
+// ■■■■■■ import > Packages ■■■■■■
 import { computed } from 'vue';
-import { ref, onMounted } from 'vue';
+// import { onMounted } from 'vue';
+import { ref } from 'vue';
+// import { reactive } from 'vue';
+import { useStore } from 'vuex';
+// import { useRoute } from 'vue-router';
+
+
+
+// ■■■■■■ import > Others ■■■■■■
 import { Icon } from '@iconify/vue';
 
 
+
+
+// ■■■■■■ import > Components ■■■■■■
+import Btn_1 from '../components/_Btn_1_mottomiru.vue';
 import Text_1 from '../components/_Text_1.vue';
+// import HelloWorld from './components/HelloWorld.vue'
+// import Meta from './components/Meta.vue';
+// import ToolBar from './components/ToolBar.vue';
+// import Topimage from './components/Topimage.vue';
+// import Footer from './components/Footer.vue';
+// import Breadcrumbs from './components/Breadcrumbs.vue';
 
 
 
 
 
 
-const router = useRoute();
+// ■■■■■■ VueStore ■■■■■■
 const store = useStore();
-
-const url_params = ref('');
-
-
-store.dispatch('FETCH_GET_BREADCRUMBS')
-
-
-const GET_VIDEOS_LOADED = computed(() => { return store.getters.GET_VIDEOS_LOADED; });
-const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
+// const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
-const URL_LIST = computed(() => { return store.getters.GET_URL_LIST; });
+// const MAKER_LIST = computed(() => { return store.getters.GET_MAKER_LIST; });
+// const LABEL_LIST = computed(() => { return store.getters.GET_LABEL_LIST; });
+// const SERIES_LIST = computed(() => { return store.getters.GET_SERIES_LIST; });
 const KYOUNUKI_LIST = computed(() => { return store.getters.GET_KYOUNUKI_LIST; });
-// const slicedKYOUNUKI_LIST = KYOUNUKI_LIST.value.slice(0, 2);
-
-console.log("KYOUNUKI_LISTKYOUNUKI_LISTKYOUNUKI_LIST", KYOUNUKI_LIST)
-// const currentURL = window.location.href;
-// const currentPath = window.location.pathname;
-// const pathList = currentPath.split("/").slice(1);
-// const currentHost = window.location.host;
-
+const VIDEOS_LOADED = computed(() => { return store.getters.GET_VIDEOS_LOADED; });
+// const URL_LIST = computed(() => { return store.getters.GET_URL_LIST; });
+// const URL_PARAM = computed(() => { return store.getters.GET_URL_PARAM; });
+// const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
+// const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
+// const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
 const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
-console.log("DEBUG", DEBUG.value)
+// console.log("DEBUG", DEBUG.value)
+store.dispatch('FETCH_GET_BREADCRUMBS')
+let slicedKYOUNUKI_LIST = ref("");
+if (KYOUNUKI_LIST.length > 2) {
+  slicedKYOUNUKI_LIST = KYOUNUKI_LIST.slice(0, 2);
+} else {
+  slicedKYOUNUKI_LIST = KYOUNUKI_LIST;
+}
+
+
+
+
+// ■■■■■■ VueRouter ■■■■■■
+// const route = useRoute();
+
 
 
 
@@ -58,9 +84,14 @@ if (DEBUG.value == true) {
   text3.value = "記事２";
 
 }
+
+
+
+
+
 </script>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue'
 import GlobalStyles from '../components/_GlobalStyles.vue';
 
@@ -168,11 +199,12 @@ export default defineComponent({
 
 
 <template>
+
   <v-app id="#my-scroll-target">
 
 
     <!-- <v-main v-if="isUrlListDataLoaded" class="my-bg-color-white"> -->
-    <v-main v-if="GET_VIDEOS_LOADED" class="my-bg-color-white">
+    <v-main v-if="VIDEOS_LOADED" class="my-bg-color-white">
       <!-- <dev>{{ VIDEOS }}</dev> -->
       <!-- <dev>{{ URL_LIST }}</dev>
       <dev>{{ currentPath }}</dev>
@@ -190,7 +222,7 @@ export default defineComponent({
         <v-col cols="12" class="mx-auto px-10">
 
           <v-card class="my-15"
-          v-for="(KYOUNUKI,iii) in slicedKYOUNUKI_LIST"
+          v-for="(KYOUNUKI,iii) in KYOUNUKI_LIST"
           :key="iii"
           >
           <v-toolbar
@@ -325,7 +357,7 @@ export default defineComponent({
                     </v-col>
                   </v-row> -->
 
-                  <a :to="{ name: 'Video', param: VIDEO.productnumber}" class="custom-link my-text-size-50 font-weight-medium pt-2">{{ VIDEO.title }}</a>
+                  <!-- <a :to="{ name: 'Video', param: VIDEO.productnumber}" class="custom-link my-text-size-50 font-weight-medium pt-2">{{ VIDEO.title }}</a> -->
 
                   <v-row no-gutters>
 <!-- 

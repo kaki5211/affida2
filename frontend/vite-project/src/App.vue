@@ -5,7 +5,7 @@
 import { computed } from 'vue';
 // import { onMounted } from 'vue';
 // import { ref } from 'vue';
-import { reactive } from 'vue';
+// import { reactive } from 'vue';
 import { useStore } from 'vuex';
 // import { useRoute } from 'vue-router';
 
@@ -23,17 +23,20 @@ import { useStore } from 'vuex';
 // import HelloWorld from './components/HelloWorld.vue'
 import Meta from './components/Meta.vue';
 import ToolBar from './components/ToolBar.vue';
-// import Topimage from './components/Topimage.vue';
+import Topimage from './components/Topimage.vue';
 import Footer from './components/Footer.vue';
-// import Breadcrumbs from './components/Breadcrumbs.vue';
+import Breadcrumbs from './components/Breadcrumbs.vue';
+// import Btn_1 from './components/_Btn_1_mottomiru.vue';
+// import Text_1 from './components/_Text_1.vue';
+
 
 
 
 
 
 // ■■■■■■ VueStore ■■■■■■
-const store = useStore();
-const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
+// const store = useStore();
+// const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 // const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
 // const MAKER_LIST = computed(() => { return store.getters.GET_MAKER_LIST; });
@@ -46,8 +49,8 @@ const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 // const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
-const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
-console.log("DEBUG", DEBUG.value)
+// const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
+// console.log("DEBUG", DEBUG.value)
 
 
 // ■■■■■■ VueRouter ■■■■■■
@@ -95,42 +98,33 @@ export default defineComponent({
 <v-app id="#my-scroll-target">
   <Meta />
 
-    <!-- <template v-slot:title="{ content }">{{ content ? `${content} | SITE_NAME` : `SITE_NAME` }}</template> -->
-
 
   <ToolBar />
+  <Topimage />
 
 
-
-
-  <!-- <Topimage /> -->
 
 
   <!-- <Judgeurl /> -->
-  <!-- <v-row no-gutters> -->
-    <!-- <v-col cols="12"> -->
-      <!-- <Breadcrumbs /> -->
-    <!-- </v-col> -->
-  <!-- </v-row> -->
+  <v-row no-gutters>
+    <v-col cols="12">
+      <Breadcrumbs />
+    </v-col>
+  </v-row>
     
   <v-main class="my-bg-color-white">
-    router!!
     <router-view />
   </v-main>
 
 
-<v-btn>
-  あいうえお
-</v-btn>
-<sparcer>
-  
-</sparcer>
 
-  <div>
-      データを読み込んでいます...
-      <!-- url_judge_param: {{ URL_JUDGE_PARAM }} -->
-      VIDEOS: {{ VIDEOS }}
-  </div>
+
+  <sparcer>
+
+  </sparcer>
+
+
+
 
   <Footer />
 </v-app>

@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 
 // import VuetifyPlugin from '@vuetify/vite-plugin';
-// import VuetifyPlugin from "vite-plugin-vuetify"
+import VuetifyPlugin from "vite-plugin-vuetify"
 
 
 
@@ -14,6 +14,9 @@ import vuetify from 'vite-plugin-vuetify'
 export default defineConfig({
   plugins: [
     vue(),
+    VuetifyPlugin(
+      // Vuetify の設定
+    ),
   ],
 
 

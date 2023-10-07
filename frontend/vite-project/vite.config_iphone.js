@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 
 // import VuetifyPlugin from '@vuetify/vite-plugin';
-import VuetifyPlugin from "vite-plugin-vuetify"
+// import VuetifyPlugin from "vite-plugin-vuetify"
 
 
 
@@ -14,9 +14,6 @@ import VuetifyPlugin from "vite-plugin-vuetify"
 export default defineConfig({
   plugins: [
     vue(),
-    VuetifyPlugin(
-      // Vuetify の設定
-    ),
   ],
   server: {
     host: '172.20.10.4', // 希望のアドレスに置き換えてください
