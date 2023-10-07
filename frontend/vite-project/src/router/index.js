@@ -1,14 +1,14 @@
 // router/index.js
 import App from '../views/App.vue'
-import Home from '../views/Home.vue'
-import About from '../views/About.vue'
-import ContantsListVideo from '../views/ContantsListVideo.vue'
-import ContantsListKyounuki from '../views/ContantsListKyounuki.vue'
+// import Home from '../views/Home.vue'
+// import About from '../views/About.vue'
+// import ContantsListVideo from '../views/ContantsListVideo.vue'
+// import ContantsListKyounuki from '../views/ContantsListKyounuki.vue'
 
 // import NotFoundComponent from '../views/NotFoundComponent.vue'
 
 // import { computed } from 'vue';
-import { createRouter, createWebHistory } from 'vue-router';
+// import { createRouter, createWebHistory } from 'vue-router';
 // import { useStore } from 'vuex';
 // import store from '../store';
 
@@ -43,11 +43,11 @@ routes.push(
     // { path: '/performer/:param',  name: 'Performer',  meta: { subcontents: 'performer'}, component: About, props: true},
     // { path: '/tag',  name: 'Tags',  meta: { subcontents: 'tag'}, component: About,  props: true},
   //   { path: '/tag/:param',  name: 'Tag',  meta: { subcontents: 'tag'}, component: About, props: true},
-    { path: '/maker',  name: 'Makers',  meta: { subcontents: 'maker'}, component: About, props: true},
+    // { path: '/maker',  name: 'Makers',  meta: { subcontents: 'maker'}, component: About, props: true},
   //   { path: '/maker/:param',  name: 'Maker',  meta: { subcontents: 'maker'}, component: About, props: true},
-    { path: '/label',  name: 'Labels',  meta: { subcontents: 'label'}, component: About, props: true},
+    // { path: '/label',  name: 'Labels',  meta: { subcontents: 'label'}, component: About, props: true},
   //   { path: '/label/:param',  name: 'Label',  meta: { subcontents: 'label'}, component: About, props: true},
-    { path: '/series',  name: 'Seriess',  meta: { subcontents: 'series'}, component: About, props: true},
+    // { path: '/series',  name: 'Seriess',  meta: { subcontents: 'series'}, component: About, props: true},
     // { path: '/series/:param',  name: 'Series',  meta: { subcontents: 'series'}, component: About, props: true},
 
     
