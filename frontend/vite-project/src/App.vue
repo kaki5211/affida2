@@ -7,7 +7,7 @@
 // import { ref } from 'vue';
 // import { reactive } from 'vue';
 // import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
 
 
 
@@ -54,7 +54,7 @@ import ToolBar from './components/ToolBar.vue';
 
 
 // ■■■■■■ VueRouter ■■■■■■
-const route = useRoute();
+// const route = useRoute();
 
 
 
@@ -114,9 +114,6 @@ export default defineComponent({
     
   <v-main class="my-bg-color-white">
     aiueo!
-    <v-btn class="mx-11 d-flex" icon>
-      <v-icon class="align-center" size="80" color="#1DA1F2">mdi-twitter</v-icon>
-    </v-btn>
     
     <router-view />
   </v-main>
