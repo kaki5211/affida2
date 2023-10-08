@@ -21,7 +21,7 @@
 // import Btn_1 from '../components/_Btn_1_mottomiru.vue';
 // import Text_1 from '../components/_Text_1.vue';
 // import HelloWorld from './components/HelloWorld.vue'
-// import Meta from './components/Meta.vue';
+import Meta from './components/Meta.vue';
 import ToolBar from './components/ToolBar.vue';
 // import Topimage from './components/Topimage.vue';
 // import Footer from './components/Footer.vue';
@@ -96,7 +96,7 @@ export default defineComponent({
 <template>
 
 <v-app id="#my-scroll-target">
-  <!-- <Meta /> -->
+  <Meta />
 
 
   <ToolBar />
