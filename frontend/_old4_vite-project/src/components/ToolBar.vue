@@ -9,7 +9,7 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 // import { ref, onMounted } from 'vue';
 import { ref } from 'vue';
-import { Icon } from '@iconify/vue';
+// import { Icon } from '@iconify/vue';
 // import { useMeta } from 'vue-meta';
 
 
@@ -41,7 +41,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
 	components: {
-		Icon,
+		// Icon,
 	},
 });
 </script>

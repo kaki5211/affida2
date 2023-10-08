@@ -7,7 +7,7 @@
 // import { ref } from 'vue';
 // import { reactive } from 'vue';
 // import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
 
 
 
@@ -22,7 +22,7 @@ import { useRoute } from 'vue-router';
 // import Text_1 from '../components/_Text_1.vue';
 // import HelloWorld from './components/HelloWorld.vue'
 // import Meta from './components/Meta.vue';
-// import ToolBar from './components/ToolBar.vue';
+import ToolBar from './components/ToolBar.vue';
 // import Topimage from './components/Topimage.vue';
 // import Footer from './components/Footer.vue';
 // import Breadcrumbs from './components/Breadcrumbs.vue';
@@ -54,7 +54,7 @@ import { useRoute } from 'vue-router';
 
 
 // ■■■■■■ VueRouter ■■■■■■
-const route = useRoute();
+// const route = useRoute();
 
 
 
@@ -99,7 +99,7 @@ export default defineComponent({
   <!-- <Meta /> -->
 
 
-  <!-- <ToolBar /> -->
+  <ToolBar />
   <!-- <Topimage /> -->
 
 
@@ -113,20 +113,15 @@ export default defineComponent({
   </v-row>
     
   <v-main class="my-bg-color-white">
-    aiueo!
-    <v-btn class="mx-11 d-flex" icon>
-      <v-icon class="align-center" size="80" color="#1DA1F2">mdi-twitter</v-icon>
-    </v-btn>
+    aiueo!2
+
     
-    <router-view />
+    <!-- <router-view /> -->
   </v-main>
 
 
 
 
-  <sparcer>
-
-  </sparcer>
 
 
 
