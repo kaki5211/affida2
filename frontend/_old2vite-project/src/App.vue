@@ -1,3 +1,13 @@
+<!-- <template>
+  <router-view />
+</template>
+
+<script setup>
+  //
+</script> -->
+
+
+
 <script setup>
 
 
@@ -22,7 +32,7 @@
 // import Text_1 from '../components/_Text_1.vue';
 // import HelloWorld from './components/HelloWorld.vue'
 // import Meta from './components/Meta.vue';
-// import ToolBar from './components/ToolBar.vue';
+import ToolBar from './components/ToolBar.vue';
 // import Topimage from './components/Topimage.vue';
 // import Footer from './components/Footer.vue';
 // import Breadcrumbs from './components/Breadcrumbs.vue';
@@ -99,7 +109,7 @@ export default defineComponent({
   <!-- <Meta /> -->
 
 
-  <!-- <ToolBar /> -->
+  <ToolBar />
   <!-- <Topimage /> -->
 
 
@@ -114,11 +124,7 @@ export default defineComponent({
     
   <v-main class="my-bg-color-white">
     aiueo!
-    <v-btn class="mx-11 d-flex" icon>
-          <v-icon class="align-center" size="80" color="#1DA1F2">mdi-twitter</v-icon>
-        </v-btn>
-    
-    <!-- <router-view /> -->
+    <router-view />
   </v-main>
 
 

@@ -1,41 +1,51 @@
-// /**
-//  * main.js
-//  *
-//  * Bootstraps Vuetify and other plugins then mounts the App`
-//  */
-
-// // Components
-// import App from './App.vue'
-
-// // Composables
-// import { createApp } from 'vue'
-
-// // Plugins
-// import { registerPlugins } from '@/plugins'
-
-// const app = createApp(App)
-
-// registerPlugins(app)
-
-// app.mount('#app')
-
-
-
-
-
-
-
-// Components
+import { createApp } from 'vue'
+// import './style.css'
 import App from './App.vue'
 
-// Composables
-import { createApp } from 'vue'
+// import router from './router'
+// import store from './store';
+// import { createMetaManager } from 'vue-meta'
+// const metaManager = createMetaManager()
 
-// Plugins
-import { registerPlugins } from '@/plugins'
 
-const app = createApp(App)
 
-registerPlugins(app)
+// import VueMeta from 'vue-meta'
 
-app.mount('#app')
+
+// Vuetify
+import 'vuetify/styles'
+import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
+import { createVuetify } from 'vuetify'
+import '@mdi/font/css/materialdesignicons.css'
+// import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
+// const vuetify = createVuetify({
+//     components,
+//     directives,
+//  });
+
+// const vuetify = createVuetify()
+
+
+
+
+
+
+
+
+
+
+
+createApp(App)
+// .use(store)
+// .use(router)
+// .use(createMetaManager())
+// .use(metaManager)
+.use(vuetify)
+.mount('#app')
