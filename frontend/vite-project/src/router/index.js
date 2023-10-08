@@ -2,8 +2,8 @@
 import App from '../views/App.vue'
 // import Home from '../views/Home.vue'
 import About from '../views/About.vue'
-// import ContantsListVideo from '../views/ContantsListVideo.vue'
-// import ContantsListKyounuki from '../views/ContantsListKyounuki.vue'
+import ContantsListVideo from '../views/ContantsListVideo.vue'
+import ContantsListKyounuki from '../views/ContantsListKyounuki.vue'
 
 // import NotFoundComponent from '../views/NotFoundComponent.vue'
 
@@ -36,9 +36,9 @@ routes.push(
 
 
     { path: '/', name: 'Home', component: App },
-    { path: '/video',  name: 'Videos',  meta: { subcontents: 'video'}, component: About, props: true},
+    { path: '/video',  name: 'Videos',  meta: { subcontents: 'video'}, component: ContantsListVideo, props: true},
     // { path: '/video/:param',  name: 'Video',  meta: { subcontents: 'video'}, component: About, props: true},
-    { path: '/kyounuki',  name: 'Kyounuki',  meta: { subcontents: 'kyounuki'}, component: About, props: true},
+    { path: '/kyounuki',  name: 'Kyounuki',  meta: { subcontents: 'kyounuki'}, component: ContantsListKyounuki, props: true},
     { path: '/performer',  name: 'Performers',  meta: { subcontents: 'performer'}, component: About, props: true},
     // { path: '/performer/:param',  name: 'Performer',  meta: { subcontents: 'performer'}, component: About, props: true},
     { path: '/tag',  name: 'Tags',  meta: { subcontents: 'tag'}, component: About,  props: true},

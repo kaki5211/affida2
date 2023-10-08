@@ -25,7 +25,7 @@ import Meta from './components/Meta.vue';
 import ToolBar from './components/ToolBar.vue';
 import Topimage from './components/Topimage.vue';
 import Footer from './components/Footer.vue';
-// import Breadcrumbs from './components/Breadcrumbs.vue';
+import Breadcrumbs from './components/Breadcrumbs.vue';
 // import Btn_1 from './components/_Btn_1_mottomiru.vue';
 // import Text_1 from './components/_Text_1.vue';
 
@@ -108,7 +108,7 @@ export default defineComponent({
   <!-- <Judgeurl /> -->
   <v-row no-gutters>
     <v-col cols="12">
-      <!-- <Breadcrumbs /> -->
+      <Breadcrumbs />
     </v-col>
   </v-row>
     
