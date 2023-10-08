@@ -2,8 +2,8 @@ import { createApp } from 'vue'
 // import './style.css'
 import App from './App.vue'
 
-// import router from './router'
-// import store from './store';
+import router from './router'
+import store from './store';
 // import { createMetaManager } from 'vue-meta'
 // const metaManager = createMetaManager()
 
@@ -43,8 +43,8 @@ const vuetify = createVuetify({
 
 
 createApp(App)
-// .use(store)
-// .use(router)
+.use(store)
+.use(router)
 // .use(createMetaManager())
 // .use(metaManager)
 .use(vuetify)

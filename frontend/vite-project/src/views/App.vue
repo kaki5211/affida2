@@ -18,7 +18,7 @@ import { useStore } from 'vuex';
 
 
 // ■■■■■■ import > Others ■■■■■■
-import { Icon } from '@iconify/vue';
+// import { Icon } from '@iconify/vue';
 
 
 
@@ -100,7 +100,7 @@ export default defineComponent({
   name: 'App',
   components: {
     GlobalStyles,
-		Icon,
+		// Icon,
     Text_1,
     // VideoPlayer,
   },
