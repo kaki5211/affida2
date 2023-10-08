@@ -116,7 +116,7 @@ export default defineComponent({
     aiueo!2
 
     
-    <router-view />
+    <!-- <router-view /> -->
   </v-main>
 
 
