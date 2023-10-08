@@ -7,12 +7,12 @@
 // import { ref } from 'vue';
 // import { reactive } from 'vue';
 // import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
 
 
 
 // ■■■■■■ import > Others ■■■■■■
-// import { Icon } from '@iconify/vue';
+import { Icon } from '@iconify/vue';
 
 
 
@@ -21,11 +21,11 @@ import { useRoute } from 'vue-router';
 // import Btn_1 from '../components/_Btn_1_mottomiru.vue';
 // import Text_1 from '../components/_Text_1.vue';
 // import HelloWorld from './components/HelloWorld.vue'
-// import Meta from './components/Meta.vue';
+import Meta from './components/Meta.vue';
 import ToolBar from './components/ToolBar.vue';
-// import Topimage from './components/Topimage.vue';
-// import Footer from './components/Footer.vue';
-// import Breadcrumbs from './components/Breadcrumbs.vue';
+import Topimage from './components/Topimage.vue';
+import Footer from './components/Footer.vue';
+import Breadcrumbs from './components/Breadcrumbs.vue';
 // import Btn_1 from './components/_Btn_1_mottomiru.vue';
 // import Text_1 from './components/_Text_1.vue';
 
@@ -54,7 +54,7 @@ import ToolBar from './components/ToolBar.vue';
 
 
 // ■■■■■■ VueRouter ■■■■■■
-const route = useRoute();
+// const route = useRoute();
 
 
 
@@ -96,11 +96,11 @@ export default defineComponent({
 <template>
 
 <v-app id="#my-scroll-target">
-  <!-- <Meta /> -->
+  <Meta />
 
 
   <ToolBar />
-  <!-- <Topimage /> -->
+  <Topimage />
 
 
 
@@ -108,13 +108,13 @@ export default defineComponent({
   <!-- <Judgeurl /> -->
   <v-row no-gutters>
     <v-col cols="12">
-      <!-- <Breadcrumbs /> -->
+      <Breadcrumbs />
     </v-col>
   </v-row>
     
   <v-main class="my-bg-color-white">
-    aiueo!22
-    <!-- <router-view /> -->
+    aiueo!
+    <router-view />
   </v-main>
 
 
@@ -127,7 +127,7 @@ export default defineComponent({
 
 
 
-  <!-- <Footer /> -->
+  <Footer />
 </v-app>
 
 

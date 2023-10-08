@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 // import router from './router'
-import store from './store';
+// import store from './store';
 // import { createMetaManager } from 'vue-meta'
 // const metaManager = createMetaManager()
 
@@ -13,17 +13,17 @@ import store from './store';
 
 
 // Vuetify
-import 'vuetify/styles'
-import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
-import { createVuetify } from 'vuetify'
-import '@mdi/font/css/materialdesignicons.css'
+// import 'vuetify/styles'
+// import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
+// import { createVuetify } from 'vuetify'
+// import '@mdi/font/css/materialdesignicons.css'
 // import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-const vuetify = createVuetify({
-  components,
-  directives,
-})
+// import * as components from 'vuetify/components'
+// import * as directives from 'vuetify/directives'
+// const vuetify = createVuetify({
+//   components,
+//   directives,
+// })
 
 // const vuetify = createVuetify({
 //     components,
@@ -35,9 +35,9 @@ const vuetify = createVuetify({
 
 
 createApp(App)
-.use(store)
+// .use(store)
 // .use(router)
 // .use(createMetaManager())
 // .use(metaManager)
-.use(vuetify)
+// .use(vuetify)
 .mount('#app')
