@@ -7,7 +7,7 @@
 // import { ref } from 'vue';
 // import { reactive } from 'vue';
 // import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
 
 
 
@@ -54,7 +54,7 @@ import ToolBar from './components/ToolBar.vue';
 
 
 // ■■■■■■ VueRouter ■■■■■■
-const route = useRoute();
+// const route = useRoute();
 
 
 
