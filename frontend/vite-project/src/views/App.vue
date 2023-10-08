@@ -18,7 +18,7 @@ import { useStore } from 'vuex';
 
 
 // ■■■■■■ import > Others ■■■■■■
-import { Icon } from '@iconify/vue';
+// import { Icon } from '@iconify/vue';
 
 
 
@@ -66,7 +66,6 @@ if (KYOUNUKI_LIST.length > 2) {
 
 
 
-
 // ■■■■■■ VueRouter ■■■■■■
 // const route = useRoute();
 
@@ -83,9 +82,8 @@ if (DEBUG.value == true) {
   text1.value = "アカウント";
   text2.value = "記事１";
   text3.value = "記事２";
+
 }
-
-
 
 
 
@@ -102,7 +100,7 @@ export default defineComponent({
   name: 'App',
   components: {
     GlobalStyles,
-		Icon,
+		// Icon,
     Text_1,
     // VideoPlayer,
   },
