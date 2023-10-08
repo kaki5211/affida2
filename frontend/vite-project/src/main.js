@@ -4,8 +4,8 @@ import App from './App.vue'
 
 import router from './router'
 import store from './store';
-// import { createMetaManager } from 'vue-meta'
-// const metaManager = createMetaManager()
+import { createMetaManager } from 'vue-meta'
+const metaManager = createMetaManager()
 
 
 
@@ -46,6 +46,6 @@ createApp(App)
 .use(store)
 .use(router)
 // .use(createMetaManager())
-// .use(metaManager)
+.use(metaManager)
 .use(vuetify)
 .mount('#app')
