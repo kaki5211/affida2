@@ -66,6 +66,7 @@ if (KYOUNUKI_LIST.length > 2) {
 
 
 
+
 // ■■■■■■ VueRouter ■■■■■■
 // const route = useRoute();
 
@@ -82,8 +83,9 @@ if (DEBUG.value == true) {
   text1.value = "アカウント";
   text2.value = "記事１";
   text3.value = "記事２";
-
 }
+
+
 
 
 
