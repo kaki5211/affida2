@@ -114,7 +114,7 @@ export default defineComponent({
     
   <v-main class="my-bg-color-white">
     aiueo!22
-    <router-view />
+    <!-- <router-view /> -->
   </v-main>
 
 
