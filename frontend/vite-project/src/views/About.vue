@@ -1,22 +1,11 @@
-<!-- <template>
-  <router-view />
-</template>
-
-<script setup>
-  //
-</script> -->
-
-
-
 <script setup>
 
 
 // ■■■■■■ import > Packages ■■■■■■
-// import { computed } from 'vue';
+import { computed } from 'vue';
 // import { onMounted } from 'vue';
 // import { ref } from 'vue';
-// import { reactive } from 'vue';
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex';
 // import { useRoute } from 'vue-router';
 
 
@@ -27,26 +16,17 @@
 
 
 
+
 // ■■■■■■ import > Components ■■■■■■
 // import Btn_1 from '../components/_Btn_1_mottomiru.vue';
 // import Text_1 from '../components/_Text_1.vue';
-// import HelloWorld from './components/HelloWorld.vue'
-// import Meta from './components/Meta.vue';
-// import ToolBar from './components/ToolBar.vue';
-// import Topimage from './components/Topimage.vue';
-// import Footer from './components/Footer.vue';
-// import Breadcrumbs from './components/Breadcrumbs.vue';
-// import Btn_1 from './components/_Btn_1_mottomiru.vue';
-// import Text_1 from './components/_Text_1.vue';
-
-
 
 
 
 
 // ■■■■■■ VueStore ■■■■■■
-// const store = useStore();
-// const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
+const store = useStore();
+const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 // const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
 // const MAKER_LIST = computed(() => { return store.getters.GET_MAKER_LIST; });
@@ -68,77 +48,23 @@
 
 
 
+
+
+
 </script>
-
-
-
-
-<!-- <script>
-import GlobalStyles from './components/_GlobalStyles.vue';
-import { defineComponent } from 'vue'
-
-
-export default defineComponent({
-	components: {
-    GlobalStyles,
-	},
-});
-</script> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <template>
 
 <v-app id="#my-scroll-target">
-  <!-- <Meta /> -->
-
-
-  <!-- <ToolBar /> -->
-  <!-- <Topimage /> -->
+  <!-- <a>{{ DEBUG }}</a> -->
+  <!-- <a>{{ VIDEOS }}</a> -->
 
 
 
-
-  <!-- <Judgeurl /> -->
-  <v-row no-gutters>
-    <v-col cols="12">
-      <!-- <Breadcrumbs /> -->
-    </v-col>
-  </v-row>
-    
-  <v-main class="my-bg-color-white">
-    aiueo!
-    <router-view />
-  </v-main>
-
-
-
-
-  <sparcer>
-
-  </sparcer>
-
-
-
-
-  <!-- <Footer /> -->
 </v-app>
+
+
+
 
 
 
@@ -146,6 +72,4 @@ export default defineComponent({
 
 </template>
 
-<style>
 
-</style>
