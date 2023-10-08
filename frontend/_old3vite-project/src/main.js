@@ -14,7 +14,7 @@ import store from './store';
 
 // Vuetify
 import 'vuetify/styles'
-import 'vuetify/dist/vuetify.min.css' // VuetifyのCSSをインポート
+import 'vuetify/dist/vuetify.css' // VuetifyのCSSをインポート
 import { createVuetify } from 'vuetify'
 import '@mdi/font/css/materialdesignicons.css'
 // import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
@@ -31,6 +31,14 @@ const vuetify = createVuetify({
 //  });
 
 // const vuetify = createVuetify()
+
+
+
+
+
+
+
+
 
 
 

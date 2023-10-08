@@ -34,14 +34,6 @@ const vuetify = createVuetify({
 
 
 
-
-
-
-
-
-
-
-
 createApp(App)
 .use(store)
 .use(router)
