@@ -99,7 +99,7 @@ export default defineComponent({
   <!-- <Meta /> -->
 
 
-  <!-- <ToolBar /> -->
+  <ToolBar />
   <!-- <Topimage /> -->
 
 
