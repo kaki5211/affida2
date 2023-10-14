@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Video, Performer, Maker, Label, Series, Tag, Thumbnail, Kyounuki, Test, Contents, ContentsTag
+from .models import Video, Performer, Maker, Label, Series, Tag, Thumbnail, Kyounuki, Test, Contents, ContentsTag, Article
 from django.core.exceptions import ObjectDoesNotExist
 from django.apps import apps
 import datetime
@@ -967,3 +967,19 @@ class GetContentsTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContentsTag
         fields = '__all__'
+
+
+# ■■■■■■■■■■■■■■■■■■
+# ■■■　Article　■■■
+# ■■■■■■■■■■■■■■■■■■
+class ArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = '__all__'
+class GetArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ["name", "name_eng"]
+    def create(self, validated_data):
+        # レコード作成を禁止するため、何も処理せずに例外を発生させます
+        raise serializers.ValidationError("Creating records is not allowed.")

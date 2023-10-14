@@ -215,6 +215,134 @@ export default defineComponent({
 
 
 
+
+
+
+
+
+
+
+
+
+
+      <v-row justify="space-around" aria-disabled no-gutters>
+  <Text_1 :text_1="text3 || 'ブログ記事'" />
+
+  <v-col cols="12" class="mx-auto px-5" >
+
+  <v-card
+    class="mx-auto"
+    
+  >
+    <!-- <v-system-bar
+      color="indigo darken-2"
+      dark
+    >
+      <v-spacer></v-spacer>
+
+      <v-icon icon="mdi-window-minimize"></v-icon>
+
+      <v-icon icon="mdi-window-maximize"></v-icon>
+
+      <v-icon icon="mdi-close"></v-icon>
+    </v-system-bar>
+
+    <v-toolbar
+      color="indigo"
+      dark
+    >
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Discover</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon="mdi-magnify"></v-btn>
+    </v-toolbar> -->
+
+    <v-container fluid>
+      <v-row dense>
+        <v-col
+          v-for="card in cards"
+          :key="card.title"
+          :cols="card.flex"
+
+        >
+          <v-card
+            aria-disabled
+            disabled
+          >
+            <v-img
+              :src="card.src"
+              class="align-end"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              height="200px"
+              cover
+            >
+              <v-card-title class="text-white text-h3" v-text="card.title"></v-card-title>
+            </v-img>
+
+              <!-- <v-card-actions>
+                <v-spacer></v-spacer>
+
+              <v-btn
+                color="var(--my-color-green)"
+                class="ms-auto px-6"
+                size="x-large"
+                variant="outlined"
+                prepend-icon=""
+                append-icon="mdi-account-circle"
+
+                >
+                この記事を読む...
+                <template v-slot:prepend>
+                  <v-icon color="orange"></v-icon>
+                </template>
+              </v-btn>
+            </v-card-actions> -->
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
+  
+  <Btn_1 text="もっとみる" href="Articles"/>
+
+
+
+
+</v-col>
+
+</v-row>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <v-row no-gutters class="my-bg-color-white">
         <Text_1 :text_1="text2 || '今日抜き'" />
 
@@ -541,95 +669,6 @@ export default defineComponent({
   
 
 
-<v-row justify="space-around" aria-disabled no-gutters>
-  <Text_1 :text_1="text3 || 'ブログ記事'" />
-
-  <v-col cols="12" class="mx-auto px-5" >
-
-  <v-card
-    class="mx-auto"
-    
-  >
-    <!-- <v-system-bar
-      color="indigo darken-2"
-      dark
-    >
-      <v-spacer></v-spacer>
-
-      <v-icon icon="mdi-window-minimize"></v-icon>
-
-      <v-icon icon="mdi-window-maximize"></v-icon>
-
-      <v-icon icon="mdi-close"></v-icon>
-    </v-system-bar>
-
-    <v-toolbar
-      color="indigo"
-      dark
-    >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Discover</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon="mdi-magnify"></v-btn>
-    </v-toolbar> -->
-
-    <v-container fluid>
-      <v-row dense>
-        <v-col
-          v-for="card in cards"
-          :key="card.title"
-          :cols="card.flex"
-
-        >
-          <v-card
-            aria-disabled
-            disabled
-          >
-            <v-img
-              :src="card.src"
-              class="align-end"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="200px"
-              cover
-            >
-              <v-card-title class="text-white text-h3" v-text="card.title"></v-card-title>
-            </v-img>
-
-              <!-- <v-card-actions>
-                <v-spacer></v-spacer>
-
-              <v-btn
-                color="var(--my-color-green)"
-                class="ms-auto px-6"
-                size="x-large"
-                variant="outlined"
-                prepend-icon=""
-                append-icon="mdi-account-circle"
-
-                >
-                この記事を読む...
-                <template v-slot:prepend>
-                  <v-icon color="orange"></v-icon>
-                </template>
-              </v-btn>
-            </v-card-actions> -->
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-card>
-  
-  <!-- <Btn_1 text="もっとみる" href="http://172.20.10.5:5173/"/> -->
-
-
-
-
-</v-col>
-
-</v-row>
 
 
 

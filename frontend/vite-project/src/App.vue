@@ -113,7 +113,6 @@ export default defineComponent({
   </v-row>
     
   <v-main class="my-bg-color-white">
-    aiueo!
     
     <router-view />
   </v-main>

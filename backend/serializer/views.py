@@ -9,7 +9,7 @@ from .serializers import GetVideoSerializer, GetThumbnailSerializer, GetTagSeria
 from django.db import models
 
 from .models import Test
-from .serializers import TestSerializer, GetUrlSerializer, PerformerSerializer
+from .serializers import TestSerializer, GetUrlSerializer, PerformerSerializer, GetArticleSerializer, ArticleSerializer
 
 from rest_framework.generics import UpdateAPIView
 from rest_framework.mixins import UpdateModelMixin
@@ -462,6 +462,12 @@ class GetContentsTagAPIView(DefaultAIPView):
     queryset = ContentsTag.objects.all()
     serializer_class = GetContentsTagSerializer
 
+class ArticleAPIView(DefaultAIPView):
+    queryset = ContentsTag.objects.all()
+    serializer_class = ArticleSerializer
+class GetArticleAPIView(DefaultAIPView):
+    queryset = ContentsTag.objects.all()
+    serializer_class = GetArticleSerializer
 
 
 # VideoSerializer, ThumbnailSerializer, TagSerializer, SeriesSerializer, LabelSerializer, MakerSerializer, PerformerSerializer

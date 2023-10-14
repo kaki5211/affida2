@@ -54,6 +54,8 @@ const store = createStore({
     series_list: null,
     kyounuki_list: null,
     contents_list: null,
+    article_list: null,
+
 
     set_videos_loaded: null,
 
@@ -74,6 +76,9 @@ const store = createStore({
     SET_VIDEOS(state, data) { state.videos = data; },
     SET_PERFORMER_LIST(state, data) { state.performer_list = data; },
     SET_TAG_LIST(state, data) { state.tag_list = data; },
+
+    SET_ARTICLE_LIST(state, data) { state.article_list = data; },
+
 
     SET_MAKER_LIST(state, data) { state.maker_list = data; },
     SET_LABEL_LIST(state, data) { state.label_list = data; },
@@ -133,6 +138,10 @@ const store = createStore({
     async FETCH_GET_SERIES_LIST({ commit }) {
       await fetchDataAndCommit({ commit, endpoint: 'series_list_view', mutationType: 'SET_SERIES_LIST' });
     },
+    async FETCH_GET_ARTICLE_LIST({ commit }) {
+      await fetchDataAndCommit({ commit, endpoint: 'article_list_view', mutationType: 'SET_ARTICLE_LIST' });
+    },
+
     async FETCH_GET_DEBUG({ commit }) {
       const urlhost = window.location.hostname;
       console.log("urlhost.includes('172.')", urlhost.includes("172."))
@@ -215,7 +224,6 @@ const store = createStore({
     // },
 
 
-    
 },  
 
 
@@ -223,6 +231,8 @@ const store = createStore({
     GET_VIDEOS: (state) => state.videos,
     GET_PERFORMER_LIST: (state) => state.performer_list,
     GET_TAG_LIST: (state) => state.tag_list,
+
+    GET_ARTICLE_LIST: (state) => state.article_list,
 
     GET_MAKER_LIST: (state) => state.maker_list,
     GET_LABEL_LIST: (state) => state.label_list,
@@ -247,7 +257,6 @@ const store = createStore({
 });
 
 
-
 (async () => {
   try {
     // await store.dispatch('fetchUrlListData');
@@ -263,8 +272,6 @@ const store = createStore({
     await store.dispatch('FETCH_GET_DEBUG');
     await store.dispatch('FETCH_GET_BREADCRUMBS');
     await store.dispatch('FETCH_GET_CONTENTS_LIST');
-
-    
 
     // await store.dispatch('FETCH_GET_URL_LIST');
 
