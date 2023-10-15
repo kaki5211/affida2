@@ -41,21 +41,22 @@ const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARA
 const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
 
 
-let SUBCONTENTS = ref(route.path.split("/")[1]+"s")
+// let SUBCONTENTS = ref(route.path.split("/")[1]+"s")
+let SUBCONTENTS = ref(route.path.split("/")[1])
 
 
 let SUBCONTENTS_ALL = ref()
-if (SUBCONTENTS.value === "performers") { SUBCONTENTS_ALL = PERFORMER_LIST }
-else if (SUBCONTENTS.value === "tags") { SUBCONTENTS_ALL = TAG_LIST }
-else if (SUBCONTENTS.value === "videos") { SUBCONTENTS_ALL = VIDEOS }
-// else if (SUBCONTENTS.value === "articles") { SUBCONTENTS_ALL = ARTICLE_LIST_DUP }
+if (SUBCONTENTS.value === "performer") { SUBCONTENTS_ALL = PERFORMER_LIST }
+else if (SUBCONTENTS.value === "tag") { SUBCONTENTS_ALL = TAG_LIST }
+else if (SUBCONTENTS.value === "video") { SUBCONTENTS_ALL = VIDEOS }
+else if (SUBCONTENTS.value === "article") { SUBCONTENTS_ALL = ARTICLE_LIST }
 
 
 let headers_name = ref("");
-if (SUBCONTENTS.value === "actors") { headers_name.value = "アクター"; } 
-else if (SUBCONTENTS.value === "performers") { headers_name.value = "パフォーマー"; }
-else if (SUBCONTENTS.value === "videos") { headers_name.value = "動画"; }
-else if (SUBCONTENTS.value === "articles") { headers_name.value = "記事"; }
+if (SUBCONTENTS.value === "actor") { headers_name.value = "アクター"; } 
+else if (SUBCONTENTS.value === "performer") { headers_name.value = "パフォーマー"; }
+else if (SUBCONTENTS.value === "video") { headers_name.value = "動画"; }
+else if (SUBCONTENTS.value === "article") { headers_name.value = "記事"; }
 
 
 // let SUBCONTENTS_CLASS_MAJOR = ref()
@@ -63,14 +64,15 @@ else if (SUBCONTENTS.value === "articles") { headers_name.value = "記事"; }
 // let SUBCONTENTS_CLASS_MINOR = ref()
 let ARTICLE_LIST_DUP = ref()
 watch(ARTICLE_LIST, (newVal, oldVal) => {
-if (SUBCONTENTS.value === "articles" && newVal) {
+if (SUBCONTENTS.value === "article" && newVal) {
   const uniqueTitles = [...new Set(newVal.map(item => item.title))];
   console.log("uniqueTitlesuniqueTitles", uniqueTitles)
   ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
     return newVal.find(item => item.title === title);
   });
-  console.log("ARTICLE_LIST_DUPARTICLE_LIST_DUP", ARTICLE_LIST_DUP)
   SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value
+  console.log("ARTICLE_LIST_DUPARTICLE_LIST_DUP", ARTICLE_LIST_DUP.value)
+  console.log("ARTICLE_LISTARTICLE_LIST", SUBCONTENTS_ALL.value)
   //  SUBCONTENTS_CLASS_MAJOR.value = [...new Set(newVal.map(item => item.classmajor))];
   //  SUBCONTENTS_CLASS_MEDIUM.value = [...new Set(newVal.map(item => item.classmedium))];
   //  SUBCONTENTS_CLASS_MINOR.value = [...new Set(newVal.map(item => item.classminor))];
@@ -83,12 +85,13 @@ if (SUBCONTENTS.value === "articles" && newVal) {
 const headers = ref([])
         // sortable: false,
 
-if (SUBCONTENTS.value === "performers") {
+if (SUBCONTENTS.value === "performer") {
+  headers.value.push({title: "名前", align: 'start', key: 'name', value: 'name' });
   headers.value.push({title: "生年月日", align: 'start', key: 'birth', value: 'birth' });
   headers.value.push({ title: "年齢", align: 'start', key: 'age', value: 'age' });
 }
 
-if (SUBCONTENTS.value === "videos") {
+if (SUBCONTENTS.value === "video") {
   headers.value.push({title: "タイトル", align: 'start', key: 'title', value: 'title' });
   headers.value.push({title: "パフォーマース", align: 'start', key: 'performers', value: 'performers' });
   headers.value.push({title: "タグ", align: 'start', key: 'tags', value: 'tags' });
@@ -97,10 +100,10 @@ if (SUBCONTENTS.value === "videos") {
   headers.value.push({title: "メーカー", align: 'start', key: 'maker', value: 'maker' });
 }
 
-if (SUBCONTENTS.value === "articles") {
+if (SUBCONTENTS.value === "article") {
   headers.value.push({title: "タイトル", align: 'start', key: 'title', value: 'title' });
-  headers.value.push({title: "項目", align: 'start', key: 'classmedium', value: 'classmedium' });
-  headers.value.push({title: "項目", align: 'start', key: 'classmedium', value: 'classmedium' });
+  headers.value.push({title: "a", align: 'start', key: 'classmedium', value: 'classmedium' });
+  // headers.value.push({title: "項目", align: 'start', key: 'classmedium', value: 'classmedium' });
 
 
   // headers.value.push({title: "大分類", align: 'start', key: 'classmajor', value: 'classmajor' });
@@ -323,7 +326,8 @@ computed: {
     </tbody>
   </v-table> -->
 {{ SUBCONTENTS }}
-  {{ SUBCONTENTS_ALL }}
+: {{ SUBCONTENTS_ALL }}
+SUBCONTENTS_ALLSUBCONTENTS_ALLSUBCONTENTS_ALLSUBCONTENTS_ALLSUBCONTENTS_ALLSUBCONTENTS_ALL
   {{ ARTICLE_LIST_DUP }}
 
   
@@ -346,16 +350,22 @@ computed: {
     last-icon=""
     style="overflow-x: scroll; width: 100%; border-collapse: collapse; white-space: nowrap;"
   >
+  <template v-if="SUBCONTENTS === 'article'" v-slot:item.title="{ item }">
+    <router-link :to="{ name: 'Article', params: { param: item.classmajor, param2: item.classmedium, param3: item.classminor, param4: item.number} }">
+      {{ item.title }}
+    </router-link>
+  </template>
 
-  <template v-slot:item.name="{ item }">
-    <router-link :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{[SUBCONTENTS]:item.name}])}}">
+
+
+
+
+  <!-- <template v-slot:item.name="{ item }">
+    <router-link :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{[SUBCONTENTS + 's']:item.name}])}}">
         {{ item.name }}
       </router-link>
-
-
-
   </template>
-  
+   -->
 
   </VDataTable>
 

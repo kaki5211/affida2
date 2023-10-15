@@ -47,15 +47,17 @@ routes.push(
     { path: '/performer',  name: 'Performers',  meta: { subcontents: 'performer'}, component: ContantsList, props: true},
     // { path: '/performer/:param',  name: 'Performer',  meta: { subcontents: 'performer'}, component: About, props: true},
     { path: '/tag',  name: 'Tags',  meta: { subcontents: 'tag'}, component: ContantsList,  props: true},
-  //   { path: '/tag/:param',  name: 'Tag',  meta: { subcontents: 'tag'}, component: About, props: true},
+    // { path: '/tag/:param',  name: 'Tag',  meta: { subcontents: 'tag'}, component: About, props: true},
     { path: '/maker',  name: 'Makers',  meta: { subcontents: 'maker'}, component: ContantsList, props: true},
-  //   { path: '/maker/:param',  name: 'Maker',  meta: { subcontents: 'maker'}, component: About, props: true},
+    // { path: '/maker/:param',  name: 'Maker',  meta: { subcontents: 'maker'}, component: About, props: true},
     // { path: '/label',  name: 'Labels',  meta: { subcontents: 'label'}, component: About, props: true},
-  //   { path: '/label/:param',  name: 'Label',  meta: { subcontents: 'label'}, component: About, props: true},
+    // { path: '/label/:param',  name: 'Label',  meta: { subcontents: 'label'}, component: About, props: true},
     // { path: '/series',  name: 'Seriess',  meta: { subcontents: 'series'}, component: About, props: true},
     // { path: '/series/:param',  name: 'Series',  meta: { subcontents: 'series'}, component: About, props: true},
     { path: '/article',  name: 'Articles',  meta: { subcontents: 'article'}, component: ContantsListDisplayArticle, props: true},
     { path: '/article/list',  name: 'ArticlesList',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
+    { path: '/article/:param/:param2/:param3/:param4',  name: 'Article',  meta: { subcontents: 'article'}, component: ContantsListDisplayArticle, props: true},
+
 
     
 
