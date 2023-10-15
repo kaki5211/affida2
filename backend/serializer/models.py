@@ -76,11 +76,13 @@ class Video(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
     title_number = models.IntegerField(blank=True, null=True)
+    name = models.CharField(max_length=1023, blank=True, null=True)
     classmajor = models.CharField(max_length=255, blank=True, null=True)
     classmedium = models.CharField(max_length=255, blank=True, null=True)
     classminor = models.CharField(max_length=255, blank=True, null=True)
     number = models.IntegerField(blank=True, null=True)
     price = models.CharField(max_length=255, blank=True, null=True)
+    explain = models.CharField(max_length=1023, blank=True, null=True)
     content = models.TextField(max_length=255, blank=True, null=True)
     top_image = models.CharField(max_length=1023, blank=True, null=True)
     images = models.CharField(max_length=1023, blank=True, null=True)

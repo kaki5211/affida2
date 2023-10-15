@@ -49,7 +49,7 @@ let SUBCONTENTS_ALL = ref()
 if (SUBCONTENTS.value === "performer") { SUBCONTENTS_ALL = PERFORMER_LIST }
 else if (SUBCONTENTS.value === "tag") { SUBCONTENTS_ALL = TAG_LIST }
 else if (SUBCONTENTS.value === "video") { SUBCONTENTS_ALL = VIDEOS }
-else if (SUBCONTENTS.value === "article") { SUBCONTENTS_ALL = ARTICLE_LIST }
+// else if (SUBCONTENTS.value === "article") { SUBCONTENTS_ALL = ARTICLE_LIST }
 
 
 let headers_name = ref("");
@@ -64,15 +64,13 @@ else if (SUBCONTENTS.value === "article") { headers_name.value = "記事"; }
 // let SUBCONTENTS_CLASS_MINOR = ref()
 let ARTICLE_LIST_DUP = ref()
 watch(ARTICLE_LIST, (newVal, oldVal) => {
-if (SUBCONTENTS.value === "article" && newVal) {
-  const uniqueTitles = [...new Set(newVal.map(item => item.title))];
-  console.log("uniqueTitlesuniqueTitles", uniqueTitles)
-  ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
-    return newVal.find(item => item.title === title);
-  });
-  SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value
-  console.log("ARTICLE_LIST_DUPARTICLE_LIST_DUP", ARTICLE_LIST_DUP.value)
-  console.log("ARTICLE_LISTARTICLE_LIST", SUBCONTENTS_ALL.value)
+  if (SUBCONTENTS.value === "article" && newVal) {
+    const uniqueTitles = [...new Set(newVal.map(item => item.title))];
+    ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
+      return newVal.find(item => item.title === title);
+    });
+    SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
+
   //  SUBCONTENTS_CLASS_MAJOR.value = [...new Set(newVal.map(item => item.classmajor))];
   //  SUBCONTENTS_CLASS_MEDIUM.value = [...new Set(newVal.map(item => item.classmedium))];
   //  SUBCONTENTS_CLASS_MINOR.value = [...new Set(newVal.map(item => item.classminor))];
@@ -325,10 +323,7 @@ computed: {
       </tr>
     </tbody>
   </v-table> -->
-{{ SUBCONTENTS }}
-: {{ SUBCONTENTS_ALL }}
-SUBCONTENTS_ALLSUBCONTENTS_ALLSUBCONTENTS_ALLSUBCONTENTS_ALLSUBCONTENTS_ALLSUBCONTENTS_ALL
-  {{ ARTICLE_LIST_DUP }}
+
 
   
   <div>

@@ -7,6 +7,9 @@ import ContantsListDisplayVideo from '../views/ContantsListDisplayVideo.vue'
 import ContantsListKyounuki from '../views/ContantsListKyounuki.vue'
 import ContantsDetealVideo from '../views/ContantsDetealVideo.vue'
 import ContantsListDisplayArticle from '../views/ContantsListDisplayArticle.vue'
+import ContantsDetealArticle from '../views/ContantsDetealArticle.vue'
+
+
 
 // import NotFoundComponent from '../views/NotFoundComponent.vue'
 
@@ -56,7 +59,7 @@ routes.push(
     // { path: '/series/:param',  name: 'Series',  meta: { subcontents: 'series'}, component: About, props: true},
     { path: '/article',  name: 'Articles',  meta: { subcontents: 'article'}, component: ContantsListDisplayArticle, props: true},
     { path: '/article/list',  name: 'ArticlesList',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
-    { path: '/article/:param/:param2/:param3/:param4',  name: 'Article',  meta: { subcontents: 'article'}, component: ContantsListDisplayArticle, props: true},
+    { path: '/article/:param/:param2/:param3/:param4',  name: 'Article',  meta: { subcontents: 'article'}, component: ContantsDetealArticle, props: true},
 
 
     
