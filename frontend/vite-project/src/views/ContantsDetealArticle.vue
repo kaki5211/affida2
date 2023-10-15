@@ -72,11 +72,13 @@ const headers = ref([])
 //   headers.value.push({ title: "年齢", align: 'start', key: 'age', value: 'age' });
 // }
 
-headers.value.push({ title: "項目", align: 'start', key: 'name', value: 'name' });
-headers.value.push({ title: "項目2", align: 'start', key: 'price', value: 'price' });
+
+headers.value.push({ title: "名前", align: 'start', key: 'name', value: 'name' });
+headers.value.push({ title: "説明", align: 'start', key: 'explain', value: 'explain' });
+headers.value.push({ title: "価格", align: 'start', key: 'price', value: 'price' });
+
 headers.value.push({ title: "投稿日", align: 'start', key: 'post_day', value: 'post_day' });
 headers.value.push({ title: "クリック数", align: 'start', key: 'views', value: 'views' });
-headers.value.push({ title: "説明", align: 'start', key: 'views', value: 'views' });
 
 
 
