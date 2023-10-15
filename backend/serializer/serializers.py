@@ -976,6 +976,31 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = '__all__'
+def create(self, validated_data):
+    # 'id' フィールドが 'validated_data' に存在するか確認
+    id_info = validated_data.get('id', None)
+    
+    # 'id' フィールドが存在する場合
+    if id_info is not None:
+        try:
+            # データベースから指定の 'id' の Article を取得
+            existing_article = Article.objects.get(pk=id_info)
+            
+            # 'id' フィールドを除いた 'validated_data' を使って Article インスタンスを更新
+            for field, value in validated_data.items():
+                if field != 'id':
+                    setattr(existing_article, field, value)
+            existing_article.save()
+            
+            return existing_article
+        except Article.DoesNotExist:
+            # Article が存在しない場合、新しい Article を作成
+            create_obj = Article.objects.create(**validated_data)
+            return create_obj
+    else:
+        # 'id' フィールドが存在しない場合、新しい Article を作成
+        create_obj = Article.objects.create(**validated_data)
+        return create_obj
 class GetArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article

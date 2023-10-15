@@ -74,7 +74,8 @@ class Video(models.Model):
 
 
 class Article(models.Model):
-    title = models.CharField(max_length=255, blank=True, null=True, unique=True)
+    title = models.CharField(max_length=255, blank=True, null=True)
+    title_number = models.IntegerField(blank=True, null=True)
     classmajor = models.CharField(max_length=255, blank=True, null=True)
     classmedium = models.CharField(max_length=255, blank=True, null=True)
     classminor = models.CharField(max_length=255, blank=True, null=True)

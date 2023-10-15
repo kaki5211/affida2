@@ -272,6 +272,8 @@ const store = createStore({
     await store.dispatch('FETCH_GET_DEBUG');
     await store.dispatch('FETCH_GET_BREADCRUMBS');
     await store.dispatch('FETCH_GET_CONTENTS_LIST');
+    await store.dispatch('FETCH_GET_ARTICLE_LIST');
+    
 
     // await store.dispatch('FETCH_GET_URL_LIST');
 

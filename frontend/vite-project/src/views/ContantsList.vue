@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router';
 
 import { useStore } from 'vuex';
 import { computed } from 'vue';
-import { ref, onMounted,reactive } from 'vue';
+import { ref, onMounted,reactive, watch } from 'vue';
 
 
 // import VDataTable from '../../node_modules/vuetify/lib/labs/VDataTable/index.mjs';
@@ -38,14 +38,17 @@ const URL_PARAM = computed(() => { return store.getters.GET_URL_PARAM; });
 const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 // const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
+const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
+
 
 let SUBCONTENTS = ref(route.path.split("/")[1]+"s")
+
 
 let SUBCONTENTS_ALL = ref()
 if (SUBCONTENTS.value === "performers") { SUBCONTENTS_ALL = PERFORMER_LIST }
 else if (SUBCONTENTS.value === "tags") { SUBCONTENTS_ALL = TAG_LIST }
 else if (SUBCONTENTS.value === "videos") { SUBCONTENTS_ALL = VIDEOS }
-else if (SUBCONTENTS.value === "articles") { SUBCONTENTS_ALL = VIDEOS }
+// else if (SUBCONTENTS.value === "articles") { SUBCONTENTS_ALL = ARTICLE_LIST_DUP }
 
 
 let headers_name = ref("");
@@ -55,18 +58,29 @@ else if (SUBCONTENTS.value === "videos") { headers_name.value = "動画"; }
 else if (SUBCONTENTS.value === "articles") { headers_name.value = "記事"; }
 
 
+// let SUBCONTENTS_CLASS_MAJOR = ref()
+// let SUBCONTENTS_CLASS_MEDIUM = ref()
+// let SUBCONTENTS_CLASS_MINOR = ref()
+let ARTICLE_LIST_DUP = ref()
+watch(ARTICLE_LIST, (newVal, oldVal) => {
+if (SUBCONTENTS.value === "articles" && newVal) {
+  const uniqueTitles = [...new Set(newVal.map(item => item.title))];
+  console.log("uniqueTitlesuniqueTitles", uniqueTitles)
+  ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
+    return newVal.find(item => item.title === title);
+  });
+  console.log("ARTICLE_LIST_DUPARTICLE_LIST_DUP", ARTICLE_LIST_DUP)
+  SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value
+  //  SUBCONTENTS_CLASS_MAJOR.value = [...new Set(newVal.map(item => item.classmajor))];
+  //  SUBCONTENTS_CLASS_MEDIUM.value = [...new Set(newVal.map(item => item.classmedium))];
+  //  SUBCONTENTS_CLASS_MINOR.value = [...new Set(newVal.map(item => item.classminor))];
+  }
+})
 
 
 
 
-const headers = ref([
-          { title: headers_name.value, align: 'start', key: 'name', value: 'name' },
-          // { title: 'Calories', align: 'end', key: 'calories', value: 'calories' },
-          // { title: 'Fat (g)', align: 'end', key: 'fat', value: 'fat' },
-          // { title: 'Carbs (g)', align: 'end', key: 'carbs', value: 'carbs' },
-          // { title: 'Protein (g)', align: 'end', key: 'protein', value: 'protein' },
-          // { title: 'Iron (%)', align: 'end', key: 'iron', value: 'iron' },
-        ])
+const headers = ref([])
         // sortable: false,
 
 if (SUBCONTENTS.value === "performers") {
@@ -85,6 +99,14 @@ if (SUBCONTENTS.value === "videos") {
 
 if (SUBCONTENTS.value === "articles") {
   headers.value.push({title: "タイトル", align: 'start', key: 'title', value: 'title' });
+  headers.value.push({title: "項目", align: 'start', key: 'classmedium', value: 'classmedium' });
+  headers.value.push({title: "項目", align: 'start', key: 'classmedium', value: 'classmedium' });
+
+
+  // headers.value.push({title: "大分類", align: 'start', key: 'classmajor', value: 'classmajor' });
+  // headers.value.push({title: "中分類", align: 'start', key: 'classmedium', value: 'classmedium' });
+  // headers.value.push({title: "小分類", align: 'start', key: 'classminor', value: 'classminor' });
+
 }
 
 
@@ -300,8 +322,11 @@ computed: {
       </tr>
     </tbody>
   </v-table> -->
+{{ SUBCONTENTS }}
+  {{ SUBCONTENTS_ALL }}
+  {{ ARTICLE_LIST_DUP }}
 
-  {{ VIDEOS }}
+  
   <div>
     <VDataTable
     v-if="SUBCONTENTS_ALL && SUBCONTENTS"
