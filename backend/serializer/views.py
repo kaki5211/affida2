@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets, filters
 
-from .models import Video, Tag, Performer, Maker, Label, Series, Kyounuki, Contents, ContentsTag
+from .models import Video, Tag, Performer, Maker, Label, Series, Kyounuki, Contents, ContentsTag, Article
 from .serializers import VideoSerializer, ThumbnailSerializer, TagSerializer, SeriesSerializer, LabelSerializer, MakerSerializer, PerformerSerializer, KyounukiSerializer, ContentsSerializer, ContentsTagSerializer
 from .serializers import GetVideoSerializer, GetThumbnailSerializer, GetTagSerializer, GetSeriesSerializer, GetLabelSerializer, GetMakerSerializer, GetPerformerSerializer, GetKyounukiSerializer, GetContentsSerializer, GetContentsTagSerializer
 
@@ -463,10 +463,10 @@ class GetContentsTagAPIView(DefaultAIPView):
     serializer_class = GetContentsTagSerializer
 
 class ArticleAPIView(DefaultAIPView):
-    queryset = ContentsTag.objects.all()
+    queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 class GetArticleAPIView(DefaultAIPView):
-    queryset = ContentsTag.objects.all()
+    queryset = Article.objects.all()
     serializer_class = GetArticleSerializer
 
 

@@ -29,7 +29,7 @@ if pf == 'Windows':
 
     DEBUG = True
 
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1","172.20.10.5"]
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1","172.20.10.5", "172.20.10.4"]
 
 else:
 
