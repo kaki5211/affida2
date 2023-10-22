@@ -1,0 +1,12 @@
+
+
+
+
+少し大きい文字
+　v-card-title text-white text-h3
+
+普通の大きさの文字
+　my-font-size-20 my-fit-contents my-text-size-40
+
+小さい文字
+　my-text-size-30

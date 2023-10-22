@@ -67,7 +67,8 @@ const breadcrumbsList = ref(computed(() => { return store.getters.GET_BREADCRUMB
       color="var(--my-color-white)"
       bg-color="var(--my-color)"
       class=""
-      
+      style="white-space: nowrap; overflow-x: auto"
+
 
     >
       <template v-slot:divider>

@@ -59,6 +59,9 @@ else if (SUBCONTENTS.value === "video") { headers_name.value = "動画"; }
 else if (SUBCONTENTS.value === "article") { headers_name.value = "記事"; }
 
 
+
+
+
 // let SUBCONTENTS_CLASS_MAJOR = ref()
 // let SUBCONTENTS_CLASS_MEDIUM = ref()
 // let SUBCONTENTS_CLASS_MINOR = ref()
@@ -76,9 +79,18 @@ watch(ARTICLE_LIST, (newVal, oldVal) => {
   //  SUBCONTENTS_CLASS_MINOR.value = [...new Set(newVal.map(item => item.classminor))];
   }
 })
+if (SUBCONTENTS.value === "article" && ARTICLE_LIST.value) {
+    const uniqueTitles = [...new Set(ARTICLE_LIST.value.map(item => item.title))];
+    ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
+      return ARTICLE_LIST.value.find(item => item.title === title);
+    });
+    SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
+
+  }
 
 
 
+  
 
 const headers = ref([])
         // sortable: false,
@@ -100,13 +112,14 @@ if (SUBCONTENTS.value === "video") {
 
 if (SUBCONTENTS.value === "article") {
   headers.value.push({title: "タイトル", align: 'start', key: 'title', value: 'title' });
-  headers.value.push({title: "a", align: 'start', key: 'classmedium', value: 'classmedium' });
+  headers.value.push({title: "大分類", align: 'start', key: 'classmajor', value: 'classmajor' });
+  headers.value.push({title: "中分類", align: 'start', key: 'classmedium', value: 'classmedium' });
+  headers.value.push({title: "小分類", align: 'start', key: 'classminor', value: 'classminor' });
+  
+
   // headers.value.push({title: "項目", align: 'start', key: 'classmedium', value: 'classmedium' });
 
 
-  // headers.value.push({title: "大分類", align: 'start', key: 'classmajor', value: 'classmajor' });
-  // headers.value.push({title: "中分類", align: 'start', key: 'classmedium', value: 'classmedium' });
-  // headers.value.push({title: "小分類", align: 'start', key: 'classminor', value: 'classminor' });
 
 }
 
@@ -282,6 +295,7 @@ computed: {
 <template>
   <v-app id="#my-scroll-target" v-if="VIDEOS_LOADED" class="my-bg-color">
 
+
     <v-row no-gutters class="my-bg-color-white">
 
         <v-col cols="12" class="mx-auto px-10">
@@ -290,7 +304,9 @@ computed: {
 
             
 
-
+            SUBCONTENTS_ALL:{{ SUBCONTENTS_ALL }}
+            SUBCONTENTS: {{ SUBCONTENTS }}
+            headers_name: {{ headers_name }}
 <!-- 
 
   <v-table density="compact">

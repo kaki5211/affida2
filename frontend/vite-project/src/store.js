@@ -13,8 +13,11 @@ import axios from 'axios';
 // const host_api = "https://localhost:8000/api"
 // const host_api = "https://153.122.199.147]:8000/api"
 // const host_api = "https://153.122.199.147:8080/api"
-const host_api = "https://kyounuki.jp:8080/api"
 
+
+
+const host_api = "https://kyounuki.jp:8080/api"
+// const host_api = "http://172.20.10.4:8000/api/"
 
 
 // http://localhost:8000/api/your-endpoint/
@@ -155,7 +158,8 @@ const store = createStore({
         performer: "パフォーマー",
         maker: "メーカー",
         kyounuki: "今日抜き",
-        // ...
+        matome: "まとめ"
+,        // ...
       };
       
       // URLのパスを取得
@@ -164,7 +168,7 @@ const store = createStore({
       
       // パスを"/"で区切ってリストに変換
       const pathList = urlPath.split("/").filter((path) => path !== "");
-      console.log("pathList", pathList)
+
       
       // パンくずリストの初期化
       const breadcrumbsList = [
@@ -172,7 +176,6 @@ const store = createStore({
           title: 'ホーム',
           disabled: false,
           href: '/',
-      
         },
       ];
       console.log("breadcrumbsList", breadcrumbsList)
@@ -186,8 +189,23 @@ const store = createStore({
         const disabled = i === pathList.length - 1; // 最後の要素の場合のみ disabled: true
         breadcrumbsList.push({ title: name, disabled, href: currentPath });
       }
+      // let title =''
+      // console.log("pathList.value[1]", pathList.value[1], pathList.value[2], pathList.value[3])
+
+
+      // if (pathList.includes("article") && !pathList.includes("list")) {  
+      //   title = this.article_list.filter(item => 
+      //   item.classmajor === pathList.value[1] && 
+      //   item.classmedium === pathList.value[2] && 
+      //   item.classminor === pathList.value[3] &&
+      //   item.title_number === parseInt(pathList.value[4])
+      //   );
+      // }
       
-      
+      // if (title !== '') {
+      //   breadcrumbsList[breadcrumbsList.length - 1].title = title;
+      // }
+
       commit('SET_BREADCRUMBS', breadcrumbsList);
     },
     async FETCH_GET_CONTENTS_LIST({ commit }) {
