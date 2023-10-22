@@ -126,6 +126,9 @@ watch(ARTICLE_DETEAL, (newVal, oldVal) => {
 
   ARTICLE_DETEAL_NEW.forEach((article, index) => {
     const virtual_option1 = PERFORMER_LIST.value.find(item => item.id === article.option1);
+    
+    console.log("virtual_option1", PERFORMER_LIST.value[0])
+    console.log("article.option1article.option1", article.option1)
     if (virtual_option1) {
       ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
     }
@@ -140,7 +143,7 @@ if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer") {
     const virtual_option1 = PERFORMER_LIST.value.find(item => item.id === article.option1);
     if (virtual_option1) {
       ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
-      console.log("virtual_option1.title", virtual_option1.title)
+      console.log("virtual_option1", PERFORMER_LIST.value[index].id)
     }
   });
   ARTICLE_DETEAL.value = ARTICLE_DETEAL_NEW
@@ -213,7 +216,7 @@ if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video" ) {
   headers.value.push({ title: "No.", align: 'center', key: 'number', value: 'number',width: '30px' });
   // headers.value.push({ title: "名前", align: 'start', key: 'image', value: 'image' });
   headers.value.push({ title: "番号", align: 'start', key: 'option1', value: 'option1' });
-  headers.value.push({ title: "タイトル", align: 'start', key: 'vertual_option1', value: 'vertual_option1' });
+  headers.value.push({ title: "タイトル", align: 'start', key: 'vertual_option1.title', value: 'vertual_option1.title' });
   headers.value.push({ title: "タグ", align: 'start', key: 'classminor', value: 'classminor' });
   headers.value.push({ title: "クリック数", align: 'start', key: 'views', value: 'views' });
   headers.value.push({ title: "投稿日", align: 'start', key: 'post_day', value: 'post_day' });

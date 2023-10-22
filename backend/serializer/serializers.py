@@ -58,7 +58,7 @@ class PerformerSerializer(serializers.ModelSerializer):
 class GetPerformerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Performer
-        fields = ["name", "name_eng", "birth", "age"]
+        fields = ["id", "name", "name_eng", "birth", "age"]
     def create(self, validated_data):
         # レコード作成を禁止するため、何も処理せずに例外を発生させます
         raise serializers.ValidationError("Creating records is not allowed.")
