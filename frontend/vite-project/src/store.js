@@ -158,7 +158,9 @@ const store = createStore({
         performer: "パフォーマー",
         maker: "メーカー",
         kyounuki: "今日抜き",
-        matome: "まとめ"
+        matome: "まとめ",
+        article: "雑記"
+        
 ,        // ...
       };
       

@@ -10,3 +10,48 @@
 
 小さい文字
 　my-text-size-30
+
+改行しない
+style="white-space: nowrap; overflow-x: auto"
+
+
+
+HOME　/
+　動画　/video
+　　ランキング　/video/ranking
+　　リスト　/video/list
+　　　動画　/video/list
+　　　パフォーマー　/performer/list
+　　　タグ　/performer/tag
+　　ディスプレイリスト
+    　動画　/video
+　　　パフォーマー　/performer
+　　　タグ　/tag
+
+
+　記事　/article
+　　ランキング　/article/ranking
+　　リスト　/article/list
+　　　まとめ　/article/matome
+　　　　動画　/article/matome/video
+　　　　パフォーマー　/article/matome/performer
+　　　　その他1　/article/matome/[sonota1]
+　　　　その他2　/article/matome/[sonota2]
+　　　雑記　/article/zakki
+　　　　気まぐれ1　/article/zakki/[kimagure1]
+　　　　気まぐれ2　/article/zakki/[kimagure2]
+
+HOME
+　ー記事
+　ーーーーーーーー記事ーその他記事
+                    ーランキング
+　ー動画
+　ーーーーーーーー動画ーその他記事
+                    ーランキング
+                    ーリスト
+　ーランキング記事
+　ーランキング動画
+
+
+
+Django article option

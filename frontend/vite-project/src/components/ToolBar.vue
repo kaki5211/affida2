@@ -145,11 +145,19 @@ export default defineComponent({
     </template>
   </v-list-item>
 
-  <v-list-item class="text-h3 my-text-size-40" title="今日抜き" value="kyounuki"
+  <!-- <v-list-item class="text-h3 my-text-size-40" title="今日抜き" value="kyounuki"
   :to="{ name: 'Kyounuki'}"
   >
     <template v-slot:prepend>
       <v-icon><Icon icon="icon-park:soccer-one" /></v-icon>
+    </template>
+  </v-list-item> -->
+
+  <v-list-item class="text-h3 my-text-size-40" title="ブログ記事" value="video"
+  :to="{ name: 'Articles'}"
+  >
+    <template v-slot:prepend>
+      <v-icon><Icon icon="icon-park:video-two" /></v-icon>
     </template>
   </v-list-item>
 
@@ -159,7 +167,7 @@ export default defineComponent({
     <template v-slot:prepend>
       <v-icon><Icon icon="icon-park:video-two" /></v-icon>
     </template>
-  </v-list-item>          
+  </v-list-item>
 
 
   <v-list-item class="my-text-size-40" disabled title="ランキング(準備中...)" value="ranking">

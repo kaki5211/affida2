@@ -41,6 +41,60 @@ const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARA
 const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
 
 
+const searchparams = reactive({
+  performers: [],
+  tags: [],
+  maker: [],
+  label: [],
+  series: [],
+  duration: [],
+  title: [],
+  description: [],
+  views: [],
+  kyounuki_post_day: [],
+  active: [],
+})
+try {
+  // const searchrequest = route.query.searchrequest;
+  var searchrequest = JSON.parse(route.query.searchrequest);
+  console.log("searchparams", searchparams.value)
+  console.log("searchrequest", searchrequest)
+
+  if (Array.isArray(searchrequest)) {
+    console.log("■point1")
+    searchrequest.forEach(item => {
+      console.log("■point2")
+
+      for (const key in item) {
+        console.log("■point3")
+
+        searchparams[key] = [item[key]];
+      }
+    });
+  }
+} catch (error) {
+  // エラーが発生した場合は何もしない
+}
+console.log("route.params.serchrequest", route.query.searchrequest)
+console.log("searchparams", searchparams.value)
+
+
+function toggleTag(tagName, searchparams) {
+      console.log("tagName", tagName)
+      console.log("searchparams.value.tags", searchparams)
+      console.log("searchparams.value.tags", searchparams.tags)
+      if (searchparams.tags.includes(tagName)) {
+        searchparams.tags = searchparams.tags.filter(tag => tag !== tagName);
+      } else {
+        searchparams.tags.push(tagName);
+      }
+    }
+
+
+
+    
+
+
 // let SUBCONTENTS = ref(route.path.split("/")[1]+"s")
 let SUBCONTENTS = ref(route.path.split("/")[1])
 
@@ -85,7 +139,6 @@ if (SUBCONTENTS.value === "article" && ARTICLE_LIST.value) {
       return ARTICLE_LIST.value.find(item => item.title === title);
     });
     SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
-
   }
 
 
@@ -153,7 +206,39 @@ if (SUBCONTENTS.value === "article") {
 //   item.age = age;
 // }
 
+function filterVideo(data, searchparams) {
+  let filteredData = data; // オリジナルのデータを変更せずにコピーを作成
 
+  for (let key in searchparams) {
+    const filterValue = searchparams[key];
+
+    if (filterValue !== null && filterValue !== undefined && filterValue.length !== 0) {
+      // console.log("■filterValue■", filterValue)
+      // console.log("■filterValue■", key)
+      if (key === "tags" || key === "performers") {
+        console.log("searchparams", searchparams)
+
+        // if (Array.isArray(filterValue) && filterValue.length !== 0) {
+        if (Array.isArray(filterValue) && filterValue.length !== 0) {
+          filteredData = filteredData.filter(item => {
+            return item[key].some(item2 => filterValue.includes(item2.name));
+          });
+        }
+      }
+      //  else {
+      //   console.log("key", key)
+
+      //   filteredData = filteredData.filter(item => {
+      //     return item[key] && item[key].name === filterValue;
+      //   });
+      //   console.log("filteredData", filteredData)
+
+      // }
+    }
+  // console.log("filteredData.length", filteredData.length)
+  // console.log("searchparams", searchparams)
+  }  return filteredData;
+}
 
 
 </script>
@@ -181,15 +266,12 @@ export default defineComponent({
   data () {
     return {
 
+      search_view_performer: true,
+      search_view_tag: true,
+      filteredData: [],
 
 
-        itemsPerPage: 5,
-
-
-
-
-
-
+      itemsPerPage: 5,
       model: [0,0,0,0,0,0,0,0,0,0],
       currentImageIndex: 0,
       startX: 0,
@@ -265,6 +347,18 @@ export default defineComponent({
     index = (index + 1) % this.headers.length
     this.sortBy = this.headers[index].key
   },
+  resetSearchParams(searchparams, item) {
+    if (item == "all") {
+      for (let prop in searchparams) {
+        console.log(prop)
+        searchparams[prop] = [];
+      }
+    } else {
+      searchparams[item] = [];
+    }
+
+    },
+
 
 },
 
@@ -304,44 +398,242 @@ computed: {
 
             
 
-            SUBCONTENTS_ALL:{{ SUBCONTENTS_ALL }}
-            SUBCONTENTS: {{ SUBCONTENTS }}
-            headers_name: {{ headers_name }}
-<!-- 
+            <!-- SUBCONTENTS_ALL:{{ SUBCONTENTS_ALL }} -->
+            <!-- SUBCONTENTS: {{ SUBCONTENTS }} -->
+            <!-- headers_name: {{ headers_name }} -->
+            <v-card class="my-15 pb-15" v-if="SUBCONTENTS == 'video'">
+              <v-row no-gutters class="px-0">
+                <!-- <v-checkbox
+                  cols="3"
+                  v-for="item in TAG_LIST"
+                  :key="item.name"
+                  v-model="searchparams.tags"
+                  :label="item.name"
+                  :value="item.name"
+                  @change="filteredData = filterVideo(VIDEOS, searchparams)"
 
-  <v-table density="compact">
-    <thead>
-      <tr>
-        <th class="text-left text-h3">
-          Name
-        </th>
-        <th class="text-left text-h3">
-          Calories
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in SUBCONTENTS_ALL"
-        :key="item.name"
-      >
-      <td class="text-h4 my-4 py-2">
-        <a :href="'/' + SUBCONTENTS + '/' + item.name_eng" class="custom-link">{{ item.name }}</a>
-      </td>
-
-      <td class="text-h4 my-4 py-2">
-        <a :href="'/' + SUBCONTENTS + '/' + item.name_eng" class="custom-link">{{ item.name }}</a>
-      </td>
+                ></v-checkbox> -->
 
 
+              <v-toolbar
+                v-if="SUBCONTENTS == 'video'"
+
+                flat
+                dark
+                class="my-bg-color"
+              >
+                <!-- <v-btn icon> -->
+                  <!-- <v-icon>mdi-close</v-icon> -->
+                <!-- </v-btn> -->
+                <v-toolbar-title class="my-text-color-white font-weight-medium my-text-size-40">フィルター</v-toolbar-title>
+              </v-toolbar>
+
+              <v-col cols="12" class="mx-auto px-8">
+
+                <div class="d-flex pt-10">
+                  <a class="text-h5 ms-auto me-0 text-red">
+                  ※項目内では OR検索　/　項目種類では AND検索 <br>
+                  　（例１ (performer1 OR performer2) AND (tag1 OR tag2) <br>
+                  　（例２ (performer1) AND (maker1) AND (tag1)
+                </a>
+                </div>
+
+                <!-- <v-card height="" class="my-bg-color-white" elevation=0>
+                  <v-row no-gutters>
+                    <v-col cols="12" class="border">
+                      <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg" height="50px" href="/performer"><v-icon>mdi-account-circle</v-icon>アカウント</v-btn>
+                        <v-row no-gutters class="my-auto">
+                          <v-col cols="12" class="border px-2 py-5 pb-10">
+                            <v-btn
+                              v-for="(item,i) in PERFORMER_LIST"
+                              :key="i"
+                              class="my-fit-contents my-text-size-30  ms-auto me-0"
+
+                              >
+                              {{item.name}}
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                    </v-col>
+                  </v-row>
+                </v-card>
+
+                <v-card height="" class="my-bg-color-white mt-15" elevation=0>
+                  <v-row no-gutters>
+                    <v-col cols="12" class="border">
+                      <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg" height="50px" href="/tag"><v-icon>mdi-tag-text-outline</v-icon>タグ</v-btn>
+                        <v-row no-gutters class="my-auto">
+                          <v-col cols="12" class="border px-2 py-5 pb-10">
+                            <v-btn
+                            v-for="(item,i) in TAG_LIST"
+                            :key="i"
+                            class="my-fit-contents my-text-size-30  ms-auto me-0"
+
+                            v-model="searchparams.performers"
+                            column
+                            multiple
+                            @click="filteredData = filterVideo(VIDEOS, searchparams)"
+                            
+                            >
+                            {{item.name}}
+                          </v-btn>
+                          </v-col>
+                        </v-row>
+                        {{ searchparams.tags }}
+
+                    </v-col>
+                  </v-row>
+                </v-card> -->
 
 
-      </tr>
-    </tbody>
-  </v-table> -->
 
 
-  
+
+
+
+
+                  <div class="d-flex py-10">
+                    <v-btn
+                    @click="resetSearchParams(searchparams, 'all') ;filteredData = filterVideo(VIDEOS, searchparams)"
+                    text="全てクリア"          
+                    class="ms-auto me-0 my-text-size-30 my-fit-contents"
+                    color="red"
+                    >
+                    <template v-slot:prepend>
+                        <v-icon><Icon icon="iwwa:delete" /></v-icon>
+                      </template>
+                    </v-btn>
+                  </div>  
+                  <div class="d-flex">
+                    <div
+                    class="ms-auto me-0 my-text-size-40"
+                    
+                    >
+                      全 
+                      
+                      <a v-if="VIDEOS" class="text-red">{{ filterVideo(VIDEOS, searchparams).length || "0"}}</a>
+
+                      件 表示
+                    </div>
+                  </div>
+
+                    <!-- アカウント -->
+                    <v-card height="" class="my-bg-color-white" elevation=0>
+                      <v-row no-gutters>
+                        <v-col cols="12" class="border">
+                          <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
+                          height="50px" @click="search_view_performer=!search_view_performer"><v-icon>mdi-account-circle</v-icon>アカウント</v-btn>
+                            <v-row v-if="search_view_performer" no-gutters class="my-auto">
+                              <v-col cols="12" class="border px-2 py-5 pb-10">
+                                  <v-chip-group
+                                    v-model="searchparams.performers"
+                                    column
+                                    multiple
+                                    color="text-deep-purple-accent-4"
+
+                                    @click="filteredData = filterVideo(VIDEOS, searchparams)"
+                                  >
+                                      <v-chip
+                                      v-for="item in PERFORMER_LIST"
+                                      :key="item.id"
+                                      label
+                                      outline
+                                      :value="item.name"
+                                      color="red"
+
+                                      class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
+
+                                    >
+                                      {{ item.name }}
+                                    </v-chip>
+                                  </v-chip-group>
+                                  <!-- {{searchparams.performers}} -->
+
+                                  <div class="d-flex py-3">
+                                    <v-btn
+                                    @click="resetSearchParams(searchparams, 'performers') ;filteredData = filterVideo(VIDEOS, searchparams)"
+                                    text="アカウントをクリア"          
+                                    class="ms-auto me-0 my-text-size-30 my-fit-contents"
+                                    color="red"
+                                    >
+                                    <template v-slot:prepend>
+                                        <v-icon><Icon icon="iwwa:delete" /></v-icon>
+                                      </template>
+                                    </v-btn>
+                                  </div>
+                                  
+                              </v-col>
+                              
+                            </v-row>
+                        </v-col>
+                      </v-row>
+                    </v-card>
+
+
+
+
+                    <!-- タグ -->
+                    <v-card height="" class="my-bg-color-white" elevation=0>
+                      <v-row no-gutters>
+                        <v-col cols="12" class="border">
+                          <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
+                          height="50px" @click="search_view_tag=!search_view_tag"><v-icon>mdi-tag-text-outline</v-icon>タグ</v-btn>
+                            <v-row v-if="search_view_tag" no-gutters class="my-auto">
+                              <v-col cols="12" class="border px-2 py-5 pb-10">
+                                  <v-chip-group
+                                    v-model="searchparams.tags"
+                                    column
+                                    multiple
+                                    @click="filteredData = filterVideo(VIDEOS, searchparams)"
+
+                                  >
+                                      <v-chip
+                                      v-for="item in TAG_LIST"
+                                      :key="item.id"
+                                      label
+                                      outline
+                                      :value="item.name"
+                                      color="red"
+
+                                      
+                                      class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
+
+                                    >
+                                      {{ item.name }}
+                                    </v-chip>
+                                  </v-chip-group>
+                                  <!-- {{searchparams.tags}} -->
+
+                                  <div class="d-flex py-3">
+                                    <v-btn
+                                    @click="resetSearchParams(searchparams, 'tags') ;filteredData = filterVideo(VIDEOS, searchparams)"
+                                    text="タグをクリア"
+                                    class="ms-auto me-0 my-text-size-30 my-fit-contents"
+                                    color="red"
+                                    >
+                                      <template v-slot:prepend>
+                                        <v-icon><Icon icon="iwwa:delete" /></v-icon>
+                                      </template>
+                                    </v-btn>
+                                  </div>
+                              </v-col>
+                            </v-row>
+                        </v-col>
+                      </v-row>
+                    </v-card>
+
+
+
+
+
+
+
+                  </v-col>
+              </v-row>
+
+          </v-card>
+
+          <v-spacer class="py-10"></v-spacer>
   <div>
     <VDataTable
     v-if="SUBCONTENTS_ALL && SUBCONTENTS"
@@ -349,7 +641,7 @@ computed: {
     :loading="false"
     :items-per-page="-1"
     :headers="headers"
-    :items="SUBCONTENTS_ALL"
+    :items="filteredData.length === 0 ? SUBCONTENTS_ALL : filteredData"
     item-value="name"
     class="elevation-1 custom-table"
     :items-per-page-options="[ {value: -1, title: 'All'} ]"
@@ -366,59 +658,63 @@ computed: {
       {{ item.title }}
     </router-link>
   </template>
-
-
-
-
-
-  <!-- <template v-slot:item.name="{ item }">
+  
+  <template v-if="SUBCONTENTS === 'video'" v-slot:item.title="{ item }">
     <router-link :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{[SUBCONTENTS + 's']:item.name}])}}">
-        {{ item.name }}
+        {{ item.title }}
       </router-link>
   </template>
-   -->
+  <template v-if="SUBCONTENTS === 'video'" v-slot:item.tags="{ item }">
+    <a v-for="(item2, index) in item.tags" :key="item2.name" style="white-space: nowrap; overflow-x: auto">
+      <a>{{ index > 0 && item.tags.length > 0 ? ', ' : '' }}</a>
+      <router-link :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{[SUBCONTENTS + 's']:item.name}])}}">
+        {{ item2.name }}
+      </router-link>
+    </a>
+  </template>
+  <template v-if="SUBCONTENTS === 'video'" v-slot:item.performers="{ item }">
+    <a v-for="(item2, index) in item.performers" :key="item2.name" style="white-space: nowrap; overflow-x: auto">
+      <a>{{ index > 0 && item.tags.length > 0 ? ', ' : '' }}</a>
+      <router-link :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{[SUBCONTENTS + 's']:item.name}])}}">
+        {{ item2.name }}
+      </router-link>
+    </a>
+  </template>
+  <template v-if="SUBCONTENTS === 'video'" v-slot:item.maker="{ item }">
+        {{ item.maker != '' ? item.maker : '' }}
+  </template>
+
+
+  
+
+
+
+
+
+
+
+
 
   </VDataTable>
-
-
-
-
-<!-- 
-  <template v-slot:item.name="{ item }">
-      komento →　<router-link :to="{ name: SUBCONTENTS.charAt(0).toUpperCase() + SUBCONTENTS.slice(1), params:{param:item.selectable.name_eng }  }">
-      <router-link :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{SUBCONTENTS:item.selectable.name}])}}">
-        {{ item.selectable.name }}
-      </router-link>
-    </template> -->
-
-
-
-
-
-
-
-  <!-- v-model:items-per-page="itemsPerPage" -->
-  <!-- v-model:sort-by="sortBy" -->
-  <!-- v-model:sort-desc="sortDesc" -->
-
-    <!-- <div class="text-center pt-2">
-      <v-btn
-        color="primary"
-        class="mr-2"
-        @click="toggleOrder"
-      >
-        Toggle sort order
-      </v-btn>
-      <v-btn
-        color="primary"
-        @click="nextSort"
-      >
-        Sort next column
-      </v-btn>
-    </div> -->
-
-
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

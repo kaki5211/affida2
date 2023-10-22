@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router';
 
 import { useStore } from 'vuex';
 import { computed } from 'vue';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { reactive } from 'vue';
 
 
@@ -29,111 +29,44 @@ const VIDEOS_LOADED = computed(() => { return store.getters.GET_VIDEOS_LOADED; }
 const URL_LIST = computed(() => { return store.getters.GET_URL_LIST; });
 const URL_PARAM = computed(() => { return store.getters.GET_URL_PARAM; });
 const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
-const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
+// const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
+const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
+
+
 
 store.dispatch('FETCH_GET_BREADCRUMBS')
-const searchparams = reactive({
-  performers: [],
-  tags: [],
-  maker: [],
-  label: [],
-  series: [],
-  duration: [],
-  title: [],
-  description: [],
-  views: [],
-  kyounuki_post_day: [],
-  active: [],
-})
 
 
 
+let SUBCONTENTS = ref(route.path.split("/")[1])
 
 
-try {
-  // const searchrequest = route.query.searchrequest;
-  var searchrequest = JSON.parse(route.query.searchrequest);
-  console.log("searchparams", searchparams.value)
-  console.log("searchrequest", searchrequest)
-
-  if (Array.isArray(searchrequest)) {
-    console.log("■point1")
-    searchrequest.forEach(item => {
-      console.log("■point2")
-
-      for (const key in item) {
-        console.log("■point3")
-
-        searchparams[key] = [item[key]];
-      }
+let ARTICLE_LIST_DUP = ref()
+watch(ARTICLE_LIST, (newVal, oldVal) => {
+  if (SUBCONTENTS.value === "article" && newVal) {
+    const uniqueTitles = [...new Set(newVal.map(item => item.title))];
+    ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
+      return newVal.find(item => item.title === title);
     });
+    SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
+
+  //  SUBCONTENTS_CLASS_MAJOR.value = [...new Set(newVal.map(item => item.classmajor))];
+  //  SUBCONTENTS_CLASS_MEDIUM.value = [...new Set(newVal.map(item => item.classmedium))];
+  //  SUBCONTENTS_CLASS_MINOR.value = [...new Set(newVal.map(item => item.classminor))];
   }
-} catch (error) {
-  // エラーが発生した場合は何もしない
-}
-console.log("route.params.serchrequest", route.query.searchrequest)
-console.log("searchparams", searchparams.value)
-
-
-function toggleTag(tagName, searchparams) {
-      console.log("tagName", tagName)
-      console.log("searchparams.value.tags", searchparams)
-      console.log("searchparams.value.tags", searchparams.tags)
-      if (searchparams.tags.includes(tagName)) {
-        searchparams.tags = searchparams.tags.filter(tag => tag !== tagName);
-      } else {
-        searchparams.tags.push(tagName);
-      }
-    }
+})
+if (SUBCONTENTS.value === "article" && ARTICLE_LIST.value) {
+    const uniqueTitles = [...new Set(ARTICLE_LIST.value.map(item => item.title))];
+    ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
+      return ARTICLE_LIST.value.find(item => item.title === title);
+    });
+    SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
+  }
 
 
 
-
-// const test = SUBCONTENT  S_ALL.value === searchparams.value.tags
-
-// console.log("SUBCONTENTS_ALL.value.tags", VIDEOS.value[0].tags[0].name)
-// console.log("searchparams.value.tags", searchparams.value.tags)
-// console.log("■■■■test", test)
-// 
-function filterVideo(data, searchparams) {
-  let filteredData = data; // オリジナルのデータを変更せずにコピーを作成
-
-  for (let key in searchparams) {
-    const filterValue = searchparams[key];
-
-    if (filterValue !== null && filterValue !== undefined && filterValue.length !== 0) {
-      // console.log("■filterValue■", filterValue)
-      // console.log("■filterValue■", key)
-      if (key === "tags" || key === "performers") {
-        console.log("searchparams", searchparams)
-
-        // if (Array.isArray(filterValue) && filterValue.length !== 0) {
-        if (Array.isArray(filterValue) && filterValue.length !== 0) {
-          filteredData = filteredData.filter(item => {
-            return item[key].some(item2 => filterValue.includes(item2.name));
-          });
-        }
-      }
-      //  else {
-      //   console.log("key", key)
-
-      //   filteredData = filteredData.filter(item => {
-      //     return item[key] && item[key].name === filterValue;
-      //   });
-      //   console.log("filteredData", filteredData)
-
-      // }
-    }
-  // console.log("filteredData.length", filteredData.length)
-  // console.log("searchparams", searchparams)
-  }  return filteredData;
-}
-
-// const filteredData = ref(filterVideo(VIDEOS.value, searchparams.value))
-
-
-
+  
 
 
 
@@ -252,52 +185,7 @@ export default defineComponent({
         toolbar.style.height = `${videoHeight}px`;
       }
   },
-  handleTagsInput(newSelectedItems) {
-    console.log(VIDEOS.value)
-    console.log(searchparams.value.tags)
-    // this.filteredData = filterVideo(VIDEOS.value, searchparams.value.tags);
-    // ここで必要な処理を実行する
-  },
 
-  resetSearchParams(searchparams, item) {
-    if (item == "all") {
-      for (let prop in searchparams) {
-        console.log(prop)
-        searchparams[prop] = [];
-      }
-    } else {
-      searchparams[item] = [];
-    }
-
-    }
-
-
-  // filterVideo(data, searchparams) {
-  //   let filteredData = data
-  //   // if SUBCONTENTS_ALL
-  //   for (let key in searchparams) {
-  //   // 各キーに対する処理を行う（ここではコンソールに表示）
-
-  //     if (searchparams[key] != null) {
-  //       if ((key === "tags" || key === "performers") && ((key === "tags" || key === "performers") && filteredData.length !== 0)) {
-  //       } else {
-  //         filteredData = filteredData.filter(item => {
-  //         if (Array.isArray(searchparams[key])) {
-  //           return searchparams[key].includes(item[key]?.name);
-  //         } else {
-  //           return item[key] && item[key].name === searchparams[key];
-  //         }
-  //       });
-  //       }
-  //     }
-  //   }
-  //   return filteredData;
-  // },
-  // searchparams.tagsが変更されたときに呼ばれるメソッド
-  // updateFilteredData() {
-  //   // filteredDataを再計算
-  //   this.filteredData = this.filterVideo(this.SUBCONTENTS_ALL, this.searchparams);
-  // },
   }
 });
 
@@ -313,31 +201,36 @@ export default defineComponent({
 
       <v-row no-gutters class="my-bg-color-white">
         <!-- {{ filteredData }} -->
+        <div>
+          aaaa{{ ARTICLE_LIST_DUP }}
+
+        </div>
         <v-col cols="12" class="mx-auto px-10">
 
         <v-container fluid>
-                  
+
       <v-row dense>
         <v-col
-          v-for="card in cards"
+          v-for="card in ARTICLE_LIST_DUP"
           :key="card.title"
-          :cols="card.flex"
+          cols="12"
           class="py-3"
 
         >
         <v-card class="">
-        <p class="mt-0 my-bg-color my-text-color-white">2022-04-02</p>
+        <p class="pl-5 my-font-size-20 my-fit-contents my-text-size-30 mt-0 my-bg-color my-text-color-white">2022-04-02</p>
 
           <v-card
             aria-disabled
-            disabled
+            
             class="rounded-0"
+            :to="{ name: 'Article', params: { param: card.classmajor, param2: card.classmedium, param3: card.classminor, param4: card.number} }"
           >
-          
 
 
+      
             <v-img
-              :src="card.src"
+              src="https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
               class="align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="200px"
@@ -361,7 +254,8 @@ export default defineComponent({
                           style="position: absolute; top: 5px; right: 10px;"
 
                           >
-                          aaaaaaaaa
+                          <!-- {{ card.classminor }} -->
+                          タグ
                         </v-btn>
                       </v-col>
                     </v-row>
@@ -376,7 +270,7 @@ export default defineComponent({
 
 
                     
-              <v-card-title class="text-white text-h3" v-text="card.title"></v-card-title>
+              <v-card-title class="text-white text-h3" style="white-space: pre-wrap;" v-text="card.title"></v-card-title>
             </v-img>
 
               <!-- <v-card-actions>
@@ -387,7 +281,7 @@ export default defineComponent({
                 class="ms-auto px-6"
                 size="x-large"
                 variant="outlined"
-                prepend-icon=""
+                prepend-icon=""http://172.20.10.4:5173/article/matome/performer/amature/1
                 append-icon="mdi-account-circle"
 
                 >

@@ -89,6 +89,13 @@ class Article(models.Model):
     affiliateurl = models.CharField(max_length=1023,blank=True, null=True)
     post_day = models.DateField()
     views = models.IntegerField(blank=True, null=True)
+    option1 = models.CharField(max_length=511, blank=True, null=True)
+    option2 = models.CharField(max_length=511, blank=True, null=True)
+    option3 = models.CharField(max_length=511, blank=True, null=True)
+    option4 = models.CharField(max_length=511, blank=True, null=True)
+
+
+
     def __str__(self):
         return str(self.post_day)
 

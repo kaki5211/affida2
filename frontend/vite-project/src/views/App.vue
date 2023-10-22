@@ -519,7 +519,7 @@ export default defineComponent({
 
 
 
-        <Btn_1 text="もっとみる" href="Kyounuki" />
+        <Btn_1 text="もっとみる" href="Videos" />
 
 
       </v-col>

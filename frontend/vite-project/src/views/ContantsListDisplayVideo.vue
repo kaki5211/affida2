@@ -549,11 +549,31 @@ export default defineComponent({
 
           </v-card>
 
-          <v-spacer class="py-10"></v-spacer>
+          <v-col cols="12" class="py-10"></v-col>
 
 
 
 
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- 動画 -->
           <v-card class="my-15">
             <v-toolbar
                 flat

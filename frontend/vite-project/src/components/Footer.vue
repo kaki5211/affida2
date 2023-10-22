@@ -71,13 +71,22 @@ export default defineComponent({
               </template>
             </v-list-item>
 
-            <v-list-item class="text-h3 my-text-size-40" title="今日抜き" value="kyounuki"
+            <!-- <v-list-item class="text-h3 my-text-size-40" title="今日抜き" value="kyounuki"
             :to="{ name: 'Kyounuki'}"
             >
               <template v-slot:prepend>
                 <v-icon><Icon icon="icon-park:soccer-one" /></v-icon>
               </template>
-            </v-list-item>
+            </v-list-item> -->
+            
+            <v-list-item class="text-h3 my-text-size-40" title="ブログ記事" value="video"
+              :to="{ name: 'Articles'}"
+              >
+                <template v-slot:prepend>
+                  <v-icon>mdi-post-outline</v-icon>
+                </template>
+              </v-list-item>
+
 
             <v-list-item class="text-h3 my-text-size-40" title="動画" value="video"
             :to="{ name: 'Videos'}"
@@ -102,7 +111,7 @@ export default defineComponent({
 
 
 
-
+ 
 
       <v-col cols="6">
         <v-row justify="center" no-gutters style="height: 100%">
