@@ -90,13 +90,57 @@ if (ARTICLE_LIST.value) {
 
 
 // Virtual Option
+// video
+watch(ARTICLE_DETEAL, (newVal, oldVal) => {
+  if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video") {
+  let ARTICLE_DETEAL_NEW = [...newVal]; // 新しい配列を作成
+
+  ARTICLE_DETEAL_NEW.forEach((article, index) => {
+    const virtual_option1 = VIDEOS.value.find(item => item.productnumber === article.option1);
+    if (virtual_option1) {
+      ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
+    }
+  });
+  newVal = ARTICLE_DETEAL_NEW
+}
+});
 if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video") {
   let ARTICLE_DETEAL_NEW = [...ARTICLE_DETEAL.value]; // 新しい配列を作成
 
   ARTICLE_DETEAL_NEW.forEach((article, index) => {
     const virtual_option1 = VIDEOS.value.find(item => item.productnumber === article.option1);
     if (virtual_option1) {
-      ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1.title;
+      ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
+      console.log("virtual_option1.title", virtual_option1.title)
+    }
+  });
+  ARTICLE_DETEAL.value = ARTICLE_DETEAL_NEW
+}
+
+
+// Virtual Option
+// performer
+watch(ARTICLE_DETEAL, (newVal, oldVal) => {
+  if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer") {
+  let ARTICLE_DETEAL_NEW = [...newVal]; // 新しい配列を作成
+
+  ARTICLE_DETEAL_NEW.forEach((article, index) => {
+    const virtual_option1 = PERFORMER_LIST.value.find(item => item.id === article.option1);
+    if (virtual_option1) {
+      ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
+    }
+  });
+  newVal = ARTICLE_DETEAL_NEW
+}
+});
+if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer") {
+  let ARTICLE_DETEAL_NEW = [...ARTICLE_DETEAL.value]; // 新しい配列を作成
+
+  ARTICLE_DETEAL_NEW.forEach((article, index) => {
+    const virtual_option1 = PERFORMER_LIST.value.find(item => item.id === article.option1);
+    if (virtual_option1) {
+      ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
+      console.log("virtual_option1.title", virtual_option1.title)
     }
   });
   ARTICLE_DETEAL.value = ARTICLE_DETEAL_NEW
@@ -166,19 +210,24 @@ const headers = ref([])
 // ARTICLE_CLASS.value[1]
 // ARTICLE_CLASS.value[2]
 if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video" ) {
-
   headers.value.push({ title: "No.", align: 'center', key: 'number', value: 'number',width: '30px' });
   // headers.value.push({ title: "名前", align: 'start', key: 'image', value: 'image' });
   headers.value.push({ title: "番号", align: 'start', key: 'option1', value: 'option1' });
   headers.value.push({ title: "タイトル", align: 'start', key: 'vertual_option1', value: 'vertual_option1' });
   headers.value.push({ title: "タグ", align: 'start', key: 'classminor', value: 'classminor' });
-
-  
   headers.value.push({ title: "クリック数", align: 'start', key: 'views', value: 'views' });
   headers.value.push({ title: "投稿日", align: 'start', key: 'post_day', value: 'post_day' });
 }
 
- 
+if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer" ) {
+  headers.value.push({ title: "No.", align: 'center', key: 'number', value: 'number',width: '30px' });
+  headers.value.push({title: "名前", align: 'start', key: 'name', value: 'name' });
+  headers.value.push({title: "生年月日", align: 'start', key: 'birth', value: 'birth' });
+  headers.value.push({ title: "年齢", align: 'start', key: 'age', value: 'age' });
+  headers.value.push({ title: "タグ", align: 'start', key: 'classminor', value: 'classminor' });
+  headers.value.push({ title: "クリック数", align: 'start', key: 'views', value: 'views' });
+  headers.value.push({ title: "投稿日", align: 'start', key: 'post_day', value: 'post_day' });
+} 
 
 
   // headers.value.push({ title: "No.", align: 'center', key: 'number', value: 'number',width: '30px' });
@@ -193,9 +242,6 @@ if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video" ) {
 
 
 // if (SUBCONTENTS.value === "performer") {
-//   headers.value.push({title: "名前", align: 'start', key: 'name', value: 'name' });
-//   headers.value.push({title: "生年月日", align: 'start', key: 'birth', value: 'birth' });
-//   headers.value.push({ title: "年齢", align: 'start', key: 'age', value: 'age' });
 // }
 
 // if (SUBCONTENTS.value === "video") {
@@ -268,7 +314,6 @@ export default defineComponent({
         <!-- <p>{{ ARTICLE_DETEAL }}</p>------------------- -->
         <v-col cols="11" class="mx-auto mb-15">
           <h1 class="text-h3">{{ ARTICLE_DETEAL_TITLE || ""}}</h1>
-          {{ ARTICLE_DETEAL }}
         </v-col>
         <v-col cols="12" class="mx-auto my-15"></v-col>
 
