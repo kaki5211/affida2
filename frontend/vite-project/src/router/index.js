@@ -103,21 +103,79 @@ const router = createRouter({
 
 
   scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
+    // if (to.path === from.path) {
+    //   const hash = to.hash;
+    //   if (hash) {
+    //     return new Promise((resolve) => {
+    //       const targetElement = document.querySelector(hash);
+    //       if (targetElement) {
+    //         const topOffset = targetElement.offsetTop;
+    //         window.scrollTo({
+    //           top: topOffset,
+    //           behavior: 'smooth'
+    //         });
+  
+    //         // setTimeoutを使用して一定時間後にPromiseを解決
+    //         setTimeout(() => {
+    //           resolve();
+    //         }, 500); // 500ミリ秒後に解決する例
+    //       }
+    //     });
+    //   }
+    // }
+
+    // if (savedPosition) {
+    //   return savedPosition;
+    // }
+
+
+      // if (to.hash) {
+      //   return {
+      //     el: to.hash - 100,
+      //     behavior: 'smooth',
+      //   }
+      // } 
+      
+      if (to.hash) {
+      return new Promise((resolve) => {
+        const targetElement = document.querySelector(to.hash);
+        console.log("targetElement", targetElement)
+        if (targetElement) {
+          const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+          console.log("targetPosition", targetPosition)
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+          // スクロールが完了したら解決する
+          window.addEventListener('scroll', function handler() {
+            window.removeEventListener('scroll', handler, true);
+            resolve();
+          }, true);
+        }
+      });
+    } else {
+      return new Promise((resolve) => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        // スクロールが完了したら解決する
+        window.addEventListener('scroll', function handler() {
+          window.removeEventListener('scroll', handler, true);
+          resolve();
+        }, true);
+        setTimeout(() => {
+          resolve({ left: 0, top: 0 })
+        }, 500)
+      });
+  
     }
 
-    return new Promise((resolve) => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-      // スクロールが完了したら解決する
-      window.addEventListener('scroll', function handler() {
-        window.removeEventListener('scroll', handler, true);
-        resolve();
-      }, true);
-    });
+
+
+
   },
 
 // ルートのトレーリングスラッシュを削除

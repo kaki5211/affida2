@@ -10,6 +10,7 @@
 // ■■■■■■ import > Packages ■■■■■■
 import { computed } from 'vue';
 // import { onMounted } from 'vue';
+import { watch } from 'vue';
 import { ref } from 'vue';
 // import { reactive } from 'vue';
 import { useStore } from 'vuex';
@@ -54,6 +55,8 @@ const VIDEOS_LOADED = computed(() => { return store.getters.GET_VIDEOS_LOADED; }
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 // const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
 const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
+const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
+
 // console.log("DEBUG", DEBUG.value)
 store.dispatch('FETCH_GET_BREADCRUMBS')
 let slicedKYOUNUKI_LIST = ref("");
@@ -84,6 +87,35 @@ if (DEBUG.value == true) {
   text3.value = "記事２";
 
 }
+
+
+
+// ■ARTICLE_LIST　＞　ARTICLE_LIST_DUP
+let ARTICLE_LIST_DUP = ref()
+watch(ARTICLE_LIST, (newVal, oldVal) => {
+  if (newVal) {
+    const uniqueTitles = [...new Set(newVal.map(item => item.title))];
+    ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
+      return newVal.find(item => item.title === title);
+    });
+    SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
+
+  //  SUBCONTENTS_CLASS_MAJOR.value = [...new Set(newVal.map(item => item.classmajor))];
+  //  SUBCONTENTS_CLASS_MEDIUM.value = [...new Set(newVal.map(item => item.classmedium))];
+  //  SUBCONTENTS_CLASS_MINOR.value = [...new Set(newVal.map(item => item.classminor))];
+  }
+})
+if (ARTICLE_LIST.value) {
+    const uniqueTitles = [...new Set(ARTICLE_LIST.value.map(item => item.title))];
+    ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
+      return ARTICLE_LIST.value.find(item => item.title === title);
+    });
+    SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
+  }
+
+
+
+
 
 
 
