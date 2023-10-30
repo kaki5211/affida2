@@ -55,3 +55,61 @@ HOME
 
 
 Django article option
+    
+
+
+
+
+
+
+
+
+// ■　ARTICLE_LIST_DUP　作成
+// // let SUBCONTENTS_CLASS_MAJOR = ref()
+// // let SUBCONTENTS_CLASS_MEDIUM = ref()
+// // let SUBCONTENTS_CLASS_MINOR = ref()
+// let ARTICLE_LIST_DUP = ref()
+// watch(ARTICLE_LIST, (newVal, oldVal) => {
+//   if (SUBCONTENTS.value === "article" && newVal) {
+//     const uniqueTitles = [...new Set(newVal.map(item => item.title))];
+//     ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
+//       return newVal.find(item => item.title === title);
+//     });
+//     SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
+
+//   //  SUBCONTENTS_CLASS_MAJOR.value = [...new Set(newVal.map(item => item.classmajor))];
+//   //  SUBCONTENTS_CLASS_MEDIUM.value = [...new Set(newVal.map(item => item.classmedium))];
+//   //  SUBCONTENTS_CLASS_MINOR.value = [...new Set(newVal.map(item => item.classminor))];
+//   }
+// })
+// if (SUBCONTENTS.value === "article" && ARTICLE_LIST.value) {
+//     const uniqueTitles = [...new Set(ARTICLE_LIST.value.map(item => item.title))];
+//     ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
+//       return ARTICLE_LIST.value.find(item => item.title === title);
+//     });
+//     SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
+//   }    
+
+
+
+
+watch(ARTICLE_LIST_DUP, (newVal, oldVal) => {
+  console.log("triger_ARTICLE_LIST_DUP", newVal)
+  if (newVal) {
+    articleparams.value = {
+      classmajor: [...new Set(newVal.map(item => item.classmajor))],
+      classmedium: [...new Set(newVal.map(item => item.classmedium))],
+      classminor: [...new Set(newVal.map(item => item.classminor))],
+    }
+    filteredDataArticle.value = newVal
+  }
+})
+if (ARTICLE_LIST_DUP.value) {
+    articleparams.value = {
+    classmajor: [...new Set(ARTICLE_LIST_DUP.value.map(item => item.classmajor))],
+    classmedium: [...new Set(ARTICLE_LIST_DUP.value.map(item => item.classmedium))],
+    classminor: [...new Set(ARTICLE_LIST_DUP.value.map(item => item.classminor))],
+  }
+  filteredDataArticle.value = ARTICLE_LIST_DUP.value
+  }
+

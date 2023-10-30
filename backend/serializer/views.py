@@ -1,6 +1,9 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets, filters
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
 
 from .models import Video, Tag, Performer, Maker, Label, Series, Kyounuki, Contents, ContentsTag, Article
 from .serializers import VideoSerializer, ThumbnailSerializer, TagSerializer, SeriesSerializer, LabelSerializer, MakerSerializer, PerformerSerializer, KyounukiSerializer, ContentsSerializer, ContentsTagSerializer
@@ -9,7 +12,7 @@ from .serializers import GetVideoSerializer, GetThumbnailSerializer, GetTagSeria
 from django.db import models
 
 from .models import Test
-from .serializers import TestSerializer, GetUrlSerializer, PerformerSerializer, GetArticleSerializer, ArticleSerializer
+from .serializers import TestSerializer, GetUrlSerializer, PerformerSerializer, GetArticleSerializer, ArticleSerializer, GetArticleDupSerializer, GetArticleParamsSerializer
 
 from rest_framework.generics import UpdateAPIView
 from rest_framework.mixins import UpdateModelMixin
@@ -469,5 +472,75 @@ class GetArticleAPIView(DefaultAIPView):
     queryset = Article.objects.all()
     serializer_class = GetArticleSerializer
 
+# class GetArticleDupView(viewsets.ModelViewSet):
+#     queryset = Article.objects.all()
+#     serializer_class = GetArticleDupSerializer
+
+#     # def retrieve(self, request, *args, **kwargs):
+#     #     instance = self.get_object()
+
+#     #     # クエリセットからclassmajorの値を取得
+#     #     classmajor_values = Article.objects.values_list('classmajor', flat=True).distinct()
+#     #     classmedium_values = Article.objects.values_list('classmedium', flat=True).distinct()
+#     #     classminor_values = Article.objects.values_list('classminor', flat=True).distinct()
+
+
+#     #     # モデルのclassmajorフィールドに設定
+#     #     instance.classmajor = list(classmajor_values)
+#     #     instance.classmedium = list(classmedium_values)
+#     #     instance.classminor = list(classminor_values)
+#     #     instance.save()
+
+#     #     serialized_data = self.get_serializer(instance).data
+#     #     return Response(serialized_data)
+#     # カスタムアクションを追加
+#     @action(detail=False, methods=['get'])
+#     def custom_action(self, request):
+#         queryset = self.queryset  # クエリセットを取得
+#         classmajor_data = []
+#         classmedium_data = []
+#         classminor_data = []
+#         # ここで必要なデータのフィルタリングや加工を行う
+#         data = {
+#             'classmajorf_': classmajor_data,
+#             'classmedium': classmedium_data,
+#             'classminor': classminor_data,
+#         }
+
+
+#         # シリアライザを使用してデータをシリアライズ
+#         serializer = self.serializer_class(queryset, many=True)
+#         return Response(data)
+
+class GetArticleDupView(DefaultAIPView):
+    queryset = Article.objects.all()
+    serializer_class = GetArticleDupSerializer
+
+    def get_queryset(self):
+        # 特定の条件に一致するレコードを取得するクエリセットを定義
+        # 例: classmajor フィールドが '条件値' に一致する場合
+        unique_titles = Article.objects.values_list('title', flat=True).distinct()
+        queryset = [Article.objects.filter(title=title).first() for title in unique_titles]
+        return queryset
+
+
+
+class GetArticleParamsView(viewsets.ViewSet):
+    queryset = Article.objects.all()
+    def list(self, request):
+        # データの取得と加工をここで行う
+        classmajor_data = Article.objects.values_list('classmajor', flat=True).distinct()
+        classmedium_data = Article.objects.values_list('classmedium', flat=True).distinct()
+        classminor_data = Article.objects.values_list('classminor', flat=True).distinct()
+        # シリアライザを使用してデータをシリアライズ
+        serializer = GetArticleParamsSerializer(data={
+            'classmajor': classmajor_data,
+            'classmedium': classmedium_data,
+            'classminor': classminor_data,
+        })
+        if serializer.is_valid():
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
 
 # VideoSerializer, ThumbnailSerializer, TagSerializer, SeriesSerializer, LabelSerializer, MakerSerializer, PerformerSerializer

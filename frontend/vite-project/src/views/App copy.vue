@@ -14,7 +14,7 @@ import { watch } from 'vue';
 import { ref } from 'vue';
 // import { reactive } from 'vue';
 import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
 
 
 
@@ -41,13 +41,13 @@ import Text_1 from '../components/_Text_1.vue';
 
 // ■■■■■■ VueStore ■■■■■■
 const store = useStore();
-const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
+// const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
 // const MAKER_LIST = computed(() => { return store.getters.GET_MAKER_LIST; });
 // const LABEL_LIST = computed(() => { return store.getters.GET_LABEL_LIST; });
 // const SERIES_LIST = computed(() => { return store.getters.GET_SERIES_LIST; });
-// const KYOUNUKI_LIST = computed(() => { return store.getters.GET_KYOUNUKI_LIST; });
+const KYOUNUKI_LIST = computed(() => { return store.getters.GET_KYOUNUKI_LIST; });
 const VIDEOS_LOADED = computed(() => { return store.getters.GET_VIDEOS_LOADED; });
 // const URL_LIST = computed(() => { return store.getters.GET_URL_LIST; });
 // const URL_PARAM = computed(() => { return store.getters.GET_URL_PARAM; });
@@ -57,37 +57,23 @@ const VIDEOS_LOADED = computed(() => { return store.getters.GET_VIDEOS_LOADED; }
 const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
 const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
 
-
-// let slicedKYOUNUKI_LIST = ref("");
-// if (KYOUNUKI_LIST.length > 2) {
-//   slicedKYOUNUKI_LIST = KYOUNUKI_LIST.slice(0, 2);
-// } else {
-//   slicedKYOUNUKI_LIST = KYOUNUKI_LIST;
-// }
+// console.log("DEBUG", DEBUG.value)
+store.dispatch('FETCH_GET_BREADCRUMBS')
+let slicedKYOUNUKI_LIST = ref("");
+if (KYOUNUKI_LIST.length > 2) {
+  slicedKYOUNUKI_LIST = KYOUNUKI_LIST.slice(0, 2);
+} else {
+  slicedKYOUNUKI_LIST = KYOUNUKI_LIST;
+}
 
 
 
 
 // ■■■■■■ VueRouter ■■■■■■
-const route = useRoute();
-
-const slicedVideos = ref([{performers:[], tags: [], images: []}]);
-watch(VIDEOS, (newVal, oldVal) => {
-  try {
-    if (newVal) {
-      slicedVideos.value = newVal.slice(0, 4);
-    }
-  } catch (error) {
-    console.error("An error occurred in the watcher callback:", error);
-  }})
-if (VIDEOS.value) {
-  slicedVideos.value = VIDEOS.value.slice(0,4)
-}
+// const route = useRoute();
 
 
-// console.log("DEBUG", DEBUG.value)
-// store.dispatch('FETCH_GET_BREADCRUMBS', { path_: route.path })
-console.log("route.path ", route.path )
+
 
 
 
@@ -131,11 +117,6 @@ if (ARTICLE_LIST.value) {
 
 
 
-const path_ = route
-console.log("path_", path_)
-console.log("route.path", route.path);
-
-
 
 
 
@@ -163,9 +144,6 @@ export default defineComponent({
       startX: 0,
       startIndex: 0,
       currentX: 0,
-      search_view_performer: true,
-      search_view_tag: true,
-
       playerOptions: {
         autoplay: false, // 自動再生
         controls: true, // コントロール表示
@@ -202,9 +180,7 @@ export default defineComponent({
   },
   methods: {
   parseJson(value) {
-    if (value.length != 0) {
     return JSON.parse(value.replace(/'/g, '"'));
-  }
   },
   playVideo() {
       const videoPlayer = this.$refs.videoPlayer;
@@ -274,7 +250,7 @@ export default defineComponent({
 
 
 
-      this.$router.currentRoute.pat:{{this.$router.currentRoute.path}}
+
 
 
 
@@ -291,47 +267,41 @@ export default defineComponent({
             cols="12"
             class="my-bg-color-white my-5 pb-0"
           >
-          <v-hover>
-            <template v-slot:default="{ isHovering, props }">
-              <v-card
-                v-bind="props"
-                :elevation="isHovering ? 16 : 2"
-                class="pb-0"
-                rounded="lg"
-                :to="{ name: 'Article', params: { param: card.classmajor, param2: card.classmedium, param3: card.classminor, param4: card.number} }"
-              >
-                <p class="pl-5 my-font-size-20 my-fit-contents my-text-size-30 mt-0 my-bg-color my-text-color-white">
-                  2022-04-02
-                </p>
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
-                class="align-end"
-                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                height="200px"
-                cover
-              >
-                <!-- <v-row v-if="ii==0" no-gutters> -->
-                <v-row no-gutters>
-                  <!-- v-for="(item,i) in VIDEO.performers" -->
-                  <!-- :key="i" -->
-                  <v-col cols="12" class="d-flex">
-                  <!-- :prepend-icon="i === 0 ? 'mdi-account-circle' : ''" -->
-                    <v-btn 
-                      rounded="0"
-                      class="my-fit-contents my-text-size-30  ms-auto me-0"
-                      style="position: absolute; top: 5px; right: 10px;"
-                    >
-                      <!-- {{ card.classminor }} -->
-                      タグ
-                    </v-btn>
-                  </v-col>
-                </v-row>
-                <v-card-title class="text-white text-h3" style="white-space: pre-wrap;" v-text="card.title">
-                </v-card-title>
-                </v-img>
-              </v-card>
-            </template>
-            </v-hover>
+            <v-card
+              class="pb-0"
+              rounded="lg"
+              :to="{ name: 'Article', params: { param: card.classmajor, param2: card.classmedium, param3: card.classminor, param4: card.number} }"
+            >
+            <p class="pl-5 my-font-size-20 my-fit-contents my-text-size-30 mt-0 my-bg-color my-text-color-white">
+              2022-04-02
+            </p>
+            <v-img
+              src="https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
+              class="align-end"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              height="200px"
+              cover
+            >
+              <!-- <v-row v-if="ii==0" no-gutters> -->
+              <v-row no-gutters>
+                <!-- v-for="(item,i) in VIDEO.performers" -->
+                <!-- :key="i" -->
+                <v-col cols="12" class="d-flex">
+                <!-- :prepend-icon="i === 0 ? 'mdi-account-circle' : ''" -->
+                  <v-btn 
+                    rounded="0"
+                    class="my-fit-contents my-text-size-30  ms-auto me-0"
+                    style="position: absolute; top: 5px; right: 10px;"
+                  >
+                    <!-- {{ card.classminor }} -->
+                    タグ
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-card-title class="text-white text-h3" style="white-space: pre-wrap;" v-text="card.title">
+              </v-card-title>
+              </v-img>
+            </v-card>
           </v-col>
         </v-row>
         <Btn_1 text="もっとみる" href="Articles"/>
@@ -346,31 +316,43 @@ export default defineComponent({
 
       <v-row no-gutters class="my-bg-color-white">
         <Text_1 :text_1="text2 || 'aaaa'" />
+
+        
         <v-col cols="12" class="mx-auto px-10">
 
-
-          <!-- 動画 -->
-          <v-card v-if="slicedVideos" class="my-15">
-            <v-toolbar
+          <v-card class="my-15"
+          v-for="(KYOUNUKI,iii) in KYOUNUKI_LIST"
+          :key="iii"
+          >
+          <v-toolbar
                 flat
                 dark
                 class="my-bg-color"
               >
-                <v-toolbar-title class="my-text-color-white font-weight-medium my-text-size-40">動画</v-toolbar-title>
+                <v-toolbar-title class="my-text-color-white font-weight-medium text-center my-text-size-40">{{ KYOUNUKI.post_day}}</v-toolbar-title>
               </v-toolbar>
+            <!-- <v-card-text tag="h3" class="mt-6 my-underline text-center px-5 my-text-size-40 font-weight-medium">{{ KYOUNUKI.post_day}}</v-card-text> -->
+
+            
               <v-row no-gutters>
+
                 <v-col cols="6" class="mx-auto px-6 py-15 pb-5"
-                  v-for="(VIDEO,i) in slicedVideos"
+                  v-for="(VIDEO,i) in KYOUNUKI.productnumbers"
                   :key="i"
                   :src="VIDEO"
                 >
+
+
                   <v-carousel
                   class="my-carousel"
-                  v-if="media[i]==false"
+                  v-if="media[(i)+iii*4]==false"
                    :show-arrows="false"
                    :cycle="false"
-                   v-model="model[i]"
-                    @touchstart="handleTouchStart($event, i, model[i])"
+                   v-model="model[(i)+iii*4]"
+                    @touchstart="handleTouchStart($event, (i)+iii*4, model[(i)+iii*4])"
+
+
+
                   >
                   <!-- @touchmove="handleTouchMove($event, i, parseJson(VIDEO.images).length)" -->
 
@@ -378,10 +360,12 @@ export default defineComponent({
                       v-for="(item,ii) in parseJson(VIDEO.images)"
                       :key="ii"
                       cover
-                      aspect-ratio="" :src="item" alt="Image" @click="model[i] = (model[i] + 1 ) % parseJson(VIDEO.images).length"
-                      class="d-flex justify-end"
+                      aspect-ratio="0.73" :src="item" alt="Image" @click="model[(i)+iii*4] = (model[(i)+iii*4] + 1 ) % parseJson(VIDEO.images).length"
+                      
+                      
+                      
                     >
-                    <v-row v-if="ii==0" no-gutters>
+                    <!-- <v-row v-if="ii==0" no-gutters>
                       <v-col cols="12" class="d-flex"
                       v-for="(item,i) in VIDEO.performers"
                           :key="i"
@@ -394,28 +378,12 @@ export default defineComponent({
                           {{item.name}}
                         </v-btn>
                       </v-col>
-                    </v-row>
-                    <v-row v-if="ii==1" no-gutters>
-                      <v-col cols="12" class="d-flex"
-                      v-for="(item,i) in VIDEO.tags"
-                          :key="i"
-                      >
-                        <v-btn 
-                          rounded="0"
-                          class="my-fit-contents my-text-size-30  ms-auto me-0 "
-                          style="white-space: nowrap; overflow-x: auto"
-                          :prepend-icon="i === 0 ? 'mdi-tag-text-outline' : ''"
-                          >
-                          {{item.name}}
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-
+                    </v-row> -->
                     <!-- <v-img aspect-ratio="0.73" :src="item" alt="Image" @click="model[i] = (model[i] + 1 ) % parseJson(VIDEO.images).length"></v-img> -->
 
                   </v-carousel-item>
                   </v-carousel>
-                  <v-row no-gutters v-if="media[i]==true">
+                  <v-row no-gutters v-if="media[(i)+iii*4]==true">
                     <v-col cols="12" aspect-ratio="0.73" class="mx-auto px-0 my-auto">
 
                         <video controls class="w-100 my-auto px-0 my-auto" playsinline autoplay muted>
@@ -423,31 +391,89 @@ export default defineComponent({
                           Your browser does not support the video tag.
                         </video>
                     </v-col>
+
+
+                        
                         <v-col cols="12" class="d-flex pb-0 w-100">
-                          <v-btn class="me-0 ms-auto my-font-size-20 my-fit-contents my-text-size-40 w-100" append-icon="mdi-play-circle-outline" @click="toggleMedia(i)">
+                          <v-btn class="me-0 ms-auto my-font-size-20 my-fit-contents my-text-size-40 w-100" append-icon="mdi-play-circle-outline" @click="toggleMedia((i)+iii*4)">
                             閉じる
                           </v-btn> 
                         </v-col>
+
                   </v-row>
 
 
+                  <!--
+                  <div v-if="media[i]==true" class="video-container">
+                    <video ref="videoRef" class="video-player" controls playsinline autoplay muted>
+                      <source src="src/assets/mov_hts-samp007.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+
+                    <v-toolbar class="control-bar" absolute bottom>
+                      コントロールバーのコンポーネントをここに追加
+                      <v-btn icon>
+                        <v-icon>mdi-play-pause</v-icon>
+                      </v-btn>
+                      <v-slider thumb-label="always"></v-slider>
+                      追加のコントロールボタンやスライダーなどを配置
+                    </v-toolbar>
+                  </div>
+                  -->
+
+
+                <!-- <div v-if="media[i]==true" aspect-ratio="0.73" class="mx-auto px-0 my-auto d-flex">
+                  <div class="video-wrapper">
+                    <video ref="videoPlayer" :class="['video-player', { 'small': isSmall }]" playsinline autoplay muted>
+                      <source src="src/assets/mov_hts-samp007.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <div class="custom-controls">
+                      <div class="progress-bar" @mousedown="startDrag">
+                        <div class="progress" :style="{ width: progressWidth }"></div>
+                      </div>
+                    </div>
+                  </div>
+                  </div> -->
+
+
+                  <!-- videoSrc -->
                   
 
-                  <v-row no-gutters v-if="media[i]==false">
+                  <v-row no-gutters v-if="media[(i)+iii*4]==false">
                     <v-col class="d-flex pb-0 w-100">
-                      <v-btn class="me-0 ms-auto my-font-size-20 my-fit-contents my-text-size-40 w-100" append-icon="mdi-play-circle-outline" @click="toggleMedia(i)">
+                      <v-btn class="me-0 ms-auto my-font-size-20 my-fit-contents my-text-size-40 w-100" append-icon="mdi-play-circle-outline" @click="toggleMedia((i)+iii*4)">
                         再生
                       </v-btn> 
                     </v-col>
                   </v-row>
 
-                  <p
-                    class="my-text-size-50 font-weight-midium pt-2"
-                    style="white-space: nowrap; overflow-x: auto"
-                  >
-                    {{VIDEO.title}}
-                  </p>
+                    <!-- <v-row no-gutters>
+                    <v-col class="d-flex mt-1 w-100">
+                      <v-btn class="me-0 ms-auto my-font-size-20 my-fit-contents my-text-size-40 w-100" append-icon="mdi-open-in-new">
+                        続きを見る
+                      </v-btn> 
+                    </v-col>
+                  </v-row> -->
 
+                  <!-- <a :to="{ name: 'Video', param: VIDEO.productnumber}" class="custom-link my-text-size-50 font-weight-medium pt-2">{{ VIDEO.title }}</a> -->
+
+                  <v-row no-gutters>
+<!-- 
+                    <v-col class="d-flex">
+                      <v-btn 
+                        v-for="(item,i) in VIDEO.tags"
+                        :key="i"
+                        class="my-fit-contents my-text-size-30 py-1 my-1"
+                        :prepend-icon="i === 0 ? 'mdi-tag-text-outline' : ''"
+                        >
+                        {{item.name}}
+                      </v-btn>
+                    </v-col>
+                     -->
+
+
+                  </v-row>
 
                 </v-col>
               </v-row>
@@ -511,7 +537,7 @@ export default defineComponent({
                 <v-col
                   v-for="i in 6"
                   :key="i"
-                  cols="4"
+                  cols="12"
                   md="4"
                 >
                 <div class="d-flex">
@@ -542,97 +568,51 @@ export default defineComponent({
 
 
 
-  <v-row no-gutters>
-  <Text_1 text_1="アカウント・タグ 一覧" />
+  <v-row no-gutters class="my-fit-contents">
+  <Text_1 text_1="検索" />
     <v-col cols="11" class="mx-auto px-5">
 
 
+      <v-card height="" class="my-bg-color-white" elevation=0>
+        <v-row no-gutters>
+          <v-col cols="12" class="border">
+            <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg" height="50px" :to="{ name: 'Performers'}"><v-icon>mdi-account-circle</v-icon>{{ text1 || "女優" }}</v-btn>
+              <v-row no-gutters class="my-auto">
+                <v-col cols="12" class="border px-2 py-5 pb-10">
+                  <v-btn
+                    v-for="(item,i) in PERFORMER_LIST"
+                    :key="i"
+                    class="my-fit-contents my-text-size-30  ms-auto me-0"
+                    :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{'performers':item.name}])}}"
 
-
-
-
-                    <!-- アカウント -->
-                    <v-card height="" class="my-bg-color-white mb-5">
-                  <v-row no-gutters>
-                      <v-col cols="12" class="border">
-                          <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
-                          height="50px" @click="search_view_performer=!search_view_performer"><v-icon>mdi-account-circle</v-icon>アカウント</v-btn>
-                            <v-row v-if="search_view_performer" no-gutters class="my-auto">
-                              <v-col cols="12" class="border px-2 py-5 pb-10">
-                                <v-chip-group
-                                  v-model="PERFORMER_LIST"
-                                  column
-                                  multiple
-                                  color="text-deep-purple-accent-4"
-                                >
-                                    <v-chip
-                                    v-for="item in PERFORMER_LIST"
-                                    :key="item.id"
-                                    label
-                                    outline
-                                    :value="item.name"
-                                    color="red"
-                                    :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{'performers':item.name}])}}"
-
-
-                                    class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
-
-                                  >
-
-                                      {{ item.name }}
-                                    </v-chip>
-                                  </v-chip-group>
-                                  <!-- {{searchparams.performers}} -->
-
-                                  
-                              </v-col>
-                              
-                            </v-row>
-                        </v-col>
-                      </v-row>
-                    </v-card>
-
-
-
-
-                    <!-- タグ -->
-                    <v-card height="" class="my-bg-color-white" elevation=0>
-                      <v-row no-gutters>
-                        <v-col cols="12" class="border">
-                          <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
-                          height="50px" @click="search_view_tag=!search_view_tag"><v-icon>mdi-tag-text-outline</v-icon>タグ</v-btn>
-                            <v-row v-if="search_view_tag" no-gutters class="my-auto">
-                              <v-col cols="12" class="border px-2 py-5 pb-10">
-                                  <v-chip-group
-                                    v-model="TAG_LIST"
-                                    column
-                                    multiple
-
-                                  >
-                                      <v-chip
-                                      v-for="item in TAG_LIST"
-                                      :key="item.id"
-                                      label
-                                      outline
-                                      :value="item.name"
-                                      color="red"
-                                      :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{'tags':item.name}])}}"
-                                      class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
-
-                                    >
-                                      {{ item.name }}
-                                    </v-chip>
-                                  </v-chip-group>
-                                  <!-- {{searchparams.tags}} -->
-
-                                  <div class="d-flex py-3">
-                                  </div>
-                              </v-col>
-                            </v-row>
-                        </v-col>
-                      </v-row>
-                    </v-card>
-
+                    >
+                    {{item.name}}
+                  </v-btn>
+                </v-col>
+              </v-row>
+          </v-col>
+        </v-row>
+      </v-card>
+          
+      <v-card height="" class="my-bg-color-white mt-15" elevation=0>
+        <v-row no-gutters>
+          <v-col cols="12" class="border">
+            <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg" height="50px" :to="{ name: 'Tags'}"><v-icon>mdi-tag-text-outline</v-icon>タグ</v-btn>
+              <v-row no-gutters class="my-auto">
+                <v-col cols="12" class="border px-2 py-5 pb-10">
+                  <v-btn
+                  v-for="(item,i) in TAG_LIST"
+                  :key="i"
+                  class="my-fit-contents my-text-size-30  ms-auto me-0"
+                  :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{'tags':item.name}])}}"
+                  >
+                  {{item.name}}
+                </v-btn>
+                </v-col>
+              </v-row>
+          </v-col>
+        </v-row>
+      </v-card>
       
 <!-- 
       <v-card height="" class="my-bg-color-white mt-15" elevation=0>
@@ -647,7 +627,6 @@ export default defineComponent({
     </v-col>
   </v-row>
 
-  <v-col cols="12" class="my-15"></v-col>
 
 
 

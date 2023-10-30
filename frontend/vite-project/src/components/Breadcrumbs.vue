@@ -1,7 +1,7 @@
 
 
 
-<script setup lang="ts">
+<script setup>
 
 import { ref , computed} from 'vue';
 import { useStore } from 'vuex';
@@ -48,7 +48,7 @@ const store = useStore();
 // }
 
 
-store.dispatch('FETCH_GET_BREADCRUMBS')
+// store.dispatch('FETCH_GET_BREADCRUMBS')
 const breadcrumbsList = ref(computed(() => { return store.getters.GET_BREADCRUMBS; }))
 
 
@@ -57,17 +57,30 @@ const breadcrumbsList = ref(computed(() => { return store.getters.GET_BREADCRUMB
 </script>
 
 
+<script >
+export default {
+  beforeRouteUpdate(to, from, next) {
+    // store.dispatch('FETCH_GET_BREADCRUMBS')
+    next();
+  },
+};
+</script>
+
+
+
 
 
 <template>
  <div>
     
     <v-breadcrumbs
+      v-if = "breadcrumbsList"
       :items="breadcrumbsList"
       color="var(--my-color-white)"
       bg-color="var(--my-color)"
       class=""
       style="white-space: nowrap; overflow-x: auto"
+      :to="breadcrumbsList"
 
 
     >

@@ -30,8 +30,10 @@ const URL_LIST = computed(() => { return store.getters.GET_URL_LIST; });
 const URL_PARAM = computed(() => { return store.getters.GET_URL_PARAM; });
 const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
-const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
+// const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
 const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
+const ARTICLE_LIST_DUP =computed(() => { return store.getters.GET_ARTICLE_LIST_DUP; });
+const ARTICLE_LIST_PARAMS =computed(() => { return store.getters.GET_ARTICLE_LIST_PARAMS; });
 
 
 
@@ -41,28 +43,11 @@ store.dispatch('FETCH_GET_BREADCRUMBS')
 
 let SUBCONTENTS = ref(route.path.split("/")[1])
 
-
-let ARTICLE_LIST_DUP = ref()
-watch(ARTICLE_LIST, (newVal, oldVal) => {
-  if (SUBCONTENTS.value === "article" && newVal) {
-    const uniqueTitles = [...new Set(newVal.map(item => item.title))];
-    ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
-      return newVal.find(item => item.title === title);
-    });
-    SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
-
-  //  SUBCONTENTS_CLASS_MAJOR.value = [...new Set(newVal.map(item => item.classmajor))];
-  //  SUBCONTENTS_CLASS_MEDIUM.value = [...new Set(newVal.map(item => item.classmedium))];
-  //  SUBCONTENTS_CLASS_MINOR.value = [...new Set(newVal.map(item => item.classminor))];
+watch(ARTICLE_LIST_DUP, (newVal, oldVal) => {
+  if (newVal) {
+    const articletitle = ARTICLE_LIST_DUP.value[0].title
   }
 })
-if (SUBCONTENTS.value === "article" && ARTICLE_LIST.value) {
-    const uniqueTitles = [...new Set(ARTICLE_LIST.value.map(item => item.title))];
-    ARTICLE_LIST_DUP.value = uniqueTitles.map(title => {
-      return ARTICLE_LIST.value.find(item => item.title === title);
-    });
-    SUBCONTENTS_ALL.value = ARTICLE_LIST_DUP.value;
-  }
 
 
 
@@ -199,137 +184,74 @@ export default defineComponent({
 
 <template>
 
-      <v-row no-gutters class="my-bg-color-white">
-        <!-- {{ filteredData }} -->
-        <div>
-          aaaa{{ ARTICLE_LIST_DUP }}
 
-        </div>
-        <v-col cols="12" class="mx-auto px-10">
 
-        <v-container fluid>
-
-      <v-row dense>
+  <v-row justify="space-around" aria-disabled no-gutters>
+    <v-col cols="11" class="mx-auto">
+      <v-btn
+        variant="text"
+        :to="{ name: 'ArticlesList'}"
+      >
+      リストで見る
+      </v-btn>
+    </v-col>
+  <Text_1 :text_1="text3 || 'ブログ記事'" />
+    <v-col cols="11" class="mx-auto">
+      <v-row dense class="my-bg-color-white" >
         <v-col
           v-for="card in ARTICLE_LIST_DUP"
           :key="card.title"
           cols="12"
-          class="py-3"
-
+          class="my-bg-color-white my-5 pb-0"
         >
-        <v-card class="">
-        <p class="pl-5 my-font-size-20 my-fit-contents my-text-size-30 mt-0 my-bg-color my-text-color-white">2022-04-02</p>
-
-          <v-card
-            aria-disabled
-            
-            class="rounded-0"
-            :to="{ name: 'Article', params: { param: card.classmajor, param2: card.classmedium, param3: card.classminor, param4: card.number} }"
-          >
-
-
-      
-            <v-img
-              src="https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
-              class="align-end"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="200px"
-              cover
-            >
-
-
-            <!-- <v-row v-if="ii==0" no-gutters> -->
-            <v-row no-gutters>
-              <!-- v-for="(item,i) in VIDEO.performers" -->
-              <!-- :key="i" -->
-
-
-                      <v-col cols="12" class="d-flex"
-                      >
-
-                      <!-- :prepend-icon="i === 0 ? 'mdi-account-circle' : ''" -->
-                        <v-btn 
-                          rounded="0"
-                          class="my-fit-contents my-text-size-30  ms-auto me-0"
-                          style="position: absolute; top: 5px; right: 10px;"
-
-                          >
-                          <!-- {{ card.classminor }} -->
-                          タグ
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-
-
-
-
-
-
-
-
-
-
-                    
-              <v-card-title class="text-white text-h3" style="white-space: pre-wrap;" v-text="card.title"></v-card-title>
-            </v-img>
-
-              <!-- <v-card-actions>
-                <v-spacer></v-spacer>
-
-              <v-btn
-                color="var(--my-color-green)"
-                class="ms-auto px-6"
-                size="x-large"
-                variant="outlined"
-                prepend-icon=""http://172.20.10.4:5173/article/matome/performer/amature/1
-                append-icon="mdi-account-circle"
-
-                >
-                この記事を読む...
-                <template v-slot:prepend>
-                  <v-icon color="orange"></v-icon>
-                </template>
-              </v-btn>
-            </v-card-actions> -->
-          </v-card>
-        </v-card>
-
+          <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-card
+                v-bind="props"
+                :elevation="isHovering ? 16 : 2"
+                class="pb-0"
+                rounded="lg"
+                :to="{ name: 'Article', params: { param: card.classmajor, param2: card.classmedium, param3: card.classminor, param4: card.number} }"
+              >
+                <p class="pl-5 my-font-size-20 my-fit-contents my-text-size-30 mt-0 my-bg-color my-text-color-white">
+                  2022-04-02
+                </p>
+              <v-img
+                src="https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
+                class="align-end"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="200px"
+                cover
+              >
+                <!-- <v-row v-if="ii==0" no-gutters> -->
+                <v-row no-gutters>
+                  <!-- v-for="(item,i) in VIDEO.performers" -->
+                  <!-- :key="i" -->
+                  <v-col cols="12" class="d-flex">
+                  <!-- :prepend-icon="i === 0 ? 'mdi-account-circle' : ''" -->
+                    <v-btn 
+                      rounded="0"
+                      class="my-fit-contents my-text-size-30  ms-auto me-0"
+                      style="position: absolute; top: 5px; right: 10px;"
+                    >
+                      <!-- {{ card.classminor }} -->
+                      タグ
+                    </v-btn>
+                  </v-col>
+                </v-row>
+                <v-card-title class="text-white text-h3" style="white-space: pre-wrap;" v-text="card.title">
+                </v-card-title>
+                </v-img>
+              </v-card>
+            </template>
+          </v-hover>
         </v-col>
       </v-row>
-    </v-container>
+      <Btn_1 text="もっとみる" href="Articles"/>
+    </v-col>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Btn_1 text="もっとみる"/>
-
-
-      </v-col>
-    </v-row>
-
-
-
-
-
-
-
-
-
-
-
-
+  </v-row>
 
 
 </template>

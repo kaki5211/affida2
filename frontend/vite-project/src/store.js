@@ -1,5 +1,8 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
+import { useRoute } from 'vue-router';
+const route = useRoute();
+
 // import createPersistedState from 'vuex-persistedstate'
 
 
@@ -16,8 +19,8 @@ import axios from 'axios';
 
 
 
-const host_api = "https://kyounuki.jp:8080/api"
-// const host_api = "http://172.20.10.4:8000/api/"
+// const host_api = "https://kyounuki.jp:8080/api"
+const host_api = "http://172.20.10.4:8000/api"
 
 
 // http://localhost:8000/api/your-endpoint/
@@ -58,8 +61,33 @@ const store = createStore({
     kyounuki_list: null,
     contents_list: null,
     article_list: null,
+    article_list_dup: null,
+    article_list_params: {
+      classmajor: [],
+      classmedium: [],
+      classminor: [],
+    },
 
 
+
+    searchparams: {
+      performers: [],
+      tags: [],
+      maker: [],
+      label: [],
+      series: [],
+      duration: [],
+      title: [],
+      description: [],
+      views: [],
+      kyounuki_post_day: [],
+      active: [],
+    },
+    searchparams_article: {
+      classmajor: [],
+      classmedium: [],
+      classminor: [],
+    },
     set_videos_loaded: null,
 
     url_list: null,
@@ -81,6 +109,8 @@ const store = createStore({
     SET_TAG_LIST(state, data) { state.tag_list = data; },
 
     SET_ARTICLE_LIST(state, data) { state.article_list = data; },
+    SET_ARTICLE_LIST_DUP(state, data) { state.article_list_dup = data; },
+    SET_ARTICLE_LIST_PARAMS(state, data) { state.article_list_params = data; },
 
 
     SET_MAKER_LIST(state, data) { state.maker_list = data; },
@@ -101,6 +131,9 @@ const store = createStore({
     SET_BREADCRUMBS(state, data) { state.breadcrumbs = data; },
 
     SET_CONTENTS_LIST(state, data) { state.contents_list = data; },
+
+    SET_SEARCHPARAMS(state, data) { state.searchparams = data; },
+    SET_SEARCHPARAMS_ARTICLE(state, data) { state.searchparams_article = data; },
     
     // SET_CONTENTS(state, data) { state.Contents_list = [data]; },
     // ADD_CONTENTS(state, data) { state.Contents_list.push(data); },
@@ -144,13 +177,23 @@ const store = createStore({
     async FETCH_GET_ARTICLE_LIST({ commit }) {
       await fetchDataAndCommit({ commit, endpoint: 'article_list_view', mutationType: 'SET_ARTICLE_LIST' });
     },
+    async FETCH_GET_ARTICLE_LIST_DUP({ commit }) {
+      await fetchDataAndCommit({ commit, endpoint: 'article_list_dup_view', mutationType: 'SET_ARTICLE_LIST_DUP' });
+    },
+    async FETCH_GET_ARTICLE_LIST_PARAMS({ commit }) {
+      await fetchDataAndCommit({ commit, endpoint: 'article_list_params_view', mutationType: 'SET_ARTICLE_LIST_PARAMS' });
+    },
 
     async FETCH_GET_DEBUG({ commit }) {
       const urlhost = window.location.hostname;
       console.log("urlhost.includes('172.')", urlhost.includes("172."))
       commit('SET_DEBUG', urlhost.includes("kyounuki"));
     },
-    async FETCH_GET_BREADCRUMBS({ commit }) {
+    async FETCH_GET_BREADCRUMBS({ commit }, payload) {
+      const { path_ } = payload; // payloadオブジェクトから引数を取り出す
+
+
+      
       
       // 事前に定義したパスと表示する文字列の対
       const pathMapping = {
@@ -165,11 +208,17 @@ const store = createStore({
       };
       
       // URLのパスを取得
+      const urlPath2 = path_
       const urlPath = window.location.pathname;
+      
       
       
       // パスを"/"で区切ってリストに変換
       const pathList = urlPath.split("/").filter((path) => path !== "");
+      console.log("urlPath", urlPath)
+      console.log("urlPath2", urlPath2)
+      console.log("pathList", pathList)
+
 
       
       // パンくずリストの初期化
@@ -177,7 +226,7 @@ const store = createStore({
         {
           title: 'ホーム',
           disabled: false,
-          href: '/',
+          to: '/',
         },
       ];
       console.log("breadcrumbsList", breadcrumbsList)
@@ -189,8 +238,13 @@ const store = createStore({
         currentPath += `/${path}`;
         const name = pathMapping[path] || path;
         const disabled = i === pathList.length - 1; // 最後の要素の場合のみ disabled: true
-        breadcrumbsList.push({ title: name, disabled, href: currentPath });
+        breadcrumbsList.push({ title: name, disabled, to: currentPath });
       }
+      // console.log("pathList",pathList)
+      // console.log("breadcrumbsList", breadcrumbsList)
+
+
+      
       // let title =''
       // console.log("pathList.value[1]", pathList.value[1], pathList.value[2], pathList.value[3])
 
@@ -253,12 +307,18 @@ const store = createStore({
     GET_TAG_LIST: (state) => state.tag_list,
 
     GET_ARTICLE_LIST: (state) => state.article_list,
+    GET_ARTICLE_LIST_DUP: (state) => state.article_list_dup,
+    GET_ARTICLE_LIST_PARAMS: (state) => state.article_list_params,
 
     GET_MAKER_LIST: (state) => state.maker_list,
     GET_LABEL_LIST: (state) => state.label_list,
     GET_SERIES_LIST: (state) => state.series_list,
     GET_KYOUNUKI_LIST: (state) => state.kyounuki_list,
     
+
+    GET_SEARCHPARAMS: (state) => state.searchparams,
+    GET_SEARCHPARAMS_ARTICLE: (state) => state.searchparams_article,
+
     GET_VIDEOS_LOADED: (state) => state.set_videos_loaded,
 
 
@@ -272,6 +332,7 @@ const store = createStore({
     GET_BREADCRUMBS: (state) => state.breadcrumbs,
 
     GET_CONTENTS_LIST: (state) => state.contents_list,
+
 
   } 
 });
@@ -290,9 +351,12 @@ const store = createStore({
     await store.dispatch('FETCH_GET_LABEL_LIST');
     await store.dispatch('FETCH_GET_SERIES_LIST');
     await store.dispatch('FETCH_GET_DEBUG');
-    await store.dispatch('FETCH_GET_BREADCRUMBS');
+    await store.dispatch('FETCH_GET_BREADCRUMBS', { path_: "success!" })
     await store.dispatch('FETCH_GET_CONTENTS_LIST');
     await store.dispatch('FETCH_GET_ARTICLE_LIST');
+    await store.dispatch('FETCH_GET_ARTICLE_LIST_DUP');
+    await store.dispatch('FETCH_GET_ARTICLE_LIST_PARAMS');
+
     
 
     // await store.dispatch('FETCH_GET_URL_LIST');

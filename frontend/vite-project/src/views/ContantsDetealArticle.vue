@@ -114,6 +114,11 @@ if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video") {
     if (virtual_option1) {
       ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
       console.log("virtual_option1.title", virtual_option1.title)
+    } else {
+      ARTICLE_DETEAL_NEW[index].vertual_option1 = {
+        name :"",
+      };
+
     }
   });
   ARTICLE_DETEAL.value = ARTICLE_DETEAL_NEW
@@ -150,127 +155,9 @@ if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer") {
 
 
 
-// VIDEOS_FILTER
-// let VIDEOS_FILTER = ref()
-
-// watch(VIDEOS, (newVal, oldVal) => {
-//   if (newVal) {  
-//     VIDEOS_FILTER.value = newVal.filter(item => 
-//     item.productnumber === ARTICLE_CLASS.value[0]
-//     );
-//   }
-// });
-
-
-
-
-// virtual
-// if (VIDEOS.value) {  
-//   ARTICLE_DETEAL.value = ARTICLE_LIST.value.filter(item => 
-//   item.classmajor === ARTICLE_CLASS.value[0] && 
-//   item.classmedium === ARTICLE_CLASS.value[1] && 
-//   item.classminor === ARTICLE_CLASS.value[2] &&
-//   item.title_number === parseInt(ARTICLE_CLASS.value[3])
-//   );
-//   ARTICLE_DETEAL_TITLE.value = ARTICLE_DETEAL.value[0].title;
-//   BREADCRUMBS.value[5].title = ARTICLE_DETEAL_TITLE.value
-//   store.commit('SET_BREADCRUMBS', BREADCRUMBS);
-// }
-
-
-  
   
 
 
-
-// if (ARTICLE_DETEAL) {
-//   BREADCRUMBS.value[5].title = ARTICLE_DETEAL.value[0].title_number
-//   console.log(BREADCRUMBS.value[5].title)
-// }
-
-// console.log(BREADCRUMBS.value[5].title)
-
-let headers_name = ref("雑記");
-
-const headers = ref([])
-// sortable: false,
-// if (SUBCONTENTS.value === "performer") {
-//   headers.value.push({title: "名前", align: 'start', key: 'name', value: 'name' });
-//   headers.value.push({title: "生年月日", align: 'start', key: 'birth', value: 'birth' });
-//   headers.value.push({ title: "年齢", align: 'start', key: 'age', value: 'age' });
-// }
-
-// if (SUBCONTENTS.value === "performer") {
-//   headers.value.push({title: "名前", align: 'start', key: 'name', value: 'name' });
-//   headers.value.push({title: "生年月日", align: 'start', key: 'birth', value: 'birth' });
-//   headers.value.push({ title: "年齢", align: 'start', key: 'age', value: 'age' });
-// }
-
-
-// ARTICLE_CLASS.value[0]
-// ARTICLE_CLASS.value[1]
-// ARTICLE_CLASS.value[2]
-if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video" ) {
-  headers.value.push({ title: "No.", align: 'center', key: 'number', value: 'number',width: '30px' });
-  // headers.value.push({ title: "名前", align: 'start', key: 'image', value: 'image' });
-  headers.value.push({ title: "番号", align: 'start', key: 'option1', value: 'option1' });
-  headers.value.push({ title: "タイトル", align: 'start', key: 'vertual_option1.title', value: 'vertual_option1.title' });
-  headers.value.push({ title: "タグ", align: 'start', key: 'classminor', value: 'classminor' });
-  headers.value.push({ title: "クリック数", align: 'start', key: 'views', value: 'views' });
-  headers.value.push({ title: "投稿日", align: 'start', key: 'post_day', value: 'post_day' });
-}
-
-if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer" ) {
-  headers.value.push({ title: "No.", align: 'center', key: 'number', value: 'number',width: '30px' });
-  headers.value.push({title: "名前", align: 'start', key: 'vertual_option1.name', value: 'vertual_option1.name' });
-  headers.value.push({title: "生年月日", align: 'start', key: 'vertual_option1.birth', value: 'vertual_option1.birth' });
-  headers.value.push({ title: "年齢", align: 'start', key: 'vertual_option1.age', value: 'vertual_option1.age' });
-  headers.value.push({ title: "タグ", align: 'start', key: 'classminor', value: 'classminor' });
-  headers.value.push({ title: "クリック数", align: 'start', key: 'views', value: 'views' });
-  headers.value.push({ title: "投稿日", align: 'start', key: 'post_day', value: 'post_day' });
-}
-
-
-  // headers.value.push({ title: "No.", align: 'center', key: 'number', value: 'number',width: '30px' });
-  // // headers.value.push({ title: "名前", align: 'start', key: 'image', value: 'image' });
-  // headers.value.push({ title: "名前", align: 'start', key: 'name', value: 'name' });
-  // headers.value.push({ title: "説明", align: 'start', key: 'explain', value: 'explain' });
-  // headers.value.push({ title: "価格", align: 'start', key: 'price', value: 'price' });
-  // headers.value.push({ title: "投稿日", align: 'start', key: 'post_day', value: 'post_day' });
-  // headers.value.push({ title: "クリック数", align: 'start', key: 'views', value: 'views' });
-
-
-
-
-// if (SUBCONTENTS.value === "performer") {
-// }
-
-// if (SUBCONTENTS.value === "video") {
-//   headers.value.push({title: "タイトル", align: 'start', key: 'title', value: 'title' });
-//   headers.value.push({title: "パフォーマース", align: 'start', key: 'performers', value: 'performers' });
-//   headers.value.push({title: "タグ", align: 'start', key: 'tags', value: 'tags' });
-//   headers.value.push({title: "製品番号", align: 'start', key: 'productnumber', value: 'productnumber' });
-//   headers.value.push({title: "時間", align: 'start', key: 'duration', value: 'duration' });
-//   headers.value.push({title: "メーカー", align: 'start', key: 'maker', value: 'maker' });
-// }
-
-// if (SUBCONTENTS.value === "article") {
-//   headers.value.push({title: "タイトル", align: 'start', key: 'title', value: 'title' });
-//   headers.value.push({title: "大分類", align: 'start', key: 'classmajor', value: 'classmajor' });
-//   headers.value.push({title: "中分類", align: 'start', key: 'classmedium', value: 'classmedium' });
-//   headers.value.push({title: "小分類", align: 'start', key: 'classminor', value: 'classminor' });
-  
-
-//   // headers.value.push({title: "項目", align: 'start', key: 'classmedium', value: 'classmedium' });
-
-
-
-// }
-
-
-
-
-// CONTENTS
 
 const contents_info = `
     <title>あいうえお
@@ -440,15 +327,12 @@ export default defineComponent({
 
 
       <v-row no-gutters class="my-bg-color-white">
-        <!-- <p>{{ ARTICLE_LIST }}</p>------------------- -->
-        <!-- <p>{{ ARTICLE_CLASS }}</p>------------------- -->
-        <!-- <p>{{ ARTICLE_DETEAL }}</p>------------------- -->
+        <v-col cols="12" class="my-10 py-10"></v-col>
         <v-col cols="11" class="mx-auto mb-15">
           <h1 class="text-h3">{{ ARTICLE_DETEAL_TITLE || ""}}</h1>
         </v-col>
         <v-col cols="12" class="mx-auto my-15"></v-col>
 
-        <!-- {{ filteredData }} -->
         <v-col cols="12" class="mx-auto px-6">
 
         <v-container fluid>
@@ -490,7 +374,7 @@ export default defineComponent({
         </template>
 
         <template v-slot:item.vertual_option1.name="{ item, index }">
-          <a :href="'#article_' + index" class="text-decoration-none text-h3 my-font-size-20">{{ item.vertual_option1.name }}</a>
+          <a v-if="item.vertual_option1 && item.vertual_option1.name" :href="'#article_' + index" class="text-decoration-none text-h3 my-font-size-20">{{ item.vertual_option1.name || ""}}</a>
         </template>
 
         <template v-slot:item.option1="{ item, index }">
@@ -513,8 +397,6 @@ export default defineComponent({
         </v-col>
       </v-row>
 
-<a href="#aiueo">aiueo</a>
-{{ contents }}
 
 
 
@@ -722,7 +604,7 @@ export default defineComponent({
             <!-- <v-col cols="11" class="mx-auto px-0 my-auto d-flex">
               <h3  class="v-card-title text-h3"></h3>
             </v-col> -->
-            <v-card-title :id="'article_' + index" class="py-5 text-h3 font-weight-bold my-text-color-black my-letter-spacing-initial" tag="h3">
+            <v-card-title v-if="item.vertual_option1 && item.vertual_option1.name" :id="'article_' + index" class="py-5 text-h3 font-weight-bold my-text-color-black my-letter-spacing-initial" tag="h3">
               {{ item.vertual_option1.name || item.name }}            
             </v-card-title>
 

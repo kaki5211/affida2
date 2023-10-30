@@ -187,6 +187,8 @@ Extra Large (xl): 1904px 〜 ∞ */
   height: fit-content!important;
 }
 
+
+
 body { font-family: 'Sawarabi Gothic', sans-serif; }
 .my-font-concert-one { font-family: 'Concert One', sans-serif; }
 
@@ -211,6 +213,16 @@ body { font-family: 'Sawarabi Gothic', sans-serif; }
 .custom-link:visited {
   color: var(--my-color-gray); /* 訪問後のリンク色を設定 */
 }
+
+
+.custom-chip-style {
+  /* ここに独自のスタイルを追加 */
+  /* font-size: 40px; */
+  /* 他のスタイルプロパティを追加 */
+  height: fit-content!important;
+  font-size: 30px!important;
+}
+
 
 
 </style>

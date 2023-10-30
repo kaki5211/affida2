@@ -60,12 +60,15 @@ routes.push(
     { path: '/article',  name: 'Articles',  meta: { subcontents: 'article'}, component: ContantsListDisplayArticle, props: true},
     { path: '/article/list',  name: 'ArticlesList',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
     { path: '/article/:param/:param2/:param3/:param4',  name: 'Article',  meta: { subcontents: 'article'}, component: ContantsDetealArticle, props: true},
+    { path: '/article/:param/:param2/:param3',  name: 'ArticleList1',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
+    { path: '/article/:param/:param2',  name: 'ArticleList2',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
+    { path: '/article/:param',  name: 'ArticleList3',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
 
 
-    
 
-    
- 
+
+
+
 
 
 //   { path: '/:pathMatch(.*)*', name: 'App_none', component: NotFoundComponent },

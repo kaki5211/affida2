@@ -50,6 +50,11 @@ import Breadcrumbs from './components/Breadcrumbs.vue';
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 // const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
 // const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
+// const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
+// const SEARCHPARAMS =computed(() => { return store.getters.GET_SEARCHPARAMS; });
+// const SEARCHPARAMS_ARTICLE =computed(() => { return store.getters.GET_SEARCHPARAMS_ARTICLE; });
+
+
 // console.log("DEBUG", DEBUG.value)
 
 
@@ -120,10 +125,12 @@ export default defineComponent({
 
 
 
-  <sparcer>
 
-  </sparcer>
-
+  <v-row no-gutters class="my-bg-color-white">
+    <v-col cols="12" class="my-15 py-15"></v-col>
+    <v-col cols="12" class="my-15 py-15"></v-col>
+    <v-col cols="12" class="my-15 py-15"></v-col>
+  </v-row>
 
 
 

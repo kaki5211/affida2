@@ -4,30 +4,25 @@
 
 <v-row v-if="ARTICLE_CLASS.value[1] === 'video'" no-gutters>
 
-    <v-col  cols="11" class="mx-auto px-6 py-15 pb-5">
+  <v-col  cols="11" class="mx-auto px-6 py-15 pb-5">
 
-<v-carousel
-class="my-carousel"
-v-if="media[1]==false"
-:show-arrows="false"
-:cycle="false"
-v-model="model[1]"
-@touchstart="handleTouchStart($event, 1, model[1])"
+  <v-carousel
+    class="my-carousel"
+    v-if="media[1]==false"
+    :show-arrows="false"
+    :cycle="false"
+    v-model="model[1]"
+    @touchstart="handleTouchStart($event, 1, model[1])"
+  >
+    <!-- @touchmove="handleTouchMove($event, i, parseJson(VIDEO.images).length)" -->
 
-
-
->
-<!-- @touchmove="handleTouchMove($event, i, parseJson(VIDEO.images).length)" -->
-
-<v-carousel-item
-  v-for="(item,ii) in parseJson(item.images)"
-  :key="ii"
-  cover
-  aspect-ratio="1.46" :src="item" alt="Image" @click="model[(i)+iii*4] = (model[(i)+iii*4] + 1 ) % parseJson(VIDEO.images).length"
+  <v-carousel-item
+    v-for="(item,ii) in parseJson(item.images)"
+    :key="ii"
+    cover
+    aspect-ratio="1.46" :src="item" alt="Image" @click="model[(i)+iii*4] = (model[(i)+iii*4] + 1 ) % parseJson(VIDEO.images).length"
+  >
   
-  
-  
->
 <!-- <v-row v-if="ii==0" no-gutters>
   <v-col cols="12" class="d-flex"
   v-for="(item,i) in VIDEO.performers"

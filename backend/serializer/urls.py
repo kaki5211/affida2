@@ -12,7 +12,7 @@ from rest_framework import routers
 # from .views import VideoCreateView, VideoAPIView
 from .views import VideoAPIView ,MakerAPIView ,LabelAPIView ,SeriesAPIView ,PerformerAPIView ,KyounukiAPIView, TagAPIView, UpdateVideoAPIView, ContentsAPIView, ContentsTagAPIView
 from .views import GetVideoAPIView ,GetMakerAPIView ,GetLabelAPIView ,GetSeriesAPIView ,GetPerformerAPIView ,GetKyounukiAPIView, GetTagAPIView, GetContentsAPIView, GetContentsTagAPIView
-from .views import TestAPIView, GetUrlAPIView, Video2APIView, GetArticleAPIView, ArticleAPIView
+from .views import TestAPIView, GetUrlAPIView, Video2APIView, GetArticleAPIView, ArticleAPIView, GetArticleDupView, GetArticleParamsView
 from .views import CreateVideoAPIView, CreatePerformerAPIView
 
 router = routers.DefaultRouter()
@@ -39,6 +39,9 @@ router.register('tag_list_view', GetTagAPIView, basename='tag_list_view')
 router.register('contents_list_view', ContentsAPIView, basename='contents_list_view')
 router.register('contentstag_list_view', ContentsTagAPIView, basename='contentstag_list_view')
 router.register('article_list_view', GetArticleAPIView, basename='article_list_view')
+router.register('article_list_dup_view', GetArticleDupView, basename='article_list_dup_view')
+router.register('article_list_params_view', GetArticleParamsView, basename='article_list_params_view')
+
 
 
 router.register('videos_update', UpdateVideoAPIView, basename='videos_update')

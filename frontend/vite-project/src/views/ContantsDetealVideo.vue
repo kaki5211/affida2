@@ -185,17 +185,6 @@ export default defineComponent({
       <v-col class="py-1" cols="12">
 
 
-
-
-
-
-
-
-
-
-
-
-
             <v-row no-gutters class="my-bg-color-white">
         <!-- <Text_1 :text_1="text2 || '今日抜き'" /> -->
 

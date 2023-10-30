@@ -1008,3 +1008,13 @@ class GetArticleSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # レコード作成を禁止するため、何も処理せずに例外を発生させます
         raise serializers.ValidationError("Creating records is not allowed.")
+
+class GetArticleParamsSerializer(serializers.Serializer):
+    classmajor = serializers.ListField()
+    classmedium = serializers.ListField()
+    classminor = serializers.ListField()
+
+class GetArticleDupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = '__all__'
