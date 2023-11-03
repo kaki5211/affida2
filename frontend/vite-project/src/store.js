@@ -185,12 +185,28 @@ const store = createStore({
     },
 
     async FETCH_GET_DEBUG({ commit }) {
-      const urlhost = window.location.hostname;
+        
       console.log("urlhost.includes('172.')", urlhost.includes("172."))
       commit('SET_DEBUG', urlhost.includes("kyounuki"));
     },
-    async FETCH_GET_BREADCRUMBS({ commit }, payload) {
-      const { path_ } = payload; // payloadオブジェクトから引数を取り出す
+    async FETCH_GET_BREADCRUMBS({ commit }, newpath) {
+      // const { path_ } = payload; // payloadオブジェクトから引数を取り出す
+      // URLのパスを取得
+      // const urlPath2 = path_
+      
+      let urlPath;
+
+      if (newpath != null) {
+        urlPath = newpath;
+        console.log("urlPath", newpath)
+      } else {
+        urlPath = window.location.pathname;
+        console.log("window.location.pathname", window.location.pathname)
+
+      }
+
+
+      
 
 
       
@@ -207,22 +223,21 @@ const store = createStore({
 ,        // ...
       };
       
-      // URLのパスを取得
-      const urlPath2 = path_
-      const urlPath = window.location.pathname;
+
       
       
       
       // パスを"/"で区切ってリストに変換
       const pathList = urlPath.split("/").filter((path) => path !== "");
       console.log("urlPath", urlPath)
-      console.log("urlPath2", urlPath2)
+      // console.log("urlPath2", urlPath2)
       console.log("pathList", pathList)
 
 
       
       // パンくずリストの初期化
-      const breadcrumbsList = [
+      let breadcrumbsList = ""
+      breadcrumbsList = [
         {
           title: 'ホーム',
           disabled: false,
@@ -237,7 +252,7 @@ const store = createStore({
         const path = pathList[i];
         currentPath += `/${path}`;
         const name = pathMapping[path] || path;
-        const disabled = i === pathList.length - 1; // 最後の要素の場合のみ disabled: true
+        const disabled = i === (pathList.length - 1); // 最後の要素の場合のみ disabled: true
         breadcrumbsList.push({ title: name, disabled, to: currentPath });
       }
       // console.log("pathList",pathList)
@@ -261,7 +276,7 @@ const store = createStore({
       // if (title !== '') {
       //   breadcrumbsList[breadcrumbsList.length - 1].title = title;
       // }
-
+      console.log("SET_BREADCRUMBS>breadcrumbsList", breadcrumbsList)
       commit('SET_BREADCRUMBS', breadcrumbsList);
     },
     async FETCH_GET_CONTENTS_LIST({ commit }) {
@@ -350,8 +365,9 @@ const store = createStore({
     await store.dispatch('FETCH_GET_MAKER_LIST');
     await store.dispatch('FETCH_GET_LABEL_LIST');
     await store.dispatch('FETCH_GET_SERIES_LIST');
-    await store.dispatch('FETCH_GET_DEBUG');
-    await store.dispatch('FETCH_GET_BREADCRUMBS', { path_: "success!" })
+    // await store.dispatch('FETCH_GET_DEBUG');
+    // await store.dispatch('FETCH_GET_BREADCRUMBS', { path_: "success!" })
+    // await store.dispatch('FETCH_GET_BREADCRUMBS')
     await store.dispatch('FETCH_GET_CONTENTS_LIST');
     await store.dispatch('FETCH_GET_ARTICLE_LIST');
     await store.dispatch('FETCH_GET_ARTICLE_LIST_DUP');

@@ -16,7 +16,9 @@ import ContantsDetealArticle from '../views/ContantsDetealArticle.vue'
 // import { computed } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 // import { useStore } from 'vuex';
-// import store from '../store';
+// const store = useStore()
+
+import store from '../store';
 
 
 
@@ -64,8 +66,7 @@ routes.push(
     { path: '/article/:param/:param2',  name: 'ArticleList2',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
     { path: '/article/:param',  name: 'ArticleList3',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
 
-
-
+    
 
 
 
@@ -190,22 +191,27 @@ trailingSlash: true
 });
 
 
-// router.beforeEach((to, from, next) => {
-//   if (to.name === 'Books_Contents') {
-//     // /books/:params にアクセスした場合、リダイレクトして /books/:params/:params2 に遷移する
-//     const params = to.params.params;
-//     const params2 = '1'; // params2 の値を指定
-//     next({ name: 'Books_Contents_Pages', params: { params, params2 } });
-//   } else {
-//     next();
-//   }
-// });
+
+
+router.beforeEach((to, from, next) => {
+  // すべてのルートに対して実行したいコードをここに記述
+  // 例えば、変更後のパスを取得することができます
+  const toPath = to.path;
+  store.dispatch('FETCH_GET_BREADCRUMBS', toPath)
 
 
 
 
+
+  
+
+  
+  // 次のナビゲーションステップに進む
+  next();
+});
 
 
 
 export default router;
+
 

@@ -65,6 +65,7 @@ const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
 //   slicedKYOUNUKI_LIST = KYOUNUKI_LIST;
 // }
 
+// store.dispatch('FETCH_GET_BREADCRUMBS')
 
 
 
@@ -86,8 +87,8 @@ if (VIDEOS.value) {
 
 
 // console.log("DEBUG", DEBUG.value)
-// store.dispatch('FETCH_GET_BREADCRUMBS', { path_: route.path })
-console.log("route.path ", route.path )
+// store.dispatch('FETCH_GET_BREADCRUMBS')
+// console.log("route.path ", route.path )
 
 
 

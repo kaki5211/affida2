@@ -37,7 +37,7 @@ const ARTICLE_LIST_PARAMS =computed(() => { return store.getters.GET_ARTICLE_LIS
 
 
 
-store.dispatch('FETCH_GET_BREADCRUMBS')
+// store.dispatch('FETCH_GET_BREADCRUMBS')
 
 
 

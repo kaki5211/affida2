@@ -50,7 +50,7 @@ const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
 
 
 
-store.dispatch('FETCH_GET_BREADCRUMBS')
+// store.dispatch('FETCH_GET_BREADCRUMBS') 
 const BREADCRUMBS = ref(computed(() => { return store.getters.GET_BREADCRUMBS; }))
 
 
@@ -230,6 +230,35 @@ for (const line of lines) {
 // return contents;
 
 
+const headers = ref([])
+        // sortable: false,
+
+if (SUBCONTENTS.value === "performer") {
+  headers.value.push({title: "名前", align: 'start', key: 'name', value: 'name' });
+  headers.value.push({title: "生年月日", align: 'start', key: 'birth', value: 'birth' });
+  headers.value.push({ title: "年齢", align: 'start', key: 'age', value: 'age' });
+}
+
+if (SUBCONTENTS.value === "video") {
+  headers.value.push({title: "タイトル", align: 'start', key: 'title', value: 'title' });
+  headers.value.push({title: "パフォーマース", align: 'start', key: 'performers', value: 'performers' });
+  headers.value.push({title: "タグ", align: 'start', key: 'tags', value: 'tags' });
+  headers.value.push({title: "製品番号", align: 'start', key: 'productnumber', value: 'productnumber' });
+  headers.value.push({title: "時間", align: 'start', key: 'duration', value: 'duration' });
+  headers.value.push({title: "メーカー", align: 'start', key: 'maker', value: 'maker' });
+}
+
+if (SUBCONTENTS.value === "article") {
+  headers.value.push({title: "タイトル", align: 'start', key: 'title', value: 'title' });
+  headers.value.push({title: "大分類", align: 'start', key: 'classmajor', value: 'classmajor' });
+  headers.value.push({title: "中分類", align: 'start', key: 'classmedium', value: 'classmedium' });
+  headers.value.push({title: "小分類", align: 'start', key: 'classminor', value: 'classminor' });
+  
+}
+  // headers.value.push({title: "項目", align: 'start', key: 'classmedium', value: 'classmedium' });
+
+
+
 
 
 
@@ -343,14 +372,15 @@ export default defineComponent({
           class="py-3"
 
         >
+        ARTICLE_DETEAL: {{ ARTICLE_DETEAL }}
+
         <v-card class="">
         <p class="pl-5 my-font-size-20 my-fit-contents my-text-size-40 mt-0 my-bg-color my-text-color-white">一覧表</p>
 
 
-
         <div>
           <VDataTable
-          v-if="ARTICLE_DETEAL"
+          v-if="ARTICLE_DETEAL.length > 0"
           color="var(--my-color-black)"
           :loading="false"
           :items-per-page="-1"

@@ -49,6 +49,9 @@ const ARTICLE_LIST_PARAMS =computed(() => { return store.getters.GET_ARTICLE_LIS
 
 
 
+// store.dispatch('FETCH_GET_BREADCRUMBS')
+
+
 
 // ■■■ 関数定義 ■■■
 // filterVideo
@@ -279,6 +282,9 @@ const tollgeFilter = () => {
 
 
 const ARTICLE_CLASS = ref(route.path.split("/").slice(2))
+const ROUTE_PATH_LIST = ref(route.path.split("/"))
+console.log("ROUTE_PATH_LIST", ROUTE_PATH_LIST.value.length)
+
 
 console.log("ARTICLE_CLASSARTICLE_CLASS", ARTICLE_CLASS)
 
@@ -753,7 +759,7 @@ computed: {
                       </v-row>
                     </v-card>
 
-{{ ARTICLE_LIST_PARAMS }}
+
                     <!-- タグ -->
                     <v-card height="" class="my-bg-color-white" elevation=0>
                       <v-row no-gutters>
@@ -845,12 +851,19 @@ computed: {
     last-icon=""
     style="overflow-x: scroll; width: 100%; border-collapse: collapse; white-space: nowrap;"
   >
-  <template v-if="SUBCONTENTS === 'article'" v-slot:item.title="{ item }">
-    <router-link :to="{ name: 'Article', params: { param: item.classmajor, param2: item.classmedium, param3: item.classminor, param4: item.number} }">
+<!-- 
+  <template v-if="SUBCONTENTS === 'article' && ROUTE_PATH_LIST.length == 4" v-slot:item.title="{ item }">
+    <router-link :to="{ name: 'ArticleList1', params: { param: item.classmajor, param2: item.classmedium, param3: item.classminor, param4: item.number} }">
       {{ item.title }}
     </router-link>
+  </template> -->
+
+  <template v-if="SUBCONTENTS === 'article' && this.$route.path.split('/').length === 5" v-slot:item.title="{ item }">
+    <!-- <router-link :to="{ name: 'Article', params: { param: item.classmajor, param2: item.classmedium, param3: item.classminor, param4: item.number} }"> -->
+      {{ item.title }}aa
+    <!-- </router-link> -->
   </template>
-  
+    
   <template v-if="SUBCONTENTS === 'video'" v-slot:item.title="{ item }">
     <router-link :to="{ name: 'Video', params: { 'param': item.productnumber}}">
         {{ item.title }}

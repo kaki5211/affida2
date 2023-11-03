@@ -49,7 +49,8 @@ const store = useStore();
 
 
 // store.dispatch('FETCH_GET_BREADCRUMBS')
-const breadcrumbsList = ref(computed(() => { return store.getters.GET_BREADCRUMBS; }))
+// const breadcrumbsList = ref(computed(() => { return store.getters.GET_BREADCRUMBS; }))
+const breadcrumbsList = computed(() => { return store.getters.GET_BREADCRUMBS; })
 
 
 
@@ -58,12 +59,7 @@ const breadcrumbsList = ref(computed(() => { return store.getters.GET_BREADCRUMB
 
 
 <script >
-export default {
-  beforeRouteUpdate(to, from, next) {
-    // store.dispatch('FETCH_GET_BREADCRUMBS')
-    next();
-  },
-};
+
 </script>
 
 

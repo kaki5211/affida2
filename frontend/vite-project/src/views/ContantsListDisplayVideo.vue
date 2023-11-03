@@ -36,7 +36,8 @@ const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 let SEARCHPARAMS =computed(() => { return store.getters.GET_SEARCHPARAMS; });
 
 
-store.dispatch('FETCH_GET_BREADCRUMBS')
+// store.dispatch('FETCH_GET_BREADCRUMBS')
+
 
 
 // ■■■ 関数定義 ■■■
