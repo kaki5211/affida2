@@ -19,7 +19,7 @@ const route = useRoute();
 
 
 
-const host_api = "https://kyounuki.jp:8080/api"
+  const host_api = "https://kyounuki.jp:8080/api"
 // const host_api = "http://172.20.10.4:8000/api"
 
 
