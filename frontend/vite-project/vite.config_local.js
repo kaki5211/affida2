@@ -15,11 +15,11 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
-  build: {
-    rollupOptions: {
-      external: ['vuetify/labs/VDataTable']
-    }
-  }
+  // build: {
+  //   rollupOptions: {
+  //     external: ['vuetify/labs/VDataTable']
+  //   }
+  // }
 
 
 

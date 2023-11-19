@@ -18,11 +18,11 @@ export default defineConfig({
   server: {
     host: '172.20.10.4', // 希望のアドレスに置き換えてください
   },
-  build: {
-    rollupOptions: {
-      external: ['vuetify/labs/VDataTable']
-    }
-  }
+  // build: {
+  //   rollupOptions: {
+  //     external: ['vuetify/labs/VDataTable']
+  //   }
+  // }
 
 
 
