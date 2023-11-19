@@ -196,14 +196,41 @@ trailingSlash: true
 router.beforeEach((to, from, next) => {
   // すべてのルートに対して実行したいコードをここに記述
   // 例えば、変更後のパスを取得することができます
+
+  // BREADCRUMBS
   const toPath = to.path;
+  const toParams = to.params;
   store.dispatch('FETCH_GET_BREADCRUMBS', toPath)
 
+  // SUBCONTENTS
+  let SUBCONTENTS = toPath.split("/")[1]
+  store.dispatch('FETCH_GET_SUBCONTENTS', SUBCONTENTS)
+
+  // SUBCONTENTS_ALL
+  store.dispatch('FETCH_GET_SUBCONTENTS_ALL', to)
+
+  // // FETCH_GET_SUBCONTENTS_ALL
+  // store.dispatch('FETCH_GET_SUBCONTENTS_ALL', SUBCONTENTS)
+  
+
+
+
+
+
+
+
+  // subcontents_all
+  store.dispatch('FETCH_GET_DEBUG')
 
 
 
 
   
+
+
+
+
+
 
   
   // 次のナビゲーションステップに進む

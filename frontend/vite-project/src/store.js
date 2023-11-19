@@ -19,8 +19,8 @@ const route = useRoute();
 
 
 
-// const host_api = "https://kyounuki.jp:8080/api"
-const host_api = "http://172.20.10.4:8000/api"
+const host_api = "https://kyounuki.jp:8080/api"
+// const host_api = "http://172.20.10.4:8000/api"
 
 
 // http://localhost:8000/api/your-endpoint/
@@ -36,8 +36,23 @@ async function fetchDataAndCommit({ commit, endpoint, mutationType }) {
   commit(mutationType, response.data);
 }
 
+// time.sleep
+async function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-
+// 配列の要素数の合計を出力する関数
+function countTotalElements(searchparams) {
+  let total = 0;
+  // searchparams オブジェクト内の各プロパティにアクセス
+  for (const key in searchparams) {
+    if (Array.isArray(searchparams[key])) {
+      // プロパティが配列である場合、その配列の要素数を加算
+      total += searchparams[key].length;
+    }
+  }
+  return total;
+}
 
 
 
@@ -53,6 +68,7 @@ const store = createStore({
   // plugins: [createPersistedState()],
   state: {
     videos: null,
+    video_deteal: null,
     performer_list: null,
     tag_list: null,
     maker_list: null,
@@ -60,6 +76,7 @@ const store = createStore({
     series_list: null,
     kyounuki_list: null,
     contents_list: null,
+    article_deteal: null,
     article_list: null,
     article_list_dup: null,
     article_list_params: {
@@ -105,9 +122,11 @@ const store = createStore({
   },
   mutations: {
     SET_VIDEOS(state, data) { state.videos = data; },
+    SET_VIDEO_DETEAL(state, data) { state.video_deteal = data; },
     SET_PERFORMER_LIST(state, data) { state.performer_list = data; },
     SET_TAG_LIST(state, data) { state.tag_list = data; },
 
+    SET_ARTICLE_DETEAL(state, data) { state.article_deteal = data; },
     SET_ARTICLE_LIST(state, data) { state.article_list = data; },
     SET_ARTICLE_LIST_DUP(state, data) { state.article_list_dup = data; },
     SET_ARTICLE_LIST_PARAMS(state, data) { state.article_list_params = data; },
@@ -186,8 +205,17 @@ const store = createStore({
 
     async FETCH_GET_DEBUG({ commit }) {
         
-      console.log("urlhost.includes('172.')", urlhost.includes("172."))
-      commit('SET_DEBUG', urlhost.includes("kyounuki"));
+      // console.log("urlhost.includes('172.')", urlhost.includes("172."))
+      let judge;
+      if (this.state.debug == true ) { 
+        judge = false
+      } else{
+        judge=true
+      };
+
+      // commit('SET_DEBUG', urlhost.includes("kyounuki"));
+      console.log(judge)
+      commit('SET_DEBUG', judge);
     },
     async FETCH_GET_BREADCRUMBS({ commit }, newpath) {
       // const { path_ } = payload; // payloadオブジェクトから引数を取り出す
@@ -220,7 +248,7 @@ const store = createStore({
         matome: "まとめ",
         article: "雑記"
         
-,        // ...
+        // ...
       };
       
 
@@ -229,11 +257,6 @@ const store = createStore({
       
       // パスを"/"で区切ってリストに変換
       const pathList = urlPath.split("/").filter((path) => path !== "");
-      console.log("urlPath", urlPath)
-      // console.log("urlPath2", urlPath2)
-      console.log("pathList", pathList)
-
-
       
       // パンくずリストの初期化
       let breadcrumbsList = ""
@@ -249,14 +272,45 @@ const store = createStore({
       // パスごとにパンくずリストを作成
       let currentPath = "";
       for (let i = 0; i < pathList.length; i++) {
+
         const path = pathList[i];
         currentPath += `/${path}`;
         const name = pathMapping[path] || path;
         const disabled = i === (pathList.length - 1); // 最後の要素の場合のみ disabled: true
+        // if (4 > i && i > 1 && pathList[0] == "article") {
+        //   continue
+        // }
         breadcrumbsList.push({ title: name, disabled, to: currentPath });
       }
-      // console.log("pathList",pathList)
-      // console.log("breadcrumbsList", breadcrumbsList)
+
+      
+
+      if (newpath.split("/")[1] == "article" && newpath.split("/").length == 6) {
+
+        let ARTICLE_DETEAL;
+        let ARTICLE_DETEAL_TITLE;
+        let ARTICLE_CLASS;
+
+        ARTICLE_CLASS = newpath.split("/").slice(2, 6)
+
+        for (let sleep_count = 0; sleep_count < 100; sleep_count++) {
+          await sleep(1000);
+          if (this.state.article_list !== null) {
+            break;
+          }
+          // 1秒間の一時停止
+        }
+        
+        ARTICLE_DETEAL = this.state.article_list.filter(item => 
+        item.classmajor === ARTICLE_CLASS[0] && 
+        item.classmedium === ARTICLE_CLASS[1] && 
+        item.classminor === ARTICLE_CLASS[2] &&
+        item.title_number === parseInt(ARTICLE_CLASS[3])
+        );
+        ARTICLE_DETEAL_TITLE = ARTICLE_DETEAL[0].title;
+        breadcrumbsList[5].title = ARTICLE_DETEAL_TITLE
+
+      }
 
 
       
@@ -288,39 +342,188 @@ const store = createStore({
     // },
 
 
-    // async FETCH_GET_maker_LIST({ commit }) {
-    //   await fetchDataAndCommit({ commit, endpoint: 'maker_list_view', mutationType: 'SET_MAKER_LIST' });
-    // },
+    async FETCH_GET_SUBCONTENTS({ commit }, subcontents) {
+      commit('SET_SUBCONTENTS', subcontents);
+    },
+
+    async FETCH_GET_SUBCONTENTS_ALL({ commit }, to) {
+      let subcontents_all_param = to.path.split("/")[1]
+      let subcontents_all;
+
+      for (let sleep_count = 0; sleep_count < 100; sleep_count++) {
+        await sleep(1000);
+        if (
+          this.state.video !== null &&
+          this.state.performer_list !== null &&
+          this.state.tag_list !== null &&
+          this.state.maker_list !== null &&
+          this.state.label_list !== null &&
+          this.state.series_list !== null &&
+          this.state.article_list_dup !== null
+
+
+        ) {
+          break;
+        }
+      }
+
+      if (subcontents_all_param=="video") {  subcontents_all = this.state.videos }
+      else if (subcontents_all_param=="performer") { subcontents_all = this.state.performer_list }
+      else if (subcontents_all_param=="tag") { subcontents_all = this.state.tag_list }
+      else if (subcontents_all_param=="maker") { subcontents_all = this.state.maker_list }
+      else if (subcontents_all_param=="label") { subcontents_all = this.state.label_list }
+      else if (subcontents_all_param=="series") { subcontents_all = this.state.series_list }
+      // else if (subcontents_all_param=="article") { subcontents_all = this.state.article_list }
+      else if (subcontents_all_param=="article") { subcontents_all = this.state.article_list_dup }
+
+
+      let newPathlength = to.path.split("/").length
+      let newPathsplit = to.path.split("/")
+      let toParams = to.params
+      // let newpath = ""
+
+      // console.log("toParams.param", toParams.param1)
+      // console.log("toParams.param2", toParams.param2)
+      // console.log("toParams.param3", toParams.param3)
+      // console.log("toParams.param4", toParams.param4)
+
+      let searchparams = this.state.searchparams;
+      let searchparams_article = this.state.searchparams_article;
+
+      // video
+      if (subcontents_all_param=="video" && toParams.param == null) {
+        let filteredData = this.state.videos; // オリジナルのデータを変更せずにコピーを作成
+        for (let key in searchparams) {
+          const filterValue = searchparams[key];
+          if (filterValue !== null && filterValue !== undefined && filterValue.length !== 0) {
+            if (key === "tags" || key === "performers") {
+              if (Array.isArray(filterValue) && filterValue.length !== 0) {
+                filteredData = filteredData.filter(item => {
+                  return item[key].some(item2 => filterValue.includes(item2.name));
+                });
+              }
+            }
+          }
+        }
+        subcontents_all = filteredData
+        
+      // article
+      } else if (subcontents_all_param=="article" && toParams.param == null) {
+        let filteredData = this.state.article_list_dup; // オリジナルのデータを変更せずにコピーを作成
+        for (let key in searchparams_article) {
+          const filterValue = searchparams_article[key];
+          if (filterValue !== null && filterValue !== undefined && filterValue.length !== 0) {
+            if (true) {
+              // if (Array.isArray(filterValue) && filterValue.length !== 0) {
+              if (Array.isArray(filterValue) && filterValue.length !== 0) {
+                filteredData = filteredData.filter(item => {
+                  return filterValue.includes(item[key]);
+                });
+              }
+              
+            }
+          }
+        }
+        subcontents_all = filteredData
+
+      // article > param
+      } else if (subcontents_all_param=="article" && toParams.param != null && toParams.param4 == null ) {
+        let filteredData = this.state.article_list_dup; // オリジナルのデータを変更せずにコピーを作成
+        filteredData = filteredData.filter(item => 
+        item.classmajor === toParams.param && 
+        (toParams.param2 === undefined || item.classmedium === toParams.param2) &&
+        (toParams.param3 === undefined || item.classminor === toParams.param3)
+
+        )
+        subcontents_all = filteredData
+
+      // article > param > param4
+      } else if (subcontents_all_param=="article" && toParams.param != null && toParams.param4 != null ) {
+        let filteredData = this.state.article_list; // オリジナルのデータを変更せずにコピーを作成
+        filteredData = filteredData.filter(item => 
+        item.classmajor === toParams.param && 
+        item.classmedium === toParams.param2 &&
+        item.classminor === toParams.param3 &&
+        item.title_number === parseInt(toParams.param4)
+
+        )
+        commit('SET_ARTICLE_DETEAL', filteredData);
+
+      }
 
 
 
-    // async FETCH_GET_PERFORMER_LIST({ commit }) {
-    //   const get_performer_list = axios.get(`${host_api}/performer_list_view/`);
-    //   const performer_list = await get_performer_list;
-    //   await commit('SET_PERFORMER_LIST', performer_list.data);
-    // },
-
-    // async FETCH_GET_TAG_LIST({ commit }) {
-    //   const get_tags_list = axios.get(`${host_api}/tag_list_view/`);
-    //   const tags_list = await get_tags_list;
-    //   await commit('SET_TAG_LIST', tags_list.data);
-    // },
-
-    // async FETCH_GET_maker_LIST({ commit }) {
-    //   const get_makers_list = axios.get(`${host_api}/maker_list_view/`);
-    //   const makers_list = await get_makers_list;
-    //   await commit('SET_MAKER_LIST', makers_list.data);
-    // },
 
 
-},  
+
+
+
+      // filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // { path: '/', name: 'Home', component: App },
+      // { path: '/video',  name: 'Videos',  meta: { subcontents: 'video'}, component: ContantsListDisplayVideo, props: true},
+      // { path: '/video/list',  name: 'VideosList',  meta: { subcontents: 'video'}, component: ContantsList, props: true},
+      // { path: '/video/:param',  name: 'Video',  meta: { subcontents: 'video'}, component: ContantsDetealVideo, props: true},
+      
+      // { path: '/kyounuki',  name: 'Kyounuki',  meta: { subcontents: 'kyounuki'}, component: ContantsListKyounuki, props: true},
+      // { path: '/performer',  name: 'Performers',  meta: { subcontents: 'performer'}, component: ContantsList, props: true},
+      // // { path: '/performer/:param',  name: 'Performer',  meta: { subcontents: 'performer'}, component: About, props: true},
+      // { path: '/tag',  name: 'Tags',  meta: { subcontents: 'tag'}, component: ContantsList,  props: true},
+      // // { path: '/tag/:param',  name: 'Tag',  meta: { subcontents: 'tag'}, component: About, props: true},
+      // { path: '/maker',  name: 'Makers',  meta: { subcontents: 'maker'}, component: ContantsList, props: true},
+      // // { path: '/maker/:param',  name: 'Maker',  meta: { subcontents: 'maker'}, component: About, props: true},
+      // // { path: '/label',  name: 'Labels',  meta: { subcontents: 'label'}, component: About, props: true},
+      // // { path: '/label/:param',  name: 'Label',  meta: { subcontents: 'label'}, component: About, props: true},
+      // // { path: '/series',  name: 'Seriess',  meta: { subcontents: 'series'}, component: About, props: true},
+      // // { path: '/series/:param',  name: 'Series',  meta: { subcontents: 'series'}, component: About, props: true},
+      // { path: '/article',  name: 'Articles',  meta: { subcontents: 'article'}, component: ContantsListDisplayArticle, props: true},
+      // { path: '/article/list',  name: 'ArticlesList',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
+      // { path: '/article/:param/:param2/:param3/:param4',  name: 'Article',  meta: { subcontents: 'article'}, component: ContantsDetealArticle, props: true},
+      // { path: '/article/:param/:param2/:param3',  name: 'ArticleList1',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
+      // { path: '/article/:param/:param2',  name: 'ArticleList2',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
+      // { path: '/article/:param',  name: 'ArticleList3',  meta: { subcontents: 'article'}, component: ContantsList, props: true},
+  
+
+
+
+
+      commit('SET_SUBCONTENTS_ALL', subcontents_all);
+    }
+      
+
+
+  
+  
+  },  
+  
+    
 
 
   getters: {
     GET_VIDEOS: (state) => state.videos,
+    GET_VIDEO_DETEAL: (state) => state.video_deteal,
     GET_PERFORMER_LIST: (state) => state.performer_list,
     GET_TAG_LIST: (state) => state.tag_list,
 
+    GET_ARTICLE_DETEAL: (state) => state.article_deteal,
     GET_ARTICLE_LIST: (state) => state.article_list,
     GET_ARTICLE_LIST_DUP: (state) => state.article_list_dup,
     GET_ARTICLE_LIST_PARAMS: (state) => state.article_list_params,
@@ -365,7 +568,7 @@ const store = createStore({
     await store.dispatch('FETCH_GET_MAKER_LIST');
     await store.dispatch('FETCH_GET_LABEL_LIST');
     await store.dispatch('FETCH_GET_SERIES_LIST');
-    // await store.dispatch('FETCH_GET_DEBUG');
+    await store.dispatch('FETCH_GET_DEBUG');
     // await store.dispatch('FETCH_GET_BREADCRUMBS', { path_: "success!" })
     // await store.dispatch('FETCH_GET_BREADCRUMBS')
     await store.dispatch('FETCH_GET_CONTENTS_LIST');

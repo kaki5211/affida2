@@ -40,13 +40,17 @@ const URL_LIST = computed(() => { return store.getters.GET_URL_LIST; });
 const URL_PARAM = computed(() => { return store.getters.GET_URL_PARAM; });
 const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
-// const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
+const Data = ref()
+const SUBCONTENTS_ALL = computed(() => { 
+  const item = store.getters.GET_SUBCONTENTS_ALL
+  Data.value = item
+  return item;
+ });
 const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
 let SEARCHPARAMS =computed(() => { return store.getters.GET_SEARCHPARAMS; });
 let SEARCHPARAMS_ARTICLE =computed(() => { return store.getters.GET_SEARCHPARAMS_ARTICLE; });
 const ARTICLE_LIST_DUP =computed(() => { return store.getters.GET_ARTICLE_LIST_DUP; });
 const ARTICLE_LIST_PARAMS =computed(() => { return store.getters.GET_ARTICLE_LIST_PARAMS; });
-
 
 
 // store.dispatch('FETCH_GET_BREADCRUMBS')
@@ -121,43 +125,43 @@ const PageTransition = (searchparams, item, judge) => {
 
 // ■■■ watch 定義 ■■■
 //  filteredData filteredDataArticle
-let filteredData=ref([])
-let filteredDataArticle=ref([])
-watch(SEARCHPARAMS, (newVal, oldVal) => {
-  if (newVal != null) {
-    if (VIDEOS.value) {
-      filteredData.value = filterVideo(VIDEOS.value, newVal)
-    } else {
-      watch(VIDEOS, (newVal2, oldVal2) => {
-        filteredData.value = filterVideo(newVal2, newVal)
-      })
-    }
-  }
-})
-watch(SEARCHPARAMS_ARTICLE, (newVal, oldVal) => {
-  if (newVal != null) {
-    if (ARTICLE_LIST_DUP.value) {
-      filteredDataArticle.value = filterArticle(ARTICLE_LIST_DUP.value, newVal)
+// let filteredData=ref([])
+// let filteredDataArticle=ref([])
+// watch(SEARCHPARAMS, (newVal, oldVal) => {
+//   if (newVal != null) {
+//     if (VIDEOS.value) {
+//       filteredData.value = filterVideo(VIDEOS.value, newVal)
+//     } else {
+//       watch(VIDEOS, (newVal2, oldVal2) => {
+//         filteredData.value = filterVideo(newVal2, newVal)
+//       })
+//     }
+//   }
+// })
+// watch(SEARCHPARAMS_ARTICLE, (newVal, oldVal) => {
+//   if (newVal != null) {
+//     if (ARTICLE_LIST_DUP.value) {
+//       filteredDataArticle.value = filterArticle(ARTICLE_LIST_DUP.value, newVal)
 
-    } else {
-      watch(ARTICLE_LIST_DUP, (newVal2, oldVal) => {
-        filteredDataArticle.value = filterArticle(newVal2, newVal)
-      })
-    }
-    }
-  }
-)
+//     } else {
+//       watch(ARTICLE_LIST_DUP, (newVal2, oldVal) => {
+//         filteredDataArticle.value = filterArticle(newVal2, newVal)
+//       })
+//     }
+//     }
+//   }
+// )
 
 
 
 // 2023-10-28 問題箇所　（searchparamsが、コンポーネント間でやり取りできない）
-if (VIDEOS.value && SEARCHPARAMS.value) {
-  filteredData = filterVideo(VIDEOS.value, SEARCHPARAMS.value) 
-}
+// if (VIDEOS.value && SEARCHPARAMS.value) {
+//   filteredData = filterVideo(VIDEOS.value, SEARCHPARAMS.value) 
+// }
 
-if (ARTICLE_LIST_DUP.value && SEARCHPARAMS_ARTICLE.value) {
-  filteredDataArticle = filterArticle(ARTICLE_LIST_DUP.value, SEARCHPARAMS_ARTICLE.value)
-}
+// if (ARTICLE_LIST_DUP.value && SEARCHPARAMS_ARTICLE.value) {
+//   filteredDataArticle = filterArticle(ARTICLE_LIST_DUP.value, SEARCHPARAMS_ARTICLE.value)
+// }
 
 
 
@@ -200,11 +204,11 @@ if (SEARCHPARAMS) { searchparams = SEARCHPARAMS }
 let SUBCONTENTS = ref(route.path.split("/")[1])
 
 
-let SUBCONTENTS_ALL = ref()
-if (SUBCONTENTS.value === "performer") { SUBCONTENTS_ALL = PERFORMER_LIST }
-else if (SUBCONTENTS.value === "tag") { SUBCONTENTS_ALL = TAG_LIST }
-else if (SUBCONTENTS.value === "video") { SUBCONTENTS_ALL = VIDEOS }
-else if (SUBCONTENTS.value === "article") { SUBCONTENTS_ALL = ARTICLE_LIST_DUP }
+// let SUBCONTENTS_ALL = ref()
+// if (SUBCONTENTS.value === "performer") { SUBCONTENTS_ALL = PERFORMER_LIST }
+// else if (SUBCONTENTS.value === "tag") { SUBCONTENTS_ALL = TAG_LIST }
+// else if (SUBCONTENTS.value === "video") { SUBCONTENTS_ALL = VIDEOS }
+// else if (SUBCONTENTS.value === "article") { SUBCONTENTS_ALL = ARTICLE_LIST_DUP }
 
 
 let headers_name = ref("");
@@ -515,7 +519,7 @@ computed: {
                   </div>
                   <div class="d-flex py-10">
                     <v-btn
-                    @click="resetSearchParams(searchparams, 'all') ;filteredData = filterVideo(VIDEOS, searchparams)"
+                    @click="resetSearchParams(searchparams, 'all') ;Data = filterVideo(VIDEOS, searchparams)"
                     text="全てクリア"          
                     class="ms-auto me-0 my-text-size-30 my-fit-contents"
                     color="red"
@@ -549,7 +553,7 @@ computed: {
                                   multiple
                                   color="text-deep-purple-accent-4"
 
-                                  @click="filteredData = filterVideo(VIDEOS, searchparams);UpdateSearchParams(searchparams)"
+                                  @click="Data = filterVideo(VIDEOS, searchparams);UpdateSearchParams(searchparams)"
                                 >
                                     <v-chip
                                     v-for="item in PERFORMER_LIST"
@@ -569,7 +573,7 @@ computed: {
 
                                 <div class="d-flex py-3">
                                   <v-btn
-                                  @click="resetSearchParams(searchparams, 'performers') ;filteredData = filterVideo(VIDEOS, searchparams)"
+                                  @click="resetSearchParams(searchparams, 'performers') ;Data = filterVideo(VIDEOS, searchparams)"
                                   text="アカウントをクリア"          
                                   class="ms-auto me-0 my-text-size-30 my-fit-contents"
                                   color="red"
@@ -601,7 +605,7 @@ computed: {
                                   v-model="searchparams.tags"
                                   column
                                   multiple
-                                  @click="filteredData = filterVideo(VIDEOS, searchparams)"
+                                  @click="Data = filterVideo(VIDEOS, searchparams)"
 
                                 >
                                     <v-chip
@@ -623,7 +627,7 @@ computed: {
 
                                 <div class="d-flex py-3">
                                   <v-btn
-                                  @click="resetSearchParams(searchparams, 'tags') ;filteredData = filterVideo(VIDEOS, searchparams)"
+                                  @click="resetSearchParams(searchparams, 'tags') ;Data = filterVideo(VIDEOS, searchparams)"
                                   text="タグをクリア"
                                   class="ms-auto me-0 my-text-size-30 my-fit-contents"
                                   color="red"
@@ -682,7 +686,7 @@ computed: {
 
                   <div class="d-flex py-10">
                     <v-btn
-                    @click="resetSearchParams(searchparamsarticle, 'all') ;filteredDataArticle = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
+                    @click="resetSearchParams(searchparamsarticle, 'all') ;Data = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
                     text="全てクリア"          
                     class="ms-auto me-0 my-text-size-30 my-fit-contents"
                     color="red"
@@ -699,7 +703,8 @@ computed: {
                     >
                       全 
                       
-                      <a v-if="ARTICLE_LIST_DUP" class="text-red">{{ filterArticle(ARTICLE_LIST_DUP, searchparamsarticle).length || "0"}}</a>
+                      <!-- <a v-if="ARTICLE_LIST_DUP" class="text-red">{{ filterArticle(ARTICLE_LIST_DUP, searchparamsarticle).length || "0"}}</a> -->
+                      <a v-if="Data" class="text-red">{{ SUBCONTENTS_ALL.length || "0"}}</a>
 
                       件 表示
                     </div>
@@ -721,7 +726,7 @@ computed: {
                                     multiple
                                     color="text-deep-purple-accent-4"
 
-                                    @click="filteredDataArticle = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
+                                    @click="Data = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
                                   >
                                       <v-chip
                                       v-for="item in ARTICLE_LIST_PARAMS.classmajor"
@@ -741,7 +746,7 @@ computed: {
 
                                   <div class="d-flex py-3">
                                     <v-btn
-                                    @click="resetSearchParams(searchparamsarticle, 'classmajor') ;filteredDataArticle = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
+                                    @click="resetSearchParams(searchparamsarticle, 'classmajor') ;Data = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
                                     text="アカウントをクリア"          
                                     class="ms-auto me-0 my-text-size-30 my-fit-contents"
                                     color="red"
@@ -775,7 +780,7 @@ computed: {
                                     v-model="searchparamsarticle.classmedium"
                                     column
                                     multiple
-                                    @click="filteredDataArticle = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
+                                    @click="Data = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
 
                                   >
                                       <v-chip
@@ -797,7 +802,7 @@ computed: {
 
                                   <div class="d-flex py-3">
                                     <v-btn
-                                    @click="resetSearchParams(searchparamsarticle, 'classmedium') ;filteredDataArticle = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
+                                    @click="resetSearchParams(searchparamsarticle, 'classmedium') ;Data = filterArticle(ARTICLE_LIST_DUP, searchparamsarticle)"
                                     text="タグをクリア"
                                     class="ms-auto me-0 my-text-size-30 my-fit-contents"
                                     color="red"
@@ -827,9 +832,9 @@ computed: {
 
 
     <v-col class="my-10 my-bg-color-white tile"></v-col>
-
-
-
+<a>DataDataDataData
+{{ Data }}
+</a>
 <!-- ■■■■TABLE■■■■ -->
 
   <div>
@@ -839,7 +844,7 @@ computed: {
     :loading="false"
     :items-per-page="-1"
     :headers="headers"
-    :items="filteredData.length !== 0 ? filteredData : filteredDataArticle.length !== 0 ? filteredDataArticle : SUBCONTENTS_ALL"
+    :items="Data"
     item-value="name"
     class="elevation-1 custom-table"
     :items-per-page-options="[ {value: -1, title: 'All'} ]"

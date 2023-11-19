@@ -2,11 +2,11 @@
 
 
 // ■■■■■■ import > Packages ■■■■■■
-// import { computed } from 'vue';
+import { computed } from 'vue';
 // import { onMounted } from 'vue';
 // import { ref } from 'vue';
 // import { reactive } from 'vue';
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex';
 // import { useRoute } from 'vue-router';
 
 
@@ -35,7 +35,7 @@ import Breadcrumbs from './components/Breadcrumbs.vue';
 
 
 // ■■■■■■ VueStore ■■■■■■
-// const store = useStore();
+const store = useStore();
 // const VIDEOS = computed(() => { return store.getters.GET_VIDEOS; });
 // const PERFORMER_LIST = computed(() => { return store.getters.GET_PERFORMER_LIST; });
 // const TAG_LIST = computed(() => { return store.getters.GET_TAG_LIST; });
@@ -47,9 +47,9 @@ import Breadcrumbs from './components/Breadcrumbs.vue';
 // const URL_LIST = computed(() => { return store.getters.GET_URL_LIST; });
 // const URL_PARAM = computed(() => { return store.getters.GET_URL_PARAM; });
 // const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARAM; });
-// const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
-// const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
-// const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
+const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
+const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
+const DEBUG = computed(() => { return store.getters.GET_DEBUG; });
 // const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
 // const SEARCHPARAMS =computed(() => { return store.getters.GET_SEARCHPARAMS; });
 // const SEARCHPARAMS_ARTICLE =computed(() => { return store.getters.GET_SEARCHPARAMS_ARTICLE; });
@@ -116,10 +116,13 @@ export default defineComponent({
       <Breadcrumbs />
     </v-col>
   </v-row>
-    
+  DEBUG:    {{ DEBUG }}
+  SUBCONTENTS: {{ SUBCONTENTS }}
+  subcontents_all: {{ SUBCONTENTS_ALL }}
+
   <v-main class="my-bg-color-white">
     
-    <router-view />
+    <router-view />r
   </v-main>
 
 

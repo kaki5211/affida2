@@ -140,6 +140,52 @@ console.log("route.path", route.path);
 
 
 
+function resetSearchParams(searchparams, item) {
+    if (item == "all") {
+      for (let prop in searchparams) {
+        searchparams[prop] = [];
+      }
+    } else {
+      searchparams[item] = [];
+    }
+  }
+
+const UpdateSearchParams = (searchparams) => {
+  store.commit('SET_SEARCHPARAMS', searchparams);
+}
+let searchparams = ref({
+      performers: [],
+      tags: [],
+      maker: [],
+      label: [],
+      series: [],
+      duration: [],
+      title: [],
+      description: [],
+      views: [],
+      kyounuki_post_day: [],
+      active: [],
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 
@@ -549,90 +595,88 @@ export default defineComponent({
 
 
 
+      <v-card height="" class="my-bg-color-white" elevation=0>
+        <v-row no-gutters>
+          <v-col cols="12" class="border">
+            <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
+            height="50px" @click="search_view_performer=!search_view_performer"><v-icon>mdi-account-circle</v-icon>アカウント</v-btn>
+              <v-row v-if="true" no-gutters class="my-auto">
+                <v-col cols="12" class="border px-2 py-5 pb-10">
+                    <v-chip-group
+                      v-model="searchparams.performers"
+                      column
+                      multiple
+                      color="text-deep-purple-accent-4"
+
+                      @click="resetSearchParams(searchparams, item);UpdateSearchParams(searchparams)"
+                    >
+                        <v-chip
+                        v-for="item in PERFORMER_LIST"
+                        :key="item.id"
+                        label
+                        outline
+                        :value="item.name"
+                        color="red"
+
+                        class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
+                        :to="{ name: 'Videos'}"
+
+                      >
+                        {{ item.name }}
+                      </v-chip>
+                    </v-chip-group>
+                    <!-- {{searchparams.performers}} -->
+                    
+                </v-col>
+                
+              </v-row>
+          </v-col>
+        </v-row>
+      </v-card>
 
 
 
-                    <!-- アカウント -->
-                    <v-card height="" class="my-bg-color-white mb-5">
-                  <v-row no-gutters>
-                      <v-col cols="12" class="border">
-                          <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
-                          height="50px" @click="search_view_performer=!search_view_performer"><v-icon>mdi-account-circle</v-icon>アカウント</v-btn>
-                            <v-row v-if="search_view_performer" no-gutters class="my-auto">
-                              <v-col cols="12" class="border px-2 py-5 pb-10">
-                                <v-chip-group
-                                  v-model="PERFORMER_LIST"
-                                  column
-                                  multiple
-                                  color="text-deep-purple-accent-4"
-                                >
-                                    <v-chip
-                                    v-for="item in PERFORMER_LIST"
-                                    :key="item.id"
-                                    label
-                                    outline
-                                    :value="item.name"
-                                    color="red"
-                                    :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{'performers':item.name}])}}"
+      <!-- タグ -->
+      <v-card height="" class="my-bg-color-white" elevation=0>
+        <v-row no-gutters>
+          <v-col cols="12" class="border">
+            <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
+            height="50px" @click="search_view_tag=!search_view_tag"><v-icon>mdi-tag-text-outline</v-icon>タグ</v-btn>
+              <v-row v-if="true" no-gutters class="my-auto">
+                <v-col cols="12" class="border px-2 py-5 pb-10">
+                    <v-chip-group
+                      v-model="searchparams.tags"
+                      column
+                      multiple
+                      @click="resetSearchParams(searchparams, item);UpdateSearchParams(searchparams)"
 
+                    >
+                        <v-chip
+                        v-for="item in TAG_LIST"
+                        :key="item.id"
+                        label
+                        outline
+                        :value="item.name"
+                        color="red"
 
-                                    class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
+                        class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
+                        :to="{ name: 'Videos'}"
 
-                                  >
+                      >
+                        {{ item.name }}
+                      </v-chip>
+                    </v-chip-group>
+                    <!-- {{searchparams.tags}} -->
 
-                                      {{ item.name }}
-                                    </v-chip>
-                                  </v-chip-group>
-                                  <!-- {{searchparams.performers}} -->
-
-                                  
-                              </v-col>
-                              
-                            </v-row>
-                        </v-col>
-                      </v-row>
-                    </v-card>
+                </v-col>
+              </v-row>
+          </v-col>
+        </v-row>
+      </v-card>
 
 
 
 
-                    <!-- タグ -->
-                    <v-card height="" class="my-bg-color-white" elevation=0>
-                      <v-row no-gutters>
-                        <v-col cols="12" class="border">
-                          <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
-                          height="50px" @click="search_view_tag=!search_view_tag"><v-icon>mdi-tag-text-outline</v-icon>タグ</v-btn>
-                            <v-row v-if="search_view_tag" no-gutters class="my-auto">
-                              <v-col cols="12" class="border px-2 py-5 pb-10">
-                                  <v-chip-group
-                                    v-model="TAG_LIST"
-                                    column
-                                    multiple
-
-                                  >
-                                      <v-chip
-                                      v-for="item in TAG_LIST"
-                                      :key="item.id"
-                                      label
-                                      outline
-                                      :value="item.name"
-                                      color="red"
-                                      :to="{ name: 'Videos', query: { 'searchrequest': JSON.stringify([{'tags':item.name}])}}"
-                                      class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
-
-                                    >
-                                      {{ item.name }}
-                                    </v-chip>
-                                  </v-chip-group>
-                                  <!-- {{searchparams.tags}} -->
-
-                                  <div class="d-flex py-3">
-                                  </div>
-                              </v-col>
-                            </v-row>
-                        </v-col>
-                      </v-row>
-                    </v-card>
 
       
 <!-- 

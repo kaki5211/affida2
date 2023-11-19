@@ -27,6 +27,7 @@ import Con_text from '../components/_Con_text.vue'
 import Con_title from '../components/_Con_title.vue'
 
 
+
 const route = useRoute();
 const store = useStore();
 
@@ -46,111 +47,113 @@ const URL_JUDGE_PARAM = computed(() => { return store.getters.GET_URL_JUDGE_PARA
 // const SUBCONTENTS = computed(() => { return store.getters.GET_SUBCONTENTS; });
 const SUBCONTENTS_ALL = computed(() => { return store.getters.GET_SUBCONTENTS_ALL; });
 const ARTICLE_LIST = computed(() => { return store.getters.GET_ARTICLE_LIST; });
+const ARTICLE_DETEAL = computed(() => { return store.getters.GET_ARTICLE_DETEAL; });
 
 
 
 
 // store.dispatch('FETCH_GET_BREADCRUMBS') 
-const BREADCRUMBS = ref(computed(() => { return store.getters.GET_BREADCRUMBS; }))
+// const BREADCRUMBS = computed(() => { return store.getters.GET_BREADCRUMBS; })
 
 
 
 
 let SUBCONTENTS = ref(route.path.split("/")[1])
+
 const ARTICLE_CLASS = ref(route.path.split("/").slice(2, 6))
 
-const ARTICLE_DETEAL = ref([]);
+// const ARTICLE_DETEAL = ref([]);
 const ARTICLE_DETEAL_TITLE = ref();
 
 
 // ARTICLE_LIST
-watch(ARTICLE_LIST, (newVal, oldVal) => {
-  if (newVal) {  
-    ARTICLE_DETEAL.value = newVal.filter(item => 
-    item.classmajor === ARTICLE_CLASS.value[0] && 
-    item.classmedium === ARTICLE_CLASS.value[1] && 
-    item.classminor === ARTICLE_CLASS.value[2] &&
-    item.title_number === parseInt(ARTICLE_CLASS.value[3])
-    );
-    ARTICLE_DETEAL_TITLE.value = ARTICLE_DETEAL.value[0].title;
-    BREADCRUMBS.value[5].title = ARTICLE_DETEAL_TITLE.value
-    store.commit('SET_BREADCRUMBS', BREADCRUMBS);
+// watch(ARTICLE_LIST, (newVal, oldVal) => {
+//   if (newVal) {  
+//     ARTICLE_DETEAL.value = newVal.filter(item => 
+//     item.classmajor === ARTICLE_CLASS.value[0] && 
+//     item.classmedium === ARTICLE_CLASS.value[1] && 
+//     item.classminor === ARTICLE_CLASS.value[2] &&
+//     item.title_number === parseInt(ARTICLE_CLASS.value[3])
+//     );
+//     ARTICLE_DETEAL_TITLE.value = ARTICLE_DETEAL.value[0].title;
+//     BREADCRUMBS.value[5].title = ARTICLE_DETEAL_TITLE.value
+//     store.commit('SET_BREADCRUMBS', BREADCRUMBS);
 
-  }
-});
-if (ARTICLE_LIST.value) {  
-  ARTICLE_DETEAL.value = ARTICLE_LIST.value.filter(item => 
-  item.classmajor === ARTICLE_CLASS.value[0] && 
-  item.classmedium === ARTICLE_CLASS.value[1] && 
-  item.classminor === ARTICLE_CLASS.value[2] &&
-  item.title_number === parseInt(ARTICLE_CLASS.value[3])
-  );
-  ARTICLE_DETEAL_TITLE.value = ARTICLE_DETEAL.value[0].title;
-  BREADCRUMBS.value[5].title = ARTICLE_DETEAL_TITLE.value
-  store.commit('SET_BREADCRUMBS', BREADCRUMBS);
-}
+//   }
+// });
+// if (ARTICLE_LIST.value) {  
+//   ARTICLE_DETEAL.value = ARTICLE_LIST.value.filter(item => 
+//   item.classmajor === ARTICLE_CLASS.value[0] && 
+//   item.classmedium === ARTICLE_CLASS.value[1] && 
+//   item.classminor === ARTICLE_CLASS.value[2] &&
+//   item.title_number === parseInt(ARTICLE_CLASS.value[3])
+//   );
+//   ARTICLE_DETEAL_TITLE.value = ARTICLE_DETEAL.value[0].title;
+//   BREADCRUMBS.value[5].title = ARTICLE_DETEAL_TITLE.value
+//   store.commit('SET_BREADCRUMBS', BREADCRUMBS);
+// }
 
 
 // Virtual Option
 // video
-watch(ARTICLE_DETEAL, (newVal, oldVal) => {
-  if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video") {
-  let ARTICLE_DETEAL_NEW = [...newVal]; // 新しい配列を作成
+// watch(ARTICLE_DETEAL, (newVal, oldVal) => {
+//   if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video") {
+//   let ARTICLE_DETEAL_NEW = [...newVal]; // 新しい配列を作成
 
-  ARTICLE_DETEAL_NEW.forEach((article, index) => {
-    const virtual_option1 = VIDEOS.value.find(item => item.productnumber === article.option1);
-    if (virtual_option1) {
-      ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
-    }
-  });
-  newVal = ARTICLE_DETEAL_NEW
-}
-});
-if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video") {
-  let ARTICLE_DETEAL_NEW = [...ARTICLE_DETEAL.value]; // 新しい配列を作成
+//   ARTICLE_DETEAL_NEW.forEach((article, index) => {
+//     const virtual_option1 = VIDEOS.value.find(item => item.productnumber === article.option1);
+//     if (virtual_option1) {
+//       ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
+//     }
+//   });
+//   newVal = ARTICLE_DETEAL_NEW
+// }
+// });
+// if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "video") {
+//   let ARTICLE_DETEAL_NEW = [...ARTICLE_DETEAL.value]; // 新しい配列を作成
 
-  ARTICLE_DETEAL_NEW.forEach((article, index) => {
-    const virtual_option1 = VIDEOS.value.find(item => item.productnumber === article.option1);
-    if (virtual_option1) {
-      ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
-      console.log("virtual_option1.title", virtual_option1.title)
-    } else {
-      ARTICLE_DETEAL_NEW[index].vertual_option1 = {
-        name :"",
-      };
+//   ARTICLE_DETEAL_NEW.forEach((article, index) => {
+//     const virtual_option1 = VIDEOS.value.find(item => item.productnumber === article.option1);
+//     if (virtual_option1) {
+//       ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
+//       console.log("virtual_option1.title", virtual_option1.title)
+//     } else {
+//       ARTICLE_DETEAL_NEW[index].vertual_option1 = {
+//         name :"",
+//       };
 
-    }
-  });
-  ARTICLE_DETEAL.value = ARTICLE_DETEAL_NEW
-}
+//     }
+//   });
+//   ARTICLE_DETEAL.value = ARTICLE_DETEAL_NEW
+// }
 
 
 // Virtual Option
 // performer
-watch(ARTICLE_DETEAL, (newVal, oldVal) => {
-  if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer") {
-  let ARTICLE_DETEAL_NEW = [...newVal]; // 新しい配列を作成
+// watch(ARTICLE_DETEAL, (newVal, oldVal) => {
+//   if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer") {
+//   let ARTICLE_DETEAL_NEW = [...newVal]; // 新しい配列を作成
 
-  ARTICLE_DETEAL_NEW.forEach((article, index) => {
-    const virtual_option1 = PERFORMER_LIST.value.find(item => item.id === parseInt(article.option1, 10));
-    if (virtual_option1) {
-      ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
-    }
-  });
-  newVal = ARTICLE_DETEAL_NEW
-}
-});
-if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer") {
-  let ARTICLE_DETEAL_NEW = [...ARTICLE_DETEAL.value]; // 新しい配列を作成
+//   ARTICLE_DETEAL_NEW.forEach((article, index) => {
+//     const virtual_option1 = PERFORMER_LIST.value.find(item => item.id === parseInt(article.option1, 10));
+//     if (virtual_option1) {
+//       ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
+//     }
+//   });
+//   newVal = ARTICLE_DETEAL_NEW
+// }
+// });
+// if (SUBCONTENTS.value === "article" && ARTICLE_CLASS.value[1] === "performer") {
+//   let ARTICLE_DETEAL_NEW = [...ARTICLE_DETEAL.value]; // 新しい配列を作成
 
-  ARTICLE_DETEAL_NEW.forEach((article, index) => {
-    const virtual_option1 = PERFORMER_LIST.value.find(item => item.id === article.option1);
-    if (virtual_option1) {
-      ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
-    }
-  });
-  ARTICLE_DETEAL.value = ARTICLE_DETEAL_NEW
-}
+//   ARTICLE_DETEAL_NEW.forEach((article, index) => {
+//     const virtual_option1 = PERFORMER_LIST.value.find(item => item.id === article.option1);
+//     if (virtual_option1) {
+//       ARTICLE_DETEAL_NEW[index].vertual_option1 = virtual_option1;
+//     }
+//   });
+//   ARTICLE_DETEAL.value = ARTICLE_DETEAL_NEW
+// }
 
 
 
@@ -222,6 +225,8 @@ for (const line of lines) {
     }
     count++;
 }
+
+
 
 // ここにManyToManyFieldと関連オブジェクトの処理を追加する
 // contents_tags_infoなどの変数は適切に設定する必要があります

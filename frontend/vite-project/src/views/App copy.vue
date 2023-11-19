@@ -573,7 +573,122 @@ export default defineComponent({
     <v-col cols="11" class="mx-auto px-5">
 
 
+
+
+
+
+
       <v-card height="" class="my-bg-color-white" elevation=0>
+                    <v-row no-gutters>
+                      <v-col cols="12" class="border">
+                        <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
+                        height="50px" @click="search_view_performer=!search_view_performer"><v-icon>mdi-account-circle</v-icon>アカウント</v-btn>
+                          <v-row v-if="search_view_performer" no-gutters class="my-auto">
+                            <v-col cols="12" class="border px-2 py-5 pb-10">
+                                <v-chip-group
+                                  v-model="searchparams.performers"
+                                  column
+                                  multiple
+                                  color="text-deep-purple-accent-4"
+
+                                  @click="filteredData = filterVideo(VIDEOS, searchparams);UpdateSearchParams(searchparams)"
+                                >
+                                    <v-chip
+                                    v-for="item in PERFORMER_LIST"
+                                    :key="item.id"
+                                    label
+                                    outline
+                                    :value="item.name"
+                                    color="red"
+
+                                    class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
+
+                                  >
+                                    {{ item.name }}
+                                  </v-chip>
+                                </v-chip-group>
+                                <!-- {{searchparams.performers}} -->
+
+                                <div class="d-flex py-3">
+                                  <v-btn
+                                  @click="resetSearchParams(searchparams, 'performers') ;filteredData = filterVideo(VIDEOS, searchparams)"
+                                  text="アカウントをクリア"          
+                                  class="ms-auto me-0 my-text-size-30 my-fit-contents"
+                                  color="red"
+                                  >
+                                  <template v-slot:prepend>
+                                      <v-icon><Icon icon="iwwa:delete" /></v-icon>
+                                    </template>
+                                  </v-btn>
+                                </div>
+                                
+                            </v-col>
+                            
+                          </v-row>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+
+
+
+                  <!-- タグ -->
+                  <v-card height="" class="my-bg-color-white" elevation=0>
+                    <v-row no-gutters>
+                      <v-col cols="12" class="border">
+                        <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg"
+                        height="50px" @click="search_view_tag=!search_view_tag"><v-icon>mdi-tag-text-outline</v-icon>タグ</v-btn>
+                          <v-row v-if="search_view_tag" no-gutters class="my-auto">
+                            <v-col cols="12" class="border px-2 py-5 pb-10">
+                                <v-chip-group
+                                  v-model="searchparams.tags"
+                                  column
+                                  multiple
+                                  @click="filteredData = filterVideo(VIDEOS, searchparams)"
+
+                                >
+                                    <v-chip
+                                    v-for="item in TAG_LIST"
+                                    :key="item.id"
+                                    label
+                                    outline
+                                    :value="item.name"
+                                    color="red"
+
+                                    
+                                    class="custom-chip-style mx-0 mb-1 mt-0 elevation-1"
+
+                                  >
+                                    {{ item.name }}
+                                  </v-chip>
+                                </v-chip-group>
+                                <!-- {{searchparams.tags}} -->
+
+                                <div class="d-flex py-3">
+                                  <v-btn
+                                  @click="resetSearchParams(searchparams, 'tags') ;filteredData = filterVideo(VIDEOS, searchparams)"
+                                  text="タグをクリア"
+                                  class="ms-auto me-0 my-text-size-30 my-fit-contents"
+                                  color="red"
+                                  >
+                                    <template v-slot:prepend>
+                                      <v-icon><Icon icon="iwwa:delete" /></v-icon>
+                                    </template>
+                                  </v-btn>
+                                </div>
+                            </v-col>
+                          </v-row>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+
+
+
+
+
+
+
+<!-- 2023-11-04 -->
+      <!-- <v-card height="" class="my-bg-color-white" elevation=0>
         <v-row no-gutters>
           <v-col cols="12" class="border">
             <v-btn large outlined tile block class="my-text-color my-text-size-40 font-weight-medium rounded-tl-lg" height="50px" :to="{ name: 'Performers'}"><v-icon>mdi-account-circle</v-icon>{{ text1 || "女優" }}</v-btn>
@@ -612,8 +727,14 @@ export default defineComponent({
               </v-row>
           </v-col>
         </v-row>
-      </v-card>
+      </v-card> -->
       
+
+
+
+
+
+
 <!-- 
       <v-card height="" class="my-bg-color-white mt-15" elevation=0>
         <v-row no-gutters>
